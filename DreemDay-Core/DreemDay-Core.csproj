@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <RootNamespace>DreemDay_Core</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="DTOs\LoginDTOs\" />
+    <Folder Include="DTOs\CategoryDTOs\" />
+    <Folder Include="DTOs\ServiceProviderDTOs\" />
+    <Folder Include="DTOs\ServiceDTOs\" />
+    <Folder Include="DTOs\OrderDTOs\" />
+    <Folder Include="DTOs\UserDTOs\" />
+    <Folder Include="IRepository\" />
+    <Folder Include="Iservice\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.18" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.18">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="MySql.EntityFrameworkCore" Version="7.0.16" />
+  </ItemGroup>
+
+</Project>
