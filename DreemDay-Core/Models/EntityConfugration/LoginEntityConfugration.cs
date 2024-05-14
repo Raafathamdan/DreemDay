@@ -13,7 +13,14 @@ namespace DreemDay_Core.Models.EntityConfugration
     {
         public void Configure(EntityTypeBuilder<Login> builder)
         {
-            throw new NotImplementedException();
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).ValueGeneratedOnAdd();
+            builder.Property(x => x.CreationDate).IsRequired();
+            builder.Property(x => x.IsDeleted).IsRequired();
+            builder.Property(x => x.IsDeleted).HasDefaultValue(false);
+            builder.Property(x=>x.Password).IsRequired();
+            builder.Property(x=>x.UserName).IsRequired();
+            builder.Property(x=>x.IsLoggedIn).HasDefaultValue(false);
         }
     }
 }

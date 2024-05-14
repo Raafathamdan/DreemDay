@@ -13,7 +13,19 @@ namespace DreemDay_Core.Models.EntityConfugration
     {
         public void Configure(EntityTypeBuilder<Service> builder)
         {
-            throw new NotImplementedException();
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).ValueGeneratedOnAdd();
+            builder.Property(x => x.CreationDate).IsRequired();
+            builder.Property(x => x.IsDeleted).IsRequired();
+            builder.Property(x => x.IsDeleted).HasDefaultValue(false);
+            builder.Property(x => x.Quantity).IsRequired();
+            builder.Property(x => x.Name).IsRequired();
+            builder.Property(x => x.Price).IsRequired();
+            builder.Property(x => x.isHaveDiscount).IsRequired();
+            builder.Property(x => x.isHaveDiscount).HasDefaultValue(false);
+            builder.Property(x => x.Description).IsRequired();
+            builder.Property(x => x.Image).IsRequired();
+
         }
     }
 }
