@@ -22,8 +22,9 @@ namespace DreemDay_Core.Models.EntityConfugration
             builder.Property(x => x.Address).IsRequired();
             builder.Property(x => x.ProfileImage).IsRequired();
             builder.Property(x => x.Email).IsRequired();
-            builder.Property(x => x.Phone).IsRequired();
-            builder.Property(x => x.AdminName).IsRequired();
+            builder.Property(x => x.Phone).IsRequired().HasMaxLength(15);
+            builder.HasCheckConstraint("CK_Phone_Format", "Phone LIKE '[0-9]%'");
+            builder.Property(x => x.AdminName).IsRequired().HasMaxLength(50);
 
         }
     }
