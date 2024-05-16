@@ -21,7 +21,7 @@ namespace DreemDay_Core.Models.EntityConfugration
             builder.Property(x=>x.Password).IsRequired();
             builder.Property(x=>x.UserName).IsRequired();
             builder.Property(x=>x.IsLoggedIn).HasDefaultValue(false);
-            builder.HasCheckConstraint("CK_Password_Length", "LEN(Password) >= 8");
+            builder.HasCheckConstraint("CK_Password_Length", "LENGTH(Password) >= 8");
         }
     }
 }
