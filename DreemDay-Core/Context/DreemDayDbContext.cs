@@ -23,6 +23,9 @@ namespace DreemDay_Core.Context
             modelBuilder.ApplyConfiguration(new LoginEntityConfugration());
             modelBuilder.ApplyConfiguration(new ServiceEntityConfugration());
             modelBuilder.ApplyConfiguration(new ServiceProviderEntityConfugration());
+            modelBuilder.ApplyConfiguration(new CartEntityConfugration());
+            modelBuilder.ApplyConfiguration(new CartItemEntityConfugration());
+            modelBuilder.ApplyConfiguration(new WishListEntityConfugration());
         }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
@@ -30,6 +33,9 @@ namespace DreemDay_Core.Context
         public virtual DbSet<ServiceProvider> ServiceProviders  { get; set; }
         public virtual DbSet<Login> Logins  { get; set; }
         public virtual DbSet<Category> Categories  { get; set; }
+        public virtual DbSet<Cart> Carts  { get; set; }
+        public virtual DbSet<CartItem> CartItems   { get; set; }
+        public virtual DbSet<WishList> WishLists   { get; set; }
 
     }
 }

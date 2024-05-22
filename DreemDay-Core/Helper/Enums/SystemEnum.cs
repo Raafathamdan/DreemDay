@@ -11,7 +11,6 @@ namespace DreemDay_Core.Helper.Enums
         public enum Role 
         {
             Admin,
-            ServiceProvider,
             Customer
         }
         public enum OrderStatus
@@ -27,10 +26,6 @@ namespace DreemDay_Core.Helper.Enums
             Wallet = 101,
             Cash = 102
         }
-        public enum Title
-        {
-            Halls,
-            Cars
-        }
+       
     }
 }

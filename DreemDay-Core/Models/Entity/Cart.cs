@@ -8,5 +8,9 @@ namespace DreemDay_Core.Models.Entity
 {
     public class Cart
     {
+        public int Id { get; set; }
+        public int UserId { get; set; }
+        public bool IsActive { get; set; }
+
     }
 }

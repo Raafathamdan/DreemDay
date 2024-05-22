@@ -10,6 +10,8 @@ namespace DreemDay_Core.Models.Entity
 {
     public class Order : MainEntity
     {
+        public int UserId { get; set; }
+        public int CartId { get; set; }
         public string Title { get; set; }
         public string Note { get; set; }
         public PaymentMethod PaymentMethod { get; set; }

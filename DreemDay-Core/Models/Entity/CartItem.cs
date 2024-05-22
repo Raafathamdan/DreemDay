@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace DreemDay_Core.Models.Entity
 {
-    public class CartItems
+    public class CartItem
     {
+        public int Id { get; set; }
+        public int ServiceId { get; set; }
+        public int CartId { get; set; }
     }
 }
