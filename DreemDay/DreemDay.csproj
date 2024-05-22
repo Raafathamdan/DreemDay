@@ -20,10 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\DreemDay-Core\DreemDay-Core.csproj" />
     <ProjectReference Include="..\DreemDay-Infra\DreemDay-Infra.csproj" />
   </ItemGroup>

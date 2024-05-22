@@ -14,8 +14,6 @@
     <Folder Include="DTOs\ServiceDTOs\" />
     <Folder Include="DTOs\OrderDTOs\" />
     <Folder Include="DTOs\UserDTOs\" />
-    <Folder Include="IRepository\" />
-    <Folder Include="Iservice\" />
   </ItemGroup>
 
   <ItemGroup>
