@@ -1,17 +1,14 @@
-﻿using DreemDay_Core.Models.Shared;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static DreemDay_Core.Helper.Enums.SystemEnum;
 
-namespace DreemDay_Core.Models.Entity
+namespace DreemDay_Core.DTOs.CategoryDTOs
 {
-    public class Category : MainEntity
+    public class CreateCategoryDto
     {
         public string Title { get; set; }
         public string Description { get; set; }
-
     }
 }

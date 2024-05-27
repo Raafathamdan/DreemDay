@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DreemDay_Infra.Repository
+namespace DreemDay_Infra.Service
 {
-    public class AdminRepos
+    public class CategoryService
     {
     }
 }

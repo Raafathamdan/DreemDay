@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DreemDay_Core.Models.Entity
+namespace DreemDay_Core.DTOs.CartDTOs
 {
-    public class Cart
+    public class CartCardDto
     {
-        public int Id { get; set; }
         public int UserId { get; set; }
         public bool IsActive { get; set; }
-        
-
+        public DateTime CreationDate { get; set; }
+        public DateTime? ModifiedDate { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

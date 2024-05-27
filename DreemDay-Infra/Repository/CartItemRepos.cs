@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DreemDay_Core.Iservice
+namespace DreemDay_Infra.Repository
 {
-    public class ICustomerService
+    
+    public class CartItemRepos
     {
     }
 }

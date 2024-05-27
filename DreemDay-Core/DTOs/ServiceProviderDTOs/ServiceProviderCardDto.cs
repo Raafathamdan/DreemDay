@@ -1,15 +1,12 @@
-﻿using DreemDay_Core.Models.Shared;
-using Org.BouncyCastle.Asn1.X509;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static DreemDay_Core.Helper.Enums.SystemEnum;
 
-namespace DreemDay_Core.Models.Entity
+namespace DreemDay_Core.DTOs.ServiceProviderDTOs
 {
-    public class ServiceProvider : MainEntity
+    public class ServiceProviderCardDto
     {
         public string Name { get; set; }
         public string Email { get; set; }

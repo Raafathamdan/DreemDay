@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DreemDay_Core.Iservice
+namespace DreemDay_Core.DTOs.PaymentDTOs
 {
-    public class IAdminService
+    public class UpdatePaymentDto
     {
     }
 }

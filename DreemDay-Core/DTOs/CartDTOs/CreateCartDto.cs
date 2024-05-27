@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DreemDay_Core.Models.Entity
+namespace DreemDay_Core.DTOs.CartDTOs
 {
-    public class WishList
+    public class CreateCartDto
     {
-        public int Id { get; set; }
-        public int ServiceId { get; set; }
         public int UserId { get; set; }
-
+        public bool IsActive { get; set; }
     }
 }

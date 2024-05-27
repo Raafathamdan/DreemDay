@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DreemDay_Infra.Service
+namespace DreemDay_Core.DTOs.WishListDTOs
 {
-    public class CustomerService
+    public class UpdateWishListDto
     {
     }
 }

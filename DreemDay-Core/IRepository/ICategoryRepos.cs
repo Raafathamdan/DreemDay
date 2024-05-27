@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DreemDay_Core.IRepository
 {
-    public class IAdminRepos
+    public class ICategoryRepos
     {
     }
 }

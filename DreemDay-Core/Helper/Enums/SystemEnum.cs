@@ -11,7 +11,8 @@ namespace DreemDay_Core.Helper.Enums
         public enum Role 
         {
             Admin,
-            Customer
+            Customer,
+            ServiceProvider
         }
         public enum OrderStatus
         {
