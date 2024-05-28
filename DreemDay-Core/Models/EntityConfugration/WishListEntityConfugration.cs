@@ -16,7 +16,7 @@ namespace DreemDay_Core.Models.EntityConfugration
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.UserId).IsRequired();
-            builder.Property(x => x.ItemId).IsRequired();
+            builder.Property(x => x.ServiceId).IsRequired();
 
         }
     }

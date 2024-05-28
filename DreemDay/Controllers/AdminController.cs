@@ -7,5 +7,6 @@ namespace DreemDay.Controllers
     [ApiController]
     public class AdminController : ControllerBase
     {
+
     }
 }

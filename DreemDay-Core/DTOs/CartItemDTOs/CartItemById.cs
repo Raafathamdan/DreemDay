@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace DreemDay_Core.DTOs.CartItemDTOs
 {
-    public class CartItemCardDto
+    public class CartItemById
     {
         public int Id { get; set; }
         public int ServiceId { get; set; }
         public int CartId { get; set; }
-       
+        public string CreationDate { get; set; }
+        public string? ModifiedDate { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

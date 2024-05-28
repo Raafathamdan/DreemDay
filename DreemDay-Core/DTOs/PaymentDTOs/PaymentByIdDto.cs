@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DreemDay_Core.DTOs.WishListDTOs
+namespace DreemDay_Core.DTOs.PaymentDTOs
 {
-    public class WishListDto
+    public class PaymentByIdDto
     {
     }
 }

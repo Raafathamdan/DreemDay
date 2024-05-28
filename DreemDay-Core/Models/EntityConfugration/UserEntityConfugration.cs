@@ -15,7 +15,7 @@ namespace DreemDay_Core.Models.EntityConfugration
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
-            builder.Property(x => x.CreationDate).IsRequired();
+            builder.Property(x => x.CreationDate).HasDefaultValue(DateTime.Now);
             builder.Property(x => x.IsDeleted).IsRequired();
             builder.Property(x => x.IsDeleted).HasDefaultValue(false);
             builder.Property(x => x.Role).IsRequired();
@@ -25,6 +25,11 @@ namespace DreemDay_Core.Models.EntityConfugration
             builder.Property(x => x.BirthDate).IsRequired();
             builder.Property(x => x.Phone).IsRequired().HasMaxLength(15);
             builder.HasCheckConstraint("CK_Phone_Format", "Phone LIKE '[0-9]%'");
+            //Relation
+            builder.HasOne<Login>().WithOne().HasForeignKey<Login>(x => x.UserId);
+            builder.HasOne<ServiceProvider>().WithOne().HasForeignKey<ServiceProvider>(x => x.UserId);
+            builder.HasMany<Order>().WithOne().HasForeignKey(x => x.UserId);
+            builder.HasMany<Cart>().WithOne().HasForeignKey(x => x.UserId);
 
 
         }

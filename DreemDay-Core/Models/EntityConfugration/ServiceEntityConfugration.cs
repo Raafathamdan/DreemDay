@@ -15,10 +15,9 @@ namespace DreemDay_Core.Models.EntityConfugration
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
-            builder.Property(x => x.CreationDate).IsRequired();
+            builder.Property(x => x.CreationDate).HasDefaultValue(DateTime.Now);
             builder.Property(x => x.IsDeleted).IsRequired();
             builder.Property(x => x.IsDeleted).HasDefaultValue(false);
-            builder.Property(x => x.Quantity).IsRequired();
             builder.Property(x => x.Name).IsRequired();
             builder.Property(x => x.Price).IsRequired();
             builder.Property(x => x.isHaveDiscount).IsRequired();

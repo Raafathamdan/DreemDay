@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DreemDay_Core.DTOs.CartItemDTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,12 @@ using System.Threading.Tasks;
 
 namespace DreemDay_Core.IRepository
 {
-    public class ICartItemRepos
+    public interface ICartItemRepos
     {
+        Task<List<CartItemCardDto>> GetAllCartItem();
+        Task<CartItemById> GetCartItem(int id);
+        Task CreateCartItem(CreateCartItemDto createCartItemDto);
+        Task UpdateCartItem(UpdateCartItemDto updateCartItemDto);
+        Task DeleteCartItem(int id);
     }
 }

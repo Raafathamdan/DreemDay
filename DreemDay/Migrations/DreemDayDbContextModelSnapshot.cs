@@ -19,6 +19,44 @@ namespace DreemDay.Migrations
                 .HasAnnotation("ProductVersion", "7.0.18")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+            modelBuilder.Entity("DreemDay_Core.Models.Entity.Cart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(true);
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Carts");
+                });
+
+            modelBuilder.Entity("DreemDay_Core.Models.Entity.CartItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("CartId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ServiceId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CartItems");
+                });
+
             modelBuilder.Entity("DreemDay_Core.Models.Entity.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -26,7 +64,9 @@ namespace DreemDay.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime(6)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime(6)")
+                        .HasDefaultValue(new DateTime(2024, 5, 29, 1, 12, 46, 486, DateTimeKind.Local).AddTicks(8253));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -40,8 +80,9 @@ namespace DreemDay.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("Title")
-                        .HasColumnType("int");
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -55,7 +96,9 @@ namespace DreemDay.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime(6)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime(6)")
+                        .HasDefaultValue(new DateTime(2024, 5, 29, 1, 12, 46, 486, DateTimeKind.Local).AddTicks(9327));
 
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
@@ -67,7 +110,7 @@ namespace DreemDay.Migrations
                         .HasColumnType("tinyint(1)")
                         .HasDefaultValue(false);
 
-                    b.Property<DateTime>("LastLoginTime")
+                    b.Property<DateTime?>("LastLoginTime")
                         .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("ModifiedDate")
@@ -77,11 +120,17 @@ namespace DreemDay.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Logins", t =>
                         {
@@ -95,8 +144,13 @@ namespace DreemDay.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int>("CartId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime(6)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime(6)")
+                        .HasDefaultValue(new DateTime(2024, 5, 29, 1, 12, 46, 484, DateTimeKind.Local).AddTicks(892));
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime(6)");
@@ -122,7 +176,12 @@ namespace DreemDay.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
                 });
@@ -134,11 +193,16 @@ namespace DreemDay.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime(6)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime(6)")
+                        .HasDefaultValue(new DateTime(2024, 5, 29, 1, 12, 46, 487, DateTimeKind.Local).AddTicks(1049));
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<double>("DiscountAmount")
+                        .HasColumnType("double");
 
                     b.Property<string>("Image")
                         .IsRequired()
@@ -148,6 +212,12 @@ namespace DreemDay.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("tinyint(1)")
                         .HasDefaultValue(false);
+
+                    b.Property<int>("MaxAmount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MinAmount")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime(6)");
@@ -159,8 +229,15 @@ namespace DreemDay.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("double");
 
-                    b.Property<int>("Quantity")
+                    b.Property<double>("PriceAfterDiscount")
+                        .HasColumnType("double");
+
+                    b.Property<int>("ServiceProviderId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Unit")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<bool>("isHaveDiscount")
                         .ValueGeneratedOnAdd()
@@ -168,6 +245,8 @@ namespace DreemDay.Migrations
                         .HasDefaultValue(false);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ServiceProviderId");
 
                     b.ToTable("Services");
                 });
@@ -182,13 +261,10 @@ namespace DreemDay.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("AdminName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
-
                     b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime(6)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime(6)")
+                        .HasDefaultValue(new DateTime(2024, 5, 29, 1, 12, 46, 487, DateTimeKind.Local).AddTicks(2402));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -214,7 +290,13 @@ namespace DreemDay.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("ServiceProviders", t =>
                         {
@@ -232,7 +314,9 @@ namespace DreemDay.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime(6)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime(6)")
+                        .HasDefaultValue(new DateTime(2024, 5, 29, 1, 12, 46, 484, DateTimeKind.Local).AddTicks(3463));
 
                     b.Property<int>("Email")
                         .HasColumnType("int");
@@ -267,6 +351,68 @@ namespace DreemDay.Migrations
                             t.HasCheckConstraint("CK_Phone_Format", "Phone LIKE '[0-9]%'")
                                 .HasName("CK_Phone_Format1");
                         });
+                });
+
+            modelBuilder.Entity("DreemDay_Core.Models.Entity.WishList", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("ServiceId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("WishLists");
+                });
+
+            modelBuilder.Entity("DreemDay_Core.Models.Entity.Cart", b =>
+                {
+                    b.HasOne("DreemDay_Core.Models.Entity.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DreemDay_Core.Models.Entity.Login", b =>
+                {
+                    b.HasOne("DreemDay_Core.Models.Entity.User", null)
+                        .WithOne()
+                        .HasForeignKey("DreemDay_Core.Models.Entity.Login", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DreemDay_Core.Models.Entity.Order", b =>
+                {
+                    b.HasOne("DreemDay_Core.Models.Entity.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DreemDay_Core.Models.Entity.Service", b =>
+                {
+                    b.HasOne("DreemDay_Core.Models.Entity.ServiceProvider", null)
+                        .WithMany()
+                        .HasForeignKey("ServiceProviderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DreemDay_Core.Models.Entity.ServiceProvider", b =>
+                {
+                    b.HasOne("DreemDay_Core.Models.Entity.User", null)
+                        .WithOne()
+                        .HasForeignKey("DreemDay_Core.Models.Entity.ServiceProvider", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
