@@ -24,6 +24,7 @@ namespace DreemDay_Core.Models.EntityConfugration
             builder.Property(x => x.PaymentMethod).IsRequired();
             builder.Property(x => x.Status).IsRequired();
             //Relation
+            builder.HasOne<Cart>().WithOne().HasForeignKey<Cart>(x => x.Id);
 
 
         }

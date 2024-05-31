@@ -32,6 +32,7 @@ namespace DreemDay_Core.Models.EntityConfugration
             builder.HasMany<Cart>().WithOne().HasForeignKey(x => x.UserId);
 
 
+
         }
     }
 }

@@ -17,6 +17,9 @@ namespace DreemDay_Core.Models.EntityConfugration
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.ServiceId).IsRequired();
             builder.Property(x => x.CartId).IsRequired();
+            //Relation
+            builder.HasOne<Cart>().WithOne().HasForeignKey<Cart>(x => x.Id);
+            builder.HasOne<Service>().WithOne().HasForeignKey<Service>(x => x.Id);
 
         }
     }

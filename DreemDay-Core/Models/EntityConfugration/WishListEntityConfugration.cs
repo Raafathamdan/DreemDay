@@ -17,6 +17,9 @@ namespace DreemDay_Core.Models.EntityConfugration
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.UserId).IsRequired();
             builder.Property(x => x.ServiceId).IsRequired();
+            //Relation
+            builder.HasOne<WishList>().WithMany().HasForeignKey(x => x.UserId);
+            builder.HasOne<WishList>().WithMany().HasForeignKey(x => x.ServiceId);
 
         }
     }
