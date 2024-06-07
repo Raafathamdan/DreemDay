@@ -11,7 +11,7 @@ namespace DreemDay_Core.Iservice
     {
         Task<List<OrderCardDto>> GetAllOrder(); 
         Task<OrderByIdDto> GetOrder(int id);
-        Task CreateOrder(CreateOrderDto createOrderDto);
+        Task<int> CreateOrder(CreateOrderDto createOrderDto);
         Task UpdateOrder(UpdateOrderDto updateOrderDto);
         Task DeleteOrder(int id);
         

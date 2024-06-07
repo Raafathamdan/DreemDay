@@ -8,5 +8,6 @@ namespace DreemDay_Core.DTOs.PaymentDTOs
 {
     public class PaymentCardDto
     {
+        public int Id { get; set; }
     }
 }

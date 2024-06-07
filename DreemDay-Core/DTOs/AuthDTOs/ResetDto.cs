@@ -10,7 +10,7 @@ namespace DreemDay_Core.DTOs.AuthDTOs
     {
         public string UserName { get; set; }
         public string NewPassword { get; set; }
-        public int Email { get; set; }
+        public string Email { get; set; }
 
 
     }

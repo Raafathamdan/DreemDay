@@ -1,4 +1,5 @@
 ﻿using DreemDay_Core.DTOs.CategoryDTOs;
+using DreemDay_Core.IRepository;
 using DreemDay_Core.Iservice;
 using System;
 using System.Collections.Generic;
@@ -10,29 +11,34 @@ namespace DreemDay_Infra.Service
 {
     public class CategoryService : ICategoryService
     {
-        public Task CreateCategory(CreateCategoryDto createCategoryDto)
+        private readonly ICategoryRepos _repos;
+        public CategoryService (ICategoryRepos repos)
         {
-            throw new NotImplementedException();
+            _repos = repos;
+        }
+        public async Task<int> CreateCategory(CreateCategoryDto createCategoryDto)
+        {
+            return await _repos.CreateCategory(createCategoryDto);
         }
 
-        public Task DeleteCategory(int id)
+        public async Task DeleteCategory(int id)
         {
-            throw new NotImplementedException();
+            await _repos.DeleteCategory(id);
         }
 
-        public Task<List<CategoryCardDto>> GetAllCategories()
+        public async Task<List<CategoryCardDto>> GetAllCategories()
         {
-            throw new NotImplementedException();
+            return await _repos.GetAllCategories();
         }
 
-        public Task<CategoryByIdDto> GetById(int id)
+        public async Task<CategoryByIdDto> GetById(int id)
         {
-            throw new NotImplementedException();
+            return await _repos.GetById(id);
         }
 
-        public Task UpdateCategory(UpdateCategoryDto updateCategoryDto)
+        public async Task UpdateCategory(UpdateCategoryDto updateCategoryDto)
         {
-            throw new NotImplementedException();
+            await _repos.UpdateCategory(updateCategoryDto);
         }
     }
 }

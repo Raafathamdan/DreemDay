@@ -12,5 +12,6 @@ namespace DreemDay_Core.IRepository
         Task SignUp(SignUpDto signUpDto);
         Task Login(LoginDto loginDto);
         Task Reset(ResetDto resetDto);
+        Task Logout(int id);
     }
 }

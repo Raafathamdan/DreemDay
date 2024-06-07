@@ -1,4 +1,5 @@
 ﻿using DreemDay_Core.DTOs.ServiceDTOs;
+using DreemDay_Core.IRepository;
 using DreemDay_Core.Iservice;
 using System;
 using System.Collections.Generic;
@@ -10,29 +11,35 @@ namespace DreemDay_Infra.Service
 {
     public class ServiceService : IServiceService
     {
-        public Task CreateService(CreateServiceDto createServiceDto)
+        private readonly IServiceRepos _repos;
+        public ServiceService(IServiceRepos repos)
         {
-            throw new NotImplementedException();
+            _repos = repos;
         }
 
-        public Task DeleteService(int id)
+        public async Task<int> CreateService(CreateServiceDto createServiceDto)
         {
-            throw new NotImplementedException();
+            return await _repos.CreateService(createServiceDto);
         }
 
-        public Task<List<ServiceCardDto>> GetAllService()
+        public async Task DeleteService(int id)
         {
-            throw new NotImplementedException();
+            await _repos.DeleteService(id);
         }
 
-        public Task<ServiceByIdDto> GetService(int id)
+        public async Task<List<ServiceCardDto>> GetAllService()
         {
-            throw new NotImplementedException();
+            return await _repos.GetAllService();
         }
 
-        public Task UpdateService(UpdateServiceDto updateServiceDto)
+        public async Task<ServiceByIdDto> GetService(int id)
         {
-            throw new NotImplementedException();
+            return await _repos.GetService(id);
+        }
+
+        public async Task UpdateService(UpdateServiceDto updateServiceDto)
+        {
+            await _repos.UpdateService(updateServiceDto);
         }
     }
 }

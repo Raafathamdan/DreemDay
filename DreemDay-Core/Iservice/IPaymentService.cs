@@ -11,7 +11,7 @@ namespace DreemDay_Core.Iservice
     {
         Task<List<PaymentCardDto>> GetAllPayments();
         Task<PaymentByIdDto> GetPayments(int id);
-        Task CreatePayment (CreatePaymentDto createPaymentDto);
+        Task<int> CreatePayment (CreatePaymentDto createPaymentDto);
         Task UpdatePayment (UpdatePaymentDto updatePaymentDto);
         Task DeletePayment (int id);
     }

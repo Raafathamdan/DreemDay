@@ -15,5 +15,6 @@ namespace DreemDay_Core.DTOs.ServiceProviderDTOs
         public int Phone { get; set; }
         public string ProfileImage { get; set; }
         public int UserId { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

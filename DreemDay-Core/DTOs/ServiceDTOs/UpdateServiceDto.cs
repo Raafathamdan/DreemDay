@@ -18,6 +18,7 @@ namespace DreemDay_Core.DTOs.ServiceDTOs
         public int MinAmount { get; set; }
         public int MaxAmount { get; set; }
         public bool isHaveDiscount { get; set; }
+        public bool IsDeleted { get; set; }
         public double DiscountAmount { get; set; }
         public double PriceAfterDiscount { get; set; }
     }

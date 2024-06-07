@@ -1,4 +1,5 @@
 ﻿using DreemDay_Core.DTOs.PaymentDTOs;
+using DreemDay_Core.IRepository;
 using DreemDay_Core.Iservice;
 using System;
 using System.Collections.Generic;
@@ -10,29 +11,34 @@ namespace DreemDay_Infra.Service
 {
     public class PaymentService : IPaymentService
     {
-        public Task CreatePayment(CreatePaymentDto createPaymentDto)
+        private readonly IPaymentRepos _repos;
+        public PaymentService (IPaymentRepos repos)
         {
-            throw new NotImplementedException();
+            _repos = repos;
+        }
+        public Task<int> CreatePayment(CreatePaymentDto createPaymentDto)
+        {
+            return _repos.CreatePayment(createPaymentDto);
         }
 
-        public Task DeletePayment(int id)
+        public async Task DeletePayment(int id)
         {
-            throw new NotImplementedException();
+            await _repos.DeletePayment(id);
         }
 
-        public Task<List<PaymentCardDto>> GetAllPayments()
+        public async Task<List<PaymentCardDto>> GetAllPayments()
         {
-            throw new NotImplementedException();
+            return await _repos.GetAllPayments();
         }
 
-        public Task<PaymentByIdDto> GetPayments(int id)
+        public async Task<PaymentByIdDto> GetPayments(int id)
         {
-            throw new NotImplementedException();
+            return await _repos.GetPayments(id);
         }
 
-        public Task UpdatePayment(UpdatePaymentDto updatePaymentDto)
+        public async Task UpdatePayment(UpdatePaymentDto updatePaymentDto)
         {
-            throw new NotImplementedException();
+            await _repos.UpdatePayment(updatePaymentDto);
         }
     }
 }

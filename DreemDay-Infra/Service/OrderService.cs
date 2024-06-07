@@ -1,4 +1,5 @@
 ﻿using DreemDay_Core.DTOs.OrderDTOs;
+using DreemDay_Core.IRepository;
 using DreemDay_Core.Iservice;
 using System;
 using System.Collections.Generic;
@@ -10,29 +11,35 @@ namespace DreemDay_Infra.Service
 {
     public class OrderService : IOrderService
     {
-        public Task CreateOrder(CreateOrderDto createOrderDto)
+        private readonly IOrderRepos _repos;
+        public OrderService(IOrderRepos repos)
         {
-            throw new NotImplementedException();
+            _repos = repos;
         }
 
-        public Task DeleteOrder(int id)
+        public async Task<int> CreateOrder(CreateOrderDto createOrderDto)
         {
-            throw new NotImplementedException();
+            return await _repos.CreateOrder(createOrderDto);
         }
 
-        public Task<List<OrderCardDto>> GetAllOrder()
+        public async Task DeleteOrder(int id)
         {
-            throw new NotImplementedException();
+            await _repos.DeleteOrder(id);
         }
 
-        public Task<OrderByIdDto> GetOrder(int id)
+        public async Task<List<OrderCardDto>> GetAllOrder()
         {
-            throw new NotImplementedException();
+            return await _repos.GetAllOrder();
         }
 
-        public Task UpdateOrder(UpdateOrderDto updateOrderDto)
+        public async Task<OrderByIdDto> GetOrder(int id)
         {
-            throw new NotImplementedException();
+            return await _repos.GetOrder(id);
+        }
+
+        public async Task UpdateOrder(UpdateOrderDto updateOrderDto)
+        {
+            await _repos.UpdateOrder(updateOrderDto);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DreemDay_Core.DTOs.ServiceProviderDTOs;
+using DreemDay_Core.IRepository;
 using DreemDay_Core.Iservice;
 using System;
 using System.Collections.Generic;
@@ -10,29 +11,34 @@ namespace DreemDay_Infra.Service
 {
     public class ServiceProviderService : IServiceProviderService
     {
-        public Task CreateServiceProvider(CreateServiceProviderDto createServiceProviderDto)
+        private readonly IServiceProviderRepos _repos;
+        public ServiceProviderService(IServiceProviderRepos repos)
         {
-            throw new NotImplementedException();
+            _repos = repos;
+        }
+        public async Task<int> CreateServiceProvider(CreateServiceProviderDto createServiceProviderDto)
+        {
+            return await _repos.CreateServiceProvider(createServiceProviderDto);
         }
 
-        public Task DeleteServiceProvider(int id)
+        public async Task DeleteServiceProvider(int id)
         {
-            throw new NotImplementedException();
+            await _repos.DeleteServiceProvider(id);
         }
 
-        public Task<List<ServiceProviderCardDto>> GetAllServiceProviders()
+        public async Task<List<ServiceProviderCardDto>> GetAllServiceProviders()
         {
-            throw new NotImplementedException();
+            return await _repos.GetAllServiceProviders();
         }
 
-        public Task<ServiceProviderByIdDto> GetServiceProvider(int id)
+        public async Task<ServiceProviderByIdDto> GetServiceProvider(int id)
         {
-            throw new NotImplementedException();
+            return await _repos.GetServiceProvider(id);
         }
 
-        public Task UpdateServiceProvider(UpdateServiceProviderDto updateServiceProviderDto)
+        public async Task UpdateServiceProvider(UpdateServiceProviderDto updateServiceProviderDto)
         {
-            throw new NotImplementedException();
+            await _repos.UpdateServiceProvider(updateServiceProviderDto);
         }
     }
 }

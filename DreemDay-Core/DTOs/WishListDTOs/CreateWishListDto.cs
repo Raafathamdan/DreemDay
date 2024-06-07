@@ -8,5 +8,9 @@ namespace DreemDay_Core.DTOs.WishListDTOs
 {
     public class CreateWishListDto
     {
+        public int Id { get; set; }
+        public int SerciceId { get; set; }
+        public int UserId { get; set; }
+
     }
 }

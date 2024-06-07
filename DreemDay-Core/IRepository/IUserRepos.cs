@@ -11,6 +11,8 @@ namespace DreemDay_Core.IRepository
     {
         Task<List<UserCardDto>> GetAllUsers();
         Task<UserByIdDto> GetUser(int id);
+        Task<int> CreateUser(CreateUserDto createUserDto);
+
         Task UpdateUser(UpdateUserDto updateUserDto);
         Task DeleteUser(int id);
     }

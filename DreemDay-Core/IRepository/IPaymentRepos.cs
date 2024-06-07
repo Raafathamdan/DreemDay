@@ -11,7 +11,7 @@ namespace DreemDay_Core.IRepository
     {
         Task<List<PaymentCardDto>> GetAllPayments();
         Task<PaymentByIdDto> GetPayments(int id);
-        Task CreatePayment(CreatePaymentDto createPaymentDto);
+        Task<int> CreatePayment(CreatePaymentDto createPaymentDto);
         Task UpdatePayment(UpdatePaymentDto updatePaymentDto);
         Task DeletePayment(int id);
     }

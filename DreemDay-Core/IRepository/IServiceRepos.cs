@@ -11,7 +11,7 @@ namespace DreemDay_Core.IRepository
     {
         Task<List<ServiceCardDto>> GetAllService();
         Task<ServiceByIdDto> GetService(int id);
-        Task CreateService(CreateServiceDto createServiceDto);
+        Task<int> CreateService(CreateServiceDto createServiceDto);
         Task UpdateService(UpdateServiceDto updateServiceDto);
         Task DeleteService(int id);
     }

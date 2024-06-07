@@ -11,7 +11,7 @@ namespace DreemDay_Core.IRepository
     {
         Task<List<CartCardDto>> GetAllCart();
         Task<CartByIdDto> GetCart(int id);
-        Task CreateCart(CreateCartDto createCartDto);
+        Task<int> CreateCart(CreateCartDto createCartDto);
         Task UpdateCart(UpdateCartDto updateCartDto);
         Task DeleteCart(int id);
     }

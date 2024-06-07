@@ -24,7 +24,6 @@ namespace DreemDay_Core.Models.EntityConfugration
             builder.Property(x => x.LastName).IsRequired().HasMaxLength(15);
             builder.Property(x => x.BirthDate).IsRequired();
             builder.Property(x => x.Phone).IsRequired().HasMaxLength(15);
-            builder.HasCheckConstraint("CK_Phone_Format", "Phone LIKE '[0-9]%'");
             //Relation
             builder.HasOne<Login>().WithOne().HasForeignKey<Login>(x => x.UserId);
             builder.HasOne<ServiceProvider>().WithOne().HasForeignKey<ServiceProvider>(x => x.UserId);

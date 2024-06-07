@@ -1,4 +1,5 @@
 ﻿using DreemDay_Core.DTOs.CartItemDTOs;
+using DreemDay_Core.IRepository;
 using DreemDay_Core.Iservice;
 using System;
 using System.Collections.Generic;
@@ -10,29 +11,34 @@ namespace DreemDay_Infra.Service
 {
     public class CartItemService : ICartItemService
     {
-        public Task CreateCartItem(CreateCartItemDto createCartItemDto)
+        private readonly ICartItemRepos _repos;
+        public CartItemService(ICartItemRepos repos) 
         {
-            throw new NotImplementedException();
+            _repos = repos;
+        }
+        public async Task<int> CreateCartItem(CreateCartItemDto createCartItemDto)
+        {
+            return await _repos.CreateCartItem(createCartItemDto);
         }
 
-        public Task DeleteCartItem(int id)
+        public async Task DeleteCartItem(int id)
         {
-            throw new NotImplementedException();
+            await _repos.DeleteCartItem(id);
         }
 
-        public Task<List<CartItemCardDto>> GetAllCartItem()
+        public async Task<List<CartItemCardDto>> GetAllCartItem()
         {
-            throw new NotImplementedException();
+            return await _repos.GetAllCartItem();
         }
 
-        public Task<CartItemById> GetCartItem(int id)
+        public async Task<CartItemById> GetCartItem(int id)
         {
-            throw new NotImplementedException();
+            return await _repos.GetCartItem(id);
         }
 
-        public Task UpdateCartItem(UpdateCartItemDto updateCartItemDto)
+        public async Task UpdateCartItem(UpdateCartItemDto updateCartItemDto)
         {
-            throw new NotImplementedException();
+           await _repos.UpdateCartItem(updateCartItemDto);
         }
     }
 }

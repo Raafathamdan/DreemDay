@@ -17,5 +17,6 @@ namespace DreemDay_Core.DTOs.OrderDTOs
         public PaymentMethod PaymentMethod { get; set; }
         public DateTime Date { get; set; }
         public OrderStatus Status { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

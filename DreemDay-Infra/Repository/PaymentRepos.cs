@@ -1,4 +1,5 @@
-﻿using DreemDay_Core.DTOs.PaymentDTOs;
+﻿using DreemDay_Core.Context;
+using DreemDay_Core.DTOs.PaymentDTOs;
 using DreemDay_Core.IRepository;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,12 @@ namespace DreemDay_Infra.Repository
 {
     public class PaymentRepos : IPaymentRepos
     {
-        public Task CreatePayment(CreatePaymentDto createPaymentDto)
+        private readonly DreemDayDbContext _dbContext;
+        public PaymentRepos(DreemDayDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+        public Task<int> CreatePayment(CreatePaymentDto createPaymentDto)
         {
             throw new NotImplementedException();
         }

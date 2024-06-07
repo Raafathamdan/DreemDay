@@ -15,7 +15,7 @@ namespace DreemDay_Core.Models.Entity
         public string Email { get; set; }
         public string Address { get; set; }
         public int Phone { get; set; }
-        public string ProfileImage { get; set; }
+        public string? ProfileImage { get; set; }
         public int UserId { get; set; }
     }
 }

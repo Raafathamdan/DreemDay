@@ -1,4 +1,5 @@
 ﻿using DreemDay_Core.DTOs.WishListDTOs;
+using DreemDay_Core.IRepository;
 using DreemDay_Core.Iservice;
 using System;
 using System.Collections.Generic;
@@ -10,29 +11,35 @@ namespace DreemDay_Infra.Service
 {
     public class WishListService : IWishListService
     {
-        public Task CreateWishList(CreateWishListDto createWishListDto)
+        private readonly IWishListRepos _repos;
+        public WishListService(IWishListRepos repos)
         {
-            throw new NotImplementedException();
+            _repos = repos;
         }
 
-        public Task DeleteWishList(int id)
+        public async Task<int> CreateWishList(CreateWishListDto createWishListDto)
         {
-            throw new NotImplementedException();
+            return await _repos.CreateWishList(createWishListDto);
         }
 
-        public Task<List<WishListCardDto>> GetAllWishList()
+        public async Task DeleteWishList(int id)
         {
-            throw new NotImplementedException();
+            await _repos.DeleteWishList(id);
         }
 
-        public Task<WishListByIdDto> GetWishList(int id)
+        public async Task<List<WishListCardDto>> GetAllWishList()
         {
-            throw new NotImplementedException();
+            return await _repos.GetAllWishList();
         }
 
-        public Task UpdateWishList(UpdateWishListDto updateWishListDto)
+        public async Task<WishListByIdDto> GetWishList(int id)
         {
-            throw new NotImplementedException();
+            return await _repos.GetWishList(id);
+        }
+
+        public async Task UpdateWishList(UpdateWishListDto updateWishListDto)
+        {
+            await _repos.UpdateWishList(updateWishListDto);
         }
     }
 }

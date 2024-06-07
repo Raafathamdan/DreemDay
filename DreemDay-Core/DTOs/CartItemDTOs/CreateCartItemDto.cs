@@ -10,5 +10,6 @@ namespace DreemDay_Core.DTOs.CartItemDTOs
     {
         public int ServiceId { get; set; }
         public int CartId { get; set; }
+        public int Quantity { get; set; }
     }
 }

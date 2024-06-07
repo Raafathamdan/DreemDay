@@ -1,5 +1,8 @@
-﻿using DreemDay_Core.DTOs.ServiceProviderDTOs;
+﻿using DreemDay_Core.Context;
+using DreemDay_Core.DTOs.ServiceProviderDTOs;
 using DreemDay_Core.IRepository;
+using DreemDay_Core.Models.Entity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,29 +13,83 @@ namespace DreemDay_Infra.Repository
 {
     public class ServiceProviderRepos : IServiceProviderRepos
     {
-        public Task CreateServiceProvider(CreateServiceProviderDto createServiceProviderDto)
+        private readonly DreemDayDbContext _dbContext;
+        public ServiceProviderRepos(DreemDayDbContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
+        }
+        public async Task<int> CreateServiceProvider(CreateServiceProviderDto createServiceProviderDto)
+        {
+            var serviceb = new ServiceProvider
+            {
+                Name = createServiceProviderDto.Name,
+                Email = createServiceProviderDto.Email,
+                Address = createServiceProviderDto.Address,
+                Phone = createServiceProviderDto.Phone,
+                ProfileImage = createServiceProviderDto.ProfileImage,
+                UserId = createServiceProviderDto.UserId,
+                CreationDate = DateTime.Now,
+            };
+            _dbContext.ServiceProviders.Add(serviceb);
+            await _dbContext.SaveChangesAsync();
+            return serviceb.Id;
         }
 
-        public Task DeleteServiceProvider(int id)
+        public async Task DeleteServiceProvider(int id)
         {
-            throw new NotImplementedException();
+            var serviceb = await _dbContext.ServiceProviders.FindAsync(id);
+            if (serviceb == null) return;
+            serviceb.IsDeleted = true;
+            _dbContext.ServiceProviders.Update(serviceb);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public Task<List<ServiceProviderCardDto>> GetAllServiceProviders()
+        public async Task<List<ServiceProviderCardDto>> GetAllServiceProviders()
         {
-            throw new NotImplementedException();
+            return await _dbContext.ServiceProviders
+                .Where(x =>!x.IsDeleted)
+                .Select(serviceb => new ServiceProviderCardDto
+                { Id = serviceb.Id,
+                Name = serviceb.Name,
+                ProfileImage= serviceb.ProfileImage,
+                }).ToListAsync();
         }
 
-        public Task<ServiceProviderByIdDto> GetServiceProvider(int id)
+        public async Task<ServiceProviderByIdDto> GetServiceProvider(int id)
         {
-            throw new NotImplementedException();
+            var serviceb = await _dbContext.ServiceProviders.Join(_dbContext.Users,sb=>sb.UserId,u=>u.Id,(sb,u)=>new {ServiceProvider=sb,User=u}).FirstOrDefaultAsync(sb => sb.ServiceProvider.Id == id);   
+            if (serviceb == null) return null;
+            return new ServiceProviderByIdDto
+            {
+                Id = serviceb.ServiceProvider.Id,
+                Name = serviceb.ServiceProvider.Name,
+                ProfileImage = serviceb.ServiceProvider.ProfileImage,
+                Email = serviceb.ServiceProvider.Email,
+                Address = serviceb.ServiceProvider.Address,
+                Phone = serviceb.ServiceProvider.Phone,
+                UserId = serviceb.User.Id,
+                CreationDate = serviceb.ServiceProvider.CreationDate.ToString(),
+                ModifiedDate = serviceb.ServiceProvider.ModifiedDate.ToString(),
+                IsDeleted = serviceb.ServiceProvider.IsDeleted,
+
+            };
         }
 
-        public Task UpdateServiceProvider(UpdateServiceProviderDto updateServiceProviderDto)
+        public async Task UpdateServiceProvider(UpdateServiceProviderDto updateServiceProviderDto)
         {
-            throw new NotImplementedException();
+            var serviceb = await _dbContext.ServiceProviders.FindAsync(updateServiceProviderDto.Id);
+            if (serviceb == null) return;
+            serviceb.Name = updateServiceProviderDto.Name;
+            serviceb.Address = updateServiceProviderDto.Address;
+            serviceb.Phone = updateServiceProviderDto.Phone;
+            serviceb.Email = updateServiceProviderDto.Email;
+            serviceb.IsDeleted = updateServiceProviderDto.IsDeleted;
+            serviceb.ProfileImage = updateServiceProviderDto.ProfileImage;
+            serviceb.ModifiedDate= DateTime.Now;
+            serviceb.UserId = updateServiceProviderDto.UserId;
+            _dbContext.ServiceProviders.Update(serviceb);
+            await _dbContext.SaveChangesAsync();
+
         }
     }
 }

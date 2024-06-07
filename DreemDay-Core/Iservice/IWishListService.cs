@@ -11,7 +11,7 @@ namespace DreemDay_Core.Iservice
     {
         Task<List<WishListCardDto>> GetAllWishList();
         Task<WishListByIdDto> GetWishList(int id);
-        Task CreateWishList(CreateWishListDto createWishListDto);
+        Task<int> CreateWishList(CreateWishListDto createWishListDto);
         Task UpdateWishList(UpdateWishListDto updateWishListDto);
         Task DeleteWishList(int id);
     }

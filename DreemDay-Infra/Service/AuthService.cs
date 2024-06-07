@@ -1,28 +1,43 @@
 ﻿using DreemDay_Core.DTOs.AuthDTOs;
+using DreemDay_Core.DTOs.LoginDTOs;
+using DreemDay_Core.DTOs.UserDTOs;
+using DreemDay_Core.IRepository;
 using DreemDay_Core.Iservice;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DreemDay_Infra.Service
 {
     public class AuthService : IAuthService
     {
-        public Task Login(LoginDto loginDto)
+        private readonly IAuthRepos _repos;
+        private readonly IUserRepos _userRepos;
+        private readonly ILoginRepos _loginRepos;
+
+        public AuthService(IAuthRepos repos, IUserRepos userRepos, ILoginRepos loginRepos)
         {
-            throw new NotImplementedException();
+            _repos = repos;
+            _userRepos = userRepos;
+            _loginRepos = loginRepos;
         }
 
-        public Task Reset(ResetDto resetDto)
+        public async Task Login(LoginDto loginDto)
         {
-            throw new NotImplementedException();
+            await _repos.Login(loginDto);
         }
 
-        public Task SignUp(SignUpDto signUpDto)
+        public async Task Logout(int id)
         {
-            throw new NotImplementedException();
+            await _repos.Logout(id);
+        }
+
+        public async Task Reset(ResetDto resetDto)
+        {
+            await _repos.Reset(resetDto);
+        }
+
+        public async Task SignUp(SignUpDto signUpDto)
+        {
+            await _repos.SignUp(signUpDto);
         }
     }
 }

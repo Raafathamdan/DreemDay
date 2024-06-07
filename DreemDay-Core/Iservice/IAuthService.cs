@@ -12,5 +12,7 @@ namespace DreemDay_Core.Iservice
         Task SignUp(SignUpDto signUpDto);
         Task Login (LoginDto loginDto);
         Task Reset (ResetDto resetDto);
+        Task Logout(int id);
+
     }
 }

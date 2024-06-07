@@ -1,4 +1,5 @@
 ﻿using DreemDay_Core.DTOs.UserDTOs;
+using DreemDay_Core.IRepository;
 using DreemDay_Core.Iservice;
 using System;
 using System.Collections.Generic;
@@ -10,24 +11,34 @@ namespace DreemDay_Infra.Service
 {
     public class UserService : IUserService
     {
-        public Task DeleteUser(int id)
+        private readonly IUserRepos _repos;
+        public UserService(IUserRepos repos)
         {
-            throw new NotImplementedException();
+            _repos = repos;
+        }
+        public async Task<int> CreateUser(CreateUserDto createUserDto)
+        {
+            return await _repos.CreateUser(createUserDto);
         }
 
-        public Task<List<UserCardDto>> GetAllUsers()
+        public async Task DeleteUser(int id)
         {
-            throw new NotImplementedException();
+             await _repos.DeleteUser(id);
         }
 
-        public Task<UserByIdDto> GetUser(int id)
+        public async Task<List<UserCardDto>> GetAllUsers()
         {
-            throw new NotImplementedException();
+            return await _repos.GetAllUsers();
         }
 
-        public Task UpdateUser(UpdateUserDto updateUserDto)
+        public async Task<UserByIdDto> GetUser(int id)
         {
-            throw new NotImplementedException();
+            return await GetUser(id);
+        }
+
+        public async Task UpdateUser(UpdateUserDto updateUserDto)
+        {
+            await _repos.UpdateUser(updateUserDto);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace DreemDay_Core.IRepository
     {
         Task<List<CategoryCardDto>> GetAllCategories();
         Task<CategoryByIdDto> GetById(int id);
-        Task CreateCategory(CreateCategoryDto createCategoryDto);
+        Task<int> CreateCategory(CreateCategoryDto createCategoryDto);
         Task UpdateCategory(UpdateCategoryDto updateCategoryDto);
         Task DeleteCategory(int id);
     }

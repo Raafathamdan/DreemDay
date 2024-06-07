@@ -11,9 +11,9 @@ namespace DreemDay_Core.Models.Entity
 {
     public class User : MainEntity
     {
-        public int FirstName { get; set; }
-        public int LastName { get; set; }
-        public int Email { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
         public int Phone { get; set; }
         public DateTime BirthDate { get; set; }
         public Role Role { get; set; }  
