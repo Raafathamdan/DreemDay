@@ -20,10 +20,9 @@ namespace DreemDay_Core.Models.EntityConfugration
             builder.Property(x => x.IsDeleted).HasDefaultValue(false);
             builder.Property(x => x.Name).IsRequired();
             builder.Property(x => x.Address).IsRequired();
-            builder.Property(x => x.ProfileImage).IsRequired();
+            builder.Property(x => x.ProfileImage).IsRequired(false);
             builder.Property(x => x.Email).IsRequired();
             builder.Property(x => x.Phone).IsRequired().HasMaxLength(15);
-            builder.HasCheckConstraint("CK_Phone_Format", "Phone LIKE '[0-9]%'");
             //Relation
             builder.HasMany<Service>().WithOne().HasForeignKey(x => x.ServiceProviderId);
 

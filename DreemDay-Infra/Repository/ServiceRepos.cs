@@ -3,6 +3,7 @@ using DreemDay_Core.DTOs.ServiceDTOs;
 using DreemDay_Core.IRepository;
 using DreemDay_Core.Models.Entity;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -40,21 +41,29 @@ namespace DreemDay_Infra.Repository
             };
             _dbContext.Services.Add(service);
             await _dbContext.SaveChangesAsync();
+            Log.Debug("Debugging CreateService Has been Finised Successfully");
+
             return service.Id;
         }
 
         public async Task DeleteService(int id)
         {
             var service = await _dbContext.Services.FindAsync(id);
-            if (service == null) return;
+            if (service == null)
+                return;
+            Log.Information("Service Is Exists");
+
             service.IsDeleted = true;
             _dbContext.Update(service);
             await _dbContext.SaveChangesAsync();
+            Log.Debug("Debugging DeleteService Has been Finised Successfully");
+
         }
+
 
         public async Task<List<ServiceCardDto>> GetAllService()
         {
-            return await _dbContext.Services
+            var S = await _dbContext.Services
                 .Where(x => x.IsDeleted)
                 .Join(_dbContext.ServiceProviders, s => s.ServiceProviderId,
                 sb => sb.Id, (s, sb) => new {Service=s,ServiceProvider=sb})
@@ -67,6 +76,8 @@ namespace DreemDay_Infra.Repository
                     Name = service.Service.Name,
 
                 }).ToListAsync();
+            Log.Debug("Debugging GetAllService Has been Finised Successfully");
+            return S;
         }
 
         public async Task<ServiceByIdDto> GetService(int id)
@@ -76,8 +87,11 @@ namespace DreemDay_Infra.Repository
                 s => s.ServiceProviderId,
                 sb => sb.Id, (s, sb) => new {Service=s,ServiceProvider=sb})
                 .FirstOrDefaultAsync(s=>s.Service.Id == id);
-            if (service == null) return null;
-            return new ServiceByIdDto
+            if (service == null)
+                return null;
+            Log.Information("Service Is Exists");
+
+            var S =  new ServiceByIdDto
             {
                 Id = service.Service.Id,
                 ServiceProviderId = service.ServiceProvider.Id,
@@ -96,12 +110,17 @@ namespace DreemDay_Infra.Repository
                 IsDeleted = service.Service.IsDeleted,
 
             };
+            Log.Debug("Debugging GetService Has been Finised Successfully");
+            return S;
         }
 
         public async Task UpdateService(UpdateServiceDto updateServiceDto)
         {
             var service = await _dbContext.Services.FindAsync(updateServiceDto.Id);
-            if (service == null) return;
+            if (service == null)
+                return;
+            Log.Information("Service Is Exists");
+
             service.Price = updateServiceDto.Price;
             service.Name = updateServiceDto.Name;
             service.Unit = updateServiceDto.Unit;
@@ -116,6 +135,8 @@ namespace DreemDay_Infra.Repository
             service.IsDeleted = updateServiceDto.IsDeleted;
             _dbContext.Update(service);
             await _dbContext.SaveChangesAsync();
+            Log.Debug("Debugging UpdateService Has been Finised Successfully");
+
         }
     }
 }

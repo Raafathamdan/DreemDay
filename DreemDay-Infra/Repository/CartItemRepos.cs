@@ -3,6 +3,7 @@ using DreemDay_Core.DTOs.CartItemDTOs;
 using DreemDay_Core.IRepository;
 using DreemDay_Core.Models.Entity;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +40,8 @@ namespace DreemDay_Infra.Repository
             };
             _dbContext.CartItems.Add(cartitem);
             await _dbContext.SaveChangesAsync();
+            Log.Debug("Debugging CreateCartItem Has been Finised Successfully");
+
             return cartitem.Id;
 
         }
@@ -47,9 +50,12 @@ namespace DreemDay_Infra.Repository
         {
             var cartitem= await _dbContext.CartItems.FindAsync(id);
             if (cartitem == null) return;
+            Log.Information("cartitem Is Exists");
             cartitem.IsDeleted = true;
             _dbContext.CartItems.Update(cartitem);
             await _dbContext.SaveChangesAsync();
+            Log.Debug("Debugging DeleteCartItem Has been Finised Successfully");
+
 
         }
 
@@ -63,7 +69,7 @@ namespace DreemDay_Infra.Repository
 
             if (cartItem == null)
                 return null;
-
+            Log.Information("cartitem Is Exists");
             return new CartItemById
             {
                 Id = cartItem.CartItem.Id,
@@ -73,13 +79,17 @@ namespace DreemDay_Infra.Repository
                 CreationDate = cartItem.CartItem.CreationDate.ToString(),
                 ModifiedDate = cartItem.CartItem.ModifiedDate.ToString(),
                 IsDeleted = cartItem.CartItem.IsDeleted
+
             };
+
         }
 
         public async Task UpdateCartItem(UpdateCartItemDto updateCartItemDto)
         {
             var cartitem = await _dbContext.CartItems.FindAsync(updateCartItemDto.Id);
-            if (cartitem == null) return;
+            if (cartitem == null)
+                return;
+            Log.Information("cartitem Is Exists");
             cartitem.Quantity = updateCartItemDto.Quantity;
             cartitem.ServiceId = updateCartItemDto.ServiceId;
             cartitem.CartId = updateCartItemDto.CartId;
@@ -87,7 +97,9 @@ namespace DreemDay_Infra.Repository
             cartitem.IsDeleted = updateCartItemDto.IsDeleted;
             _dbContext.CartItems.Update(cartitem);
             await _dbContext.SaveChangesAsync();
-            
+            Log.Debug("Debugging UpdateCartItem Has been Finised Successfully");
+
+
 
         }
 
@@ -103,8 +115,8 @@ namespace DreemDay_Infra.Repository
                     ServiceId = cartItem.Service.Id,
                     Id = cartItem.CartItem.Id
                 
-                })
-                .ToListAsync();
+                }).ToListAsync();
+
         }
 
     }

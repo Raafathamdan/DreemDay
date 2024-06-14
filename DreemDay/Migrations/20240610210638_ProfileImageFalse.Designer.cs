@@ -3,6 +3,7 @@ using System;
 using DreemDay_Core.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DreemDay.Migrations
 {
     [DbContext(typeof(DreemDayDbContext))]
-    partial class DreemDayDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240610210638_ProfileImageFalse")]
+    partial class ProfileImageFalse
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,10 +78,6 @@ namespace DreemDay.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CartId");
-
-                    b.HasIndex("ServiceId");
-
                     b.ToTable("CartItems");
                 });
 
@@ -91,7 +90,7 @@ namespace DreemDay.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2024, 6, 14, 19, 8, 47, 279, DateTimeKind.Local).AddTicks(9561));
+                        .HasDefaultValue(new DateTime(2024, 6, 11, 0, 6, 38, 248, DateTimeKind.Local).AddTicks(8790));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -123,7 +122,7 @@ namespace DreemDay.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2024, 6, 14, 19, 8, 47, 280, DateTimeKind.Local).AddTicks(324));
+                        .HasDefaultValue(new DateTime(2024, 6, 11, 0, 6, 38, 249, DateTimeKind.Local).AddTicks(98));
 
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
@@ -175,7 +174,7 @@ namespace DreemDay.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2024, 6, 14, 19, 8, 47, 278, DateTimeKind.Local).AddTicks(2257));
+                        .HasDefaultValue(new DateTime(2024, 6, 11, 0, 6, 38, 245, DateTimeKind.Local).AddTicks(8886));
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime(6)");
@@ -220,7 +219,7 @@ namespace DreemDay.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2024, 6, 14, 19, 8, 47, 280, DateTimeKind.Local).AddTicks(1879));
+                        .HasDefaultValue(new DateTime(2024, 6, 11, 0, 6, 38, 249, DateTimeKind.Local).AddTicks(1971));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -230,6 +229,7 @@ namespace DreemDay.Migrations
                         .HasColumnType("double");
 
                     b.Property<string>("Image")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<bool>("IsDeleted")
@@ -288,7 +288,7 @@ namespace DreemDay.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2024, 6, 14, 19, 8, 47, 280, DateTimeKind.Local).AddTicks(2876));
+                        .HasDefaultValue(new DateTime(2024, 6, 11, 0, 6, 38, 249, DateTimeKind.Local).AddTicks(3605));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -321,7 +321,10 @@ namespace DreemDay.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("ServiceProviders");
+                    b.ToTable("ServiceProviders", t =>
+                        {
+                            t.HasCheckConstraint("CK_Phone_Format", "Phone LIKE '[0-9]%'");
+                        });
                 });
 
             modelBuilder.Entity("DreemDay_Core.Models.Entity.User", b =>
@@ -336,7 +339,7 @@ namespace DreemDay.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2024, 6, 14, 19, 8, 47, 278, DateTimeKind.Local).AddTicks(8185));
+                        .HasDefaultValue(new DateTime(2024, 6, 11, 0, 6, 38, 246, DateTimeKind.Local).AddTicks(9121));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -379,14 +382,10 @@ namespace DreemDay.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreationDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2024, 6, 14, 19, 8, 47, 281, DateTimeKind.Local).AddTicks(5951));
+                        .HasColumnType("datetime(6)");
 
                     b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint(1)")
-                        .HasDefaultValue(false);
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime(6)");
@@ -408,6 +407,12 @@ namespace DreemDay.Migrations
 
             modelBuilder.Entity("DreemDay_Core.Models.Entity.Cart", b =>
                 {
+                    b.HasOne("DreemDay_Core.Models.Entity.CartItem", null)
+                        .WithOne()
+                        .HasForeignKey("DreemDay_Core.Models.Entity.Cart", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("DreemDay_Core.Models.Entity.Order", null)
                         .WithOne()
                         .HasForeignKey("DreemDay_Core.Models.Entity.Cart", "Id")
@@ -417,21 +422,6 @@ namespace DreemDay.Migrations
                     b.HasOne("DreemDay_Core.Models.Entity.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("DreemDay_Core.Models.Entity.CartItem", b =>
-                {
-                    b.HasOne("DreemDay_Core.Models.Entity.Cart", null)
-                        .WithMany()
-                        .HasForeignKey("CartId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DreemDay_Core.Models.Entity.Service", null)
-                        .WithMany()
-                        .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -456,6 +446,12 @@ namespace DreemDay.Migrations
 
             modelBuilder.Entity("DreemDay_Core.Models.Entity.Service", b =>
                 {
+                    b.HasOne("DreemDay_Core.Models.Entity.CartItem", null)
+                        .WithOne()
+                        .HasForeignKey("DreemDay_Core.Models.Entity.Service", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("DreemDay_Core.Models.Entity.ServiceProvider", null)
                         .WithMany()
                         .HasForeignKey("ServiceProviderId")

@@ -3,6 +3,7 @@ using DreemDay_Core.DTOs.CartDTOs;
 using DreemDay_Core.IRepository;
 using DreemDay_Core.Models.Entity;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,8 @@ namespace DreemDay_Infra.Repository
             };
             _dbContext.Carts.Add(cart);
             await _dbContext.SaveChangesAsync();
+            Log.Debug("Debugging CreateCart Has been Finised Successfully");
+
             return cart.Id;
 
         }
@@ -36,24 +39,30 @@ namespace DreemDay_Infra.Repository
         public async Task DeleteCart(int id)
         {
             var cart = await _dbContext.Carts.FindAsync(id);
-            if (cart == null) return;
+            if (cart == null) 
+            return;
+            Log.Information("cart Is Exists");
+
             cart.IsDeleted = true;
             cart.IsActive = false;
             _dbContext.Carts.Update(cart);
             await _dbContext.SaveChangesAsync();
+            Log.Debug("Debugging DeleteCart Has been Finised Successfully");
+
         }
 
         public async Task<List<CartCardDto>> GetAllCart()
         {
-            return await _dbContext.Carts
+            var carts =  await _dbContext.Carts
                 .Where(x => !x.IsDeleted)
                 .Join(_dbContext.Users, c => c.UserId, u => u.Id, (c, u) => new {Cart=c,User=u})
                 .Select( cart => new CartCardDto
                 {
                     Id = cart.Cart.Id,
                     UserId = cart.User.Id
-                })
-                .ToListAsync();
+                }).ToListAsync();
+                Log.Debug("Debugging GetAllCart Has been Finised Successfully");
+                return carts;
         }
 
         public async Task<CartByIdDto> GetCart(int id)
@@ -65,29 +74,37 @@ namespace DreemDay_Infra.Repository
                     (c, u) => new { Cart = c, User = u })
                 .FirstOrDefaultAsync(x => x.Cart.Id == id);
 
-            if (cart == null) return null;
+            if (cart == null) 
+                return null;
+            Log.Information("cart Is Exists");
 
-            return new CartByIdDto
-            {
-                UserId = cart.User.Id,
-                IsActive = cart.Cart.IsActive,
-                CreationDate = cart.Cart.CreationDate.ToString(),
-                ModifiedDate = cart.Cart.ModifiedDate.ToString(),
-                IsDeleted = cart.Cart.IsDeleted
+
+            var c =  new CartByIdDto
+                    {
+                       UserId = cart.User.Id,
+                       IsActive = cart.Cart.IsActive,
+                       CreationDate = cart.Cart.CreationDate.ToString(),
+                       ModifiedDate = cart.Cart.ModifiedDate.ToString(),
+                       IsDeleted = cart.Cart.IsDeleted
                 
-            };
+                    };
+            Log.Debug("Debugging GetCart Has been Finised Successfully");
+                return c;
         }
 
         public async Task UpdateCart(UpdateCartDto updateCartDto)
         {
             var cart = await _dbContext.Carts.FindAsync(updateCartDto.Id);
             if (cart == null) return;
+            Log.Information("cart Is Exists");
             cart.IsActive = updateCartDto.IsActive;
             cart.IsDeleted = updateCartDto.IsDeleted;
             cart.ModifiedDate = DateTime.Now;
             cart.UserId = updateCartDto.UserId;
             _dbContext.Carts.Update(cart);
             await _dbContext.SaveChangesAsync();
+            Log.Debug("Debugging UpdateCart Has been Finised Successfully");
+
         }
     }
 }

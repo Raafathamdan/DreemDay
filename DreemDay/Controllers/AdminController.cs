@@ -42,6 +42,12 @@ namespace DreemDay.Controllers
 
 
         #region User
+        /// <summary>
+        ///  Retrieve a list of User.
+        /// </summary>
+        /// <returns>A List Of All User</returns>
+        /// <response code="200">Returns  GetAllCustomer</response>
+        /// <response code="400">If the error was occured</response>
         [HttpGet]
         [Route("[action]")]
         public async Task<IActionResult> GetAllUsers()
@@ -56,6 +62,19 @@ namespace DreemDay.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        ///<remarks>
+        ///  Sample request:
+        ///    Get API/DeleteUser
+        ///    {
+        ///       "Id":"Enter The User Id Here ",
+        ///    }
+        /// </remarks>
+        /// <summary>
+        ///  Delete a User
+        /// </summary>
+        /// <returns>A User Has Been Deleted</returns>
+        /// <response code="201">Returns  User Has Been Deleted</response>
+        /// <response code="400">If the error was occured</response>
         [HttpPut]
         [Route("[action]/{id}")]
         public async Task<IActionResult> DeleteUser([FromRoute] int id)
@@ -79,6 +98,12 @@ namespace DreemDay.Controllers
         }
         #endregion
         #region ServiceProvider
+        /// <summary>
+        ///  Retrieve a list of ServiceProviders.
+        /// </summary>
+        /// <returns>A List Of All ServiceProviders</returns>
+        /// <response code="200">Returns  GetAllCustomer</response>
+        /// <response code="400">If the error was occured</response>
         [HttpGet]
         [Route("[action]")]
         public async Task<IActionResult> GetAllServiceProviders()
@@ -93,6 +118,19 @@ namespace DreemDay.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        ///<remarks>
+        ///  Sample request:
+        ///    Get API/DeleteServiceProvider
+        ///    {
+        ///       "Id":"Enter The ServiceProvider Id Here ",
+        ///    }
+        /// </remarks>
+        /// <summary>
+        ///  Delete a ServiceProvider
+        /// </summary>
+        /// <returns>A ServiceProvider Has Been Deleted</returns>
+        /// <response code="201">Returns  ServiceProvider Has Been Deleted</response>
+        /// <response code="400">If the error was occured</response>
         [HttpPut]
         [Route("[action]/{id}")]
         public async Task<IActionResult> DeleteServiceProvider([FromRoute] int id)
@@ -117,6 +155,12 @@ namespace DreemDay.Controllers
         }
         #endregion
         #region Service
+        /// <summary>
+        ///  Retrieve a list of Service.
+        /// </summary>
+        /// <returns>A List Of All Service</returns>
+        /// <response code="200">Returns  GetAllCustomer</response>
+        /// <response code="400">If the error was occured</response>
         [HttpGet]
         [Route("[action]")]
         public async Task<IActionResult> GetAllServices()
@@ -133,6 +177,12 @@ namespace DreemDay.Controllers
         }
         #endregion
         #region Order
+        /// <summary>
+        ///  Retrieve a list of Order.
+        /// </summary>
+        /// <returns>A List Of All Order</returns>
+        /// <response code="200">Returns  GetAllCustomer</response>
+        /// <response code="400">If the error was occured</response>
         [HttpGet]
         [Route("[action]")]
         public async Task<IActionResult> GetAllOrders()
@@ -149,6 +199,12 @@ namespace DreemDay.Controllers
         }
         #endregion
         #region CartItem
+        /// <summary>
+        ///  Retrieve a list of CartItem.
+        /// </summary>
+        /// <returns>A List Of All CartItem</returns>
+        /// <response code="200">Returns  GetAllCustomer</response>
+        /// <response code="400">If the error was occured</response>
         [HttpGet]
         [Route("[action]")]
         public async Task<IActionResult> GetAllCartItems()
@@ -165,6 +221,12 @@ namespace DreemDay.Controllers
         }
         #endregion
         #region Cart
+        /// <summary>
+        ///  Retrieve a list of Cart.
+        /// </summary>
+        /// <returns>A List Of All Cart</returns>
+        /// <response code="200">Returns  GetAllCustomer</response>
+        /// <response code="400">If the error was occured</response>
         [HttpGet]
         [Route("[action]")]
         public async Task<IActionResult> GetAllCarts()
@@ -181,6 +243,12 @@ namespace DreemDay.Controllers
         }
         #endregion
         #region WishList
+        /// <summary>
+        ///  Retrieve a list of WishList.
+        /// </summary>
+        /// <returns>A List Of All WishList</returns>
+        /// <response code="200">Returns  GetAllCustomer</response>
+        /// <response code="400">If the error was occured</response>
         [HttpGet]
         [Route("[action]")]
         public async Task<IActionResult> GetAllWishLists()
@@ -197,6 +265,12 @@ namespace DreemDay.Controllers
         }
         #endregion
         #region Category
+        /// <summary>
+        ///  Retrieve a list of Category.
+        /// </summary>
+        /// <returns>A List Of All Category</returns>
+        /// <response code="200">Returns  GetAllCustomer</response>
+        /// <response code="400">If the error was occured</response>
         [HttpGet]
         [Route("[action]")]
         public async Task<IActionResult> GetAllCategories()
@@ -211,6 +285,22 @@ namespace DreemDay.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        /// <remarks>
+        /// Sample request:
+        /// 
+        ///     POST api/CreateCategory
+        ///     {          
+        ///       "Title": "Enter Your new Category Title  Here",   
+        ///       "Description": "Enter Your new Category Description Here",   
+        ///         
+        ///     }
+        /// </remarks>
+        /// <summary>
+        /// Create New Category.
+        /// </summary>
+        /// <returns>A newly created Category</returns>
+        /// <response code="201">Returns the newly created Category</response>
+        /// <response code="400">If the error was occured</response>
         [HttpPost]
         [Route("[action]")]
         public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryDto dto)
@@ -232,6 +322,22 @@ namespace DreemDay.Controllers
                 }
             }
         }
+        ///<remarks>
+        ///  Sample request:
+        ///    Get API/UpdateCategory
+        ///    {
+        ///        "Id":"Enter The Category Id Here ",
+        ///        "Title": "Enter Your new Category Title  Here",   
+        ///        "Description": "Enter Your new Category Description Here",
+        ///        
+        ///    }
+        /// </remarks>
+        /// <summary>
+        /// Update an existing Category. 
+        /// </summary>
+        /// <returns>  Category Has Been Updated  </returns>
+        /// <response code="201"> Returns  Category Has Been Updated</response>
+        /// <response code="400">If the error was occured</response>
         [HttpPut]
         [Route("[action]")]
         public async Task<IActionResult> UpdateCategory(UpdateCategoryDto dto)
@@ -257,6 +363,19 @@ namespace DreemDay.Controllers
                 }
             }
         }
+        ///<remarks>
+        ///  Sample request:
+        ///    Get API/DeleteCategory
+        ///    {
+        ///       "Id":"Enter The Category Id Here ",
+        ///    }
+        /// </remarks>
+        /// <summary>
+        ///  Delete a Category
+        /// </summary>
+        /// <returns>A Category Has Been Deleted</returns>
+        /// <response code="201">Returns  Category Has Been Deleted</response>
+        /// <response code="400">If the error was occured</response>
         [HttpPut]
         [Route("[action]/{id}")]
         public async Task<IActionResult> DeleteCategory([FromRoute] int id)

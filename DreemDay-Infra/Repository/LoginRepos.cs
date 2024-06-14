@@ -2,6 +2,7 @@
 using DreemDay_Core.DTOs.LoginDTOs;
 using DreemDay_Core.IRepository;
 using DreemDay_Core.Models.Entity;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,7 @@ namespace DreemDay_Infra.Repository
             };
             _dbContext.Add(login);  
             await _dbContext.SaveChangesAsync();
+            Log.Debug("Debugging CreateLogin Has been Finised Successfully");
             return login.Id;
 
         }

@@ -33,7 +33,7 @@ namespace DreemDay_Infra.Service
 
         public async Task<UserByIdDto> GetUser(int id)
         {
-            return await GetUser(id);
+            return await _repos.GetUser(id);
         }
 
         public async Task UpdateUser(UpdateUserDto updateUserDto)

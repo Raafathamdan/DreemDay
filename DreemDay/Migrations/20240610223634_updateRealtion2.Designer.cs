@@ -3,6 +3,7 @@ using System;
 using DreemDay_Core.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DreemDay.Migrations
 {
     [DbContext(typeof(DreemDayDbContext))]
-    partial class DreemDayDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240610223634_updateRealtion2")]
+    partial class updateRealtion2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,7 +94,7 @@ namespace DreemDay.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2024, 6, 14, 19, 8, 47, 279, DateTimeKind.Local).AddTicks(9561));
+                        .HasDefaultValue(new DateTime(2024, 6, 11, 1, 36, 34, 130, DateTimeKind.Local).AddTicks(1716));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -123,7 +126,7 @@ namespace DreemDay.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2024, 6, 14, 19, 8, 47, 280, DateTimeKind.Local).AddTicks(324));
+                        .HasDefaultValue(new DateTime(2024, 6, 11, 1, 36, 34, 130, DateTimeKind.Local).AddTicks(2639));
 
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
@@ -175,7 +178,7 @@ namespace DreemDay.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2024, 6, 14, 19, 8, 47, 278, DateTimeKind.Local).AddTicks(2257));
+                        .HasDefaultValue(new DateTime(2024, 6, 11, 1, 36, 34, 128, DateTimeKind.Local).AddTicks(4905));
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime(6)");
@@ -206,6 +209,9 @@ namespace DreemDay.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CartId")
+                        .IsUnique();
+
                     b.HasIndex("UserId");
 
                     b.ToTable("Orders");
@@ -220,7 +226,7 @@ namespace DreemDay.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2024, 6, 14, 19, 8, 47, 280, DateTimeKind.Local).AddTicks(1879));
+                        .HasDefaultValue(new DateTime(2024, 6, 11, 1, 36, 34, 130, DateTimeKind.Local).AddTicks(4524));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -288,7 +294,7 @@ namespace DreemDay.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2024, 6, 14, 19, 8, 47, 280, DateTimeKind.Local).AddTicks(2876));
+                        .HasDefaultValue(new DateTime(2024, 6, 11, 1, 36, 34, 130, DateTimeKind.Local).AddTicks(5699));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -336,7 +342,7 @@ namespace DreemDay.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2024, 6, 14, 19, 8, 47, 278, DateTimeKind.Local).AddTicks(8185));
+                        .HasDefaultValue(new DateTime(2024, 6, 11, 1, 36, 34, 128, DateTimeKind.Local).AddTicks(9118));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -379,14 +385,10 @@ namespace DreemDay.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreationDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2024, 6, 14, 19, 8, 47, 281, DateTimeKind.Local).AddTicks(5951));
+                        .HasColumnType("datetime(6)");
 
                     b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint(1)")
-                        .HasDefaultValue(false);
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime(6)");
@@ -408,12 +410,6 @@ namespace DreemDay.Migrations
 
             modelBuilder.Entity("DreemDay_Core.Models.Entity.Cart", b =>
                 {
-                    b.HasOne("DreemDay_Core.Models.Entity.Order", null)
-                        .WithOne()
-                        .HasForeignKey("DreemDay_Core.Models.Entity.Cart", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("DreemDay_Core.Models.Entity.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
@@ -447,6 +443,12 @@ namespace DreemDay.Migrations
 
             modelBuilder.Entity("DreemDay_Core.Models.Entity.Order", b =>
                 {
+                    b.HasOne("DreemDay_Core.Models.Entity.Order", null)
+                        .WithOne()
+                        .HasForeignKey("DreemDay_Core.Models.Entity.Order", "CartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("DreemDay_Core.Models.Entity.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")

@@ -4,6 +4,7 @@ using DreemDay_Core.IRepository;
 using DreemDay_Core.Models.Entity;
 using Microsoft.EntityFrameworkCore;
 using Org.BouncyCastle.Bcpg;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,23 +31,28 @@ namespace DreemDay_Infra.Repository
             };
             _dbContext.Add(wishList);
             await _dbContext.SaveChangesAsync();
+            Log.Debug("Debugging CreateWishList Has been Finised Successfully");
             return wishList.Id;
         }
 
         public async Task DeleteWishList(int id)
         {
             var wishlist = await _dbContext.WishLists.FindAsync(id);
-            if (wishlist == null) return;
-            
-                wishlist.IsDeleted = true;
+            if (wishlist == null)
+                return;
+            Log.Information("WishList Is Exists");
+
+            wishlist.IsDeleted = true;
                 _dbContext.Update(wishlist);
                 await _dbContext.SaveChangesAsync();
-            
+            Log.Debug("Debugging DeleteWishList Has been Finised Successfully");
+
+
         }
 
         public async Task<List<WishListCardDto>> GetAllWishList()
         {
-            return await _dbContext.WishLists
+            var WL = await _dbContext.WishLists
                 .Where(x => !x.IsDeleted)
                 .Join(_dbContext.Users, wl => wl.UserId, u => u.Id, (wl, u) => new {WishList=wl,User=u})
                 .Join(_dbContext.Services,wlUser => wlUser.WishList.ServiceId, 
@@ -58,6 +64,8 @@ namespace DreemDay_Infra.Repository
                     ServiceId = wishlist.Service.Id,
                     UserId = wishlist.WishListUser.User.Id,
                 }).ToListAsync();
+            Log.Debug("Debugging GetAllWishList Has been Finised Successfully");
+            return WL;
         }
 
         public async Task<WishListByIdDto> GetWishList(int id)
@@ -71,8 +79,10 @@ namespace DreemDay_Infra.Repository
                     (wlUser, service) => new { WishListUser = wlUser, Service = service })
                 .FirstOrDefaultAsync(); 
 
-            if (wishlist == null) return null;
-            return new WishListByIdDto
+            if (wishlist == null) 
+                return null;
+            Log.Information("WishList Is Exists");
+            var WL = new WishListByIdDto
             {
                 Id = wishlist.WishListUser.WishList.Id,
                 ServiceId = wishlist.WishListUser.WishList.ServiceId,
@@ -81,13 +91,17 @@ namespace DreemDay_Infra.Repository
                 ModifiedDate = wishlist.WishListUser.WishList.ModifiedDate.ToString(),
                 IsDeleted = wishlist.WishListUser.WishList.IsDeleted,
             };
+            Log.Debug("Debugging GetWishList Has been Finised Successfully");
+            return WL;
         }
 
 
         public async Task UpdateWishList(UpdateWishListDto updateWishListDto)
         {
             var wishlist = await _dbContext.WishLists.FindAsync(updateWishListDto.Id);
-            if (wishlist == null) return;
+            if (wishlist == null)
+                return;
+            Log.Information("WishList Is Exists");
             wishlist.ServiceId = updateWishListDto.ServiceId;
             wishlist.UserId = updateWishListDto.UserId;
             wishlist.CreationDate=updateWishListDto.CreationDate;
@@ -95,6 +109,8 @@ namespace DreemDay_Infra.Repository
             wishlist.IsDeleted = updateWishListDto.IsDeleted;
             _dbContext.Update(wishlist);
             await _dbContext.SaveChangesAsync();
+            Log.Debug("Debugging UpdateWishList Has been Finised Successfully");
+
 
         }
     }

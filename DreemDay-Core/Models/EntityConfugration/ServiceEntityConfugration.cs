@@ -23,7 +23,7 @@ namespace DreemDay_Core.Models.EntityConfugration
             builder.Property(x => x.isHaveDiscount).IsRequired();
             builder.Property(x => x.isHaveDiscount).HasDefaultValue(false);
             builder.Property(x => x.Description).IsRequired();
-            builder.Property(x => x.Image).IsRequired();
+            builder.Property(x => x.Image).IsRequired(false);
 
         }
     }

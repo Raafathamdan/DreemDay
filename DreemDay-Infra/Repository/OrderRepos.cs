@@ -3,6 +3,7 @@ using DreemDay_Core.DTOs.OrderDTOs;
 using DreemDay_Core.IRepository;
 using DreemDay_Core.Models.Entity;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,22 +36,28 @@ namespace DreemDay_Infra.Repository
             };
             _dbContext.Add(order);
             await _dbContext.SaveChangesAsync();
+            Log.Debug("Debugging CreateOrder Has been Finised Successfully");
+
             return order.Id;
         }
 
         public async Task DeleteOrder(int id)
         {
             var order = await _dbContext.Orders.FindAsync(id);
-            if (order == null) return;
+            if (order == null) 
+                return;
+            Log.Information("Order Is Exists");
             order.IsDeleted = true;
             _dbContext.Update(order);
             await _dbContext.SaveChangesAsync();
+            Log.Debug("Debugging Delete Order Has been Finised Successfully");
+
 
         }
 
         public async Task<List<OrderCardDto>> GetAllOrder()
         {
-            return await _dbContext.Orders
+            var ord = await _dbContext.Orders
                 .Where(x => !x.IsDeleted)
                 .Join(_dbContext.Users,
                     o => o.UserId,
@@ -69,6 +76,8 @@ namespace DreemDay_Infra.Repository
                     Date = order.OrderUser.Order.Date.ToString(),
                     Title = order.OrderUser.Order.Title
                 }).ToListAsync();
+            Log.Debug("Debugging GetAllOrder Has been Finised Successfully");
+            return ord;
         }
         public async Task<OrderByIdDto> GetOrder(int id)
         {
@@ -85,8 +94,8 @@ namespace DreemDay_Infra.Repository
                 .FirstOrDefaultAsync(o => o.Id == id);
 
             if (order == null) return null;
-
-            return new OrderByIdDto
+            Log.Information("Order Is Exists");
+            var O = new OrderByIdDto
             {
                 Id = order.Id,
                 CartId = order.CartId,
@@ -100,13 +109,17 @@ namespace DreemDay_Infra.Repository
                 Note = order.Note,
                 PaymentMethod = order.PaymentMethod,
             };
+            Log.Debug("Debugging GetOrder Has been Finised Successfully");
+              return O;
         }
 
 
         public async Task UpdateOrder(UpdateOrderDto updateOrderDto)
         {
             var order = await _dbContext.Orders.FindAsync(updateOrderDto.Id);
-            if (order == null) return;
+            if (order == null) 
+                return;
+            Log.Information("Order Is Exists");
             order.Note = updateOrderDto.Note;
             order.Title = updateOrderDto.Title;
             order.Status = updateOrderDto.Status;
@@ -118,6 +131,8 @@ namespace DreemDay_Infra.Repository
             order.CartId = updateOrderDto.CartId;
             _dbContext.Orders.Update(order);
             await _dbContext.SaveChangesAsync();
+            Log.Debug("Debugging UpdateOrder Has been Finised Successfully");
+
 
         }
     }

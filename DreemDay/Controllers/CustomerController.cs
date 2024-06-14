@@ -37,6 +37,19 @@ namespace DreemDay.Controllers
             _categoryService = categoryService;
         }
         #region User
+        ///<remarks>
+        ///  Sample request:
+        ///    Get API/GetUserById
+        ///    {
+        ///       "id":"Enter The User Id Here ",
+        ///    }
+        /// </remarks>
+        /// <summary>
+        ///  Retrieve a specific User by ID.
+        /// </summary>
+        /// <returns>GetUserById</returns>
+        /// <response code="201">Returns  GetUserById</response>
+        /// <response code="400">If the error was occured</response>
         [HttpGet]
         [Route("[action]/{id}")]
         public async Task<IActionResult> GetUserById([FromRoute]int id)
@@ -58,6 +71,24 @@ namespace DreemDay.Controllers
                 }
             }
         }
+        ///<remarks>
+        ///  Sample request:
+        ///    Get API/UpdateUser
+        ///    {
+        ///        "Id":"Enter The User Id Here ",
+        ///        "FirstName": "Enter Your new User FirstName  Here",   
+        ///        "LastName": "Enter Your new User LastName  Here",   
+        ///        "Phone": "Enter Your new User Phone Here",   
+        ///        "Email": "Enter Your new User Email Here",   
+        ///        "BirthDate": "Enter Your new User BirthDate Here", 
+        ///    }
+        /// </remarks>
+        /// <summary>
+        /// Update an existing User. 
+        /// </summary>
+        /// <returns>  User Has Been Updated  </returns>
+        /// <response code="201"> Returns  User Has Been Updated</response>
+        /// <response code="400">If the error was occured</response>
         [HttpPut]
         [Route("[action]")]
         public async Task<IActionResult> UpdateUser([FromBody]UpdateUserDto dto)
@@ -86,6 +117,19 @@ namespace DreemDay.Controllers
         }
         #endregion
         #region Order
+        ///<remarks>
+        ///  Sample request:
+        ///    Get API/GetOrderById
+        ///    {
+        ///       "id":"Enter The Order Id Here ",
+        ///    }
+        /// </remarks>
+        /// <summary>
+        ///  Retrieve a specific Order by ID.
+        /// </summary>
+        /// <returns>GetOrderById</returns>
+        /// <response code="201">Returns  GetOrderById</response>
+        /// <response code="400">If the error was occured</response>
         [HttpGet]
         [Route("[action]/{id}")]
         public async Task<IActionResult> GetOrderById([FromRoute] int id)
@@ -107,6 +151,26 @@ namespace DreemDay.Controllers
                 }
             }
         }
+        /// <remarks>
+        /// Sample request:
+        /// 
+        ///     POST api/CreateOrder
+        ///     {          
+        ///       "Note": "Enter Your new Order Note  Here",   
+        ///       "Title": "Enter Your new Customer Title Here",   
+        ///       "CartId": "Enter Your new Customer CartId Here",   
+        ///       "UserId": "Enter Your new Customer UserId Here",   
+        ///       "PaymentMethod": "Enter Your new Customer PaymentMethod Here",   
+        ///       "OrderStatus": "Enter Your new Customer OrderStatus Here",   
+        ///       "DateTime": "Enter Your new Customer DateTime Here",   
+        ///     }
+        /// </remarks>
+        /// <summary>
+        /// Create New Order.
+        /// </summary>
+        /// <returns>A newly created Order</returns>
+        /// <response code="201">Returns the newly created Order</response>
+        /// <response code="400">If the error was occured</response>
         [HttpPost]
         [Route("[action]")]
         public async Task<IActionResult> CreateOrder([FromBody]CreateOrderDto dto)
@@ -128,6 +192,26 @@ namespace DreemDay.Controllers
                 }
             }
         }
+        ///<remarks>
+        ///  Sample request:
+        ///    Get API/UpdateOrder
+        ///    {
+        ///       "Id":"Enter The Order Id Here ",
+        ///       "Note": "Enter Your new Order Note  Here",   
+        ///       "Title": "Enter Your new Customer Title Here",   
+        ///       "CartId": "Enter Your new Customer CartId Here",   
+        ///       "UserId": "Enter Your new Customer UserId Here",   
+        ///       "PaymentMethod": "Enter Your new Customer PaymentMethod Here",   
+        ///       "OrderStatus": "Enter Your new Customer OrderStatus Here",   
+        ///       "DateTime": "Enter Your new Customer DateTime Here",   
+        ///    }
+        /// </remarks>
+        /// <summary>
+        /// Update an existing Order. 
+        /// </summary>
+        /// <returns>  Order Has Been Updated  </returns>
+        /// <response code="201"> Returns  Order Has Been Updated</response>
+        /// <response code="400">If the error was occured</response>
         [HttpPut]
         [Route("[action]")]
         public async Task<IActionResult> UpdateOrder([FromBody] UpdateOrderDto dto)
@@ -153,6 +237,19 @@ namespace DreemDay.Controllers
                 }
             }
         }
+        ///<remarks>
+        ///  Sample request:
+        ///    Get API/DeleteOrder
+        ///    {
+        ///       "Id":"Enter The Order Id Here ",
+        ///    }
+        /// </remarks>
+        /// <summary>
+        ///  Delete a Order
+        /// </summary>
+        /// <returns>A Order Has Been Deleted</returns>
+        /// <response code="201">Returns  Order Has Been Deleted</response>
+        /// <response code="400">If the error was occured</response>
         [HttpPut]
         [Route("[action]/{id}")]
         public async Task<ActionResult> DeleteOrder([FromRoute]int id)
@@ -178,6 +275,19 @@ namespace DreemDay.Controllers
 
         #endregion
         #region CartItem
+        ///<remarks>
+        ///  Sample request:
+        ///    Get API/GetCartItemById
+        ///    {
+        ///       "id":"Enter The CartItem Id Here ",
+        ///    }
+        /// </remarks>
+        /// <summary>
+        ///  Retrieve a specific CartItem by ID.
+        /// </summary>
+        /// <returns>GetCartItemById</returns>
+        /// <response code="201">Returns  GetCartItemById</response>
+        /// <response code="400">If the error was occured</response>
         [HttpGet]
         [Route("[action]/{id}")]
         public async Task<IActionResult> GetCartItemById([FromRoute]int id)
@@ -199,6 +309,22 @@ namespace DreemDay.Controllers
                 }
             }
         }
+        /// <remarks>
+        /// Sample request:
+        /// 
+        ///     POST api/CreateCartItem
+        ///     {          
+        ///       "ServiceId": "Enter Your new CartItem ServiceId  Here",   
+        ///       "CartId": "Enter Your new CartItem CartId Here",   
+        ///       "Quantity": "Enter Your new CartItem Quantity Here",   
+        ///     }
+        /// </remarks>
+        /// <summary>
+        /// Create New CartItem.
+        /// </summary>
+        /// <returns>A newly created CartItem</returns>
+        /// <response code="201">Returns the newly created CartItem</response>
+        /// <response code="400">If the error was occured</response>
         [HttpPost]
         [Route("[action]")]
         public async Task<IActionResult> CreateCartItem([FromBody]CreateCartItemDto dto)
@@ -220,6 +346,22 @@ namespace DreemDay.Controllers
                 }
             }
         }
+        ///<remarks>
+        ///  Sample request:
+        ///    Get API/UpdateCartItem
+        ///    {
+        ///       "Id":"Enter The CartItem Id Here ",
+        ///       "ServiceId": "Enter Your new CartItem ServiceId  Here",   
+        ///       "CartId": "Enter Your new CartItem CartId Here",   
+        ///       "Quantity": "Enter Your new CartItem Quantity Here",  
+        ///    }
+        /// </remarks>
+        /// <summary>
+        /// Update an existing CartItem. 
+        /// </summary>
+        /// <returns>  CartItem Has Been Updated  </returns>
+        /// <response code="201"> Returns  CartItem Has Been Updated</response>
+        /// <response code="400">If the error was occured</response>
         [HttpPut]
         [Route("[action]")]
         public async Task<IActionResult> UpdateCartItem([FromBody] UpdateCartItemDto dto)
@@ -247,6 +389,19 @@ namespace DreemDay.Controllers
         }
         #endregion
         #region WishList
+        ///<remarks>
+        ///  Sample request:
+        ///    Get API/GetWishListById
+        ///    {
+        ///       "id":"Enter The WishList Id Here ",
+        ///    }
+        /// </remarks>
+        /// <summary>
+        ///  Retrieve a specific WishList by ID.
+        /// </summary>
+        /// <returns>GetWishListById</returns>
+        /// <response code="201">Returns  GetWishListById</response>
+        /// <response code="400">If the error was occured</response>
         [HttpGet]
         [Route("[action]/{id}")]
         public async Task<IActionResult> GetWishListById(int id)
@@ -268,6 +423,21 @@ namespace DreemDay.Controllers
                 }
             }
         }
+        /// <remarks>
+        /// Sample request:
+        /// 
+        ///     POST api/CreateWishList
+        ///     {          
+        ///       "UserId": "Enter Your new WishList UserId  Here",   
+        ///       "SerciceId": "Enter Your new WishList SerciceId Here",   
+        ///     }
+        /// </remarks>
+        /// <summary>
+        /// Create New WishList.
+        /// </summary>
+        /// <returns>A newly created WishList</returns>
+        /// <response code="201">Returns the newly created WishList</response>
+        /// <response code="400">If the error was occured</response>
         [HttpPost]
         [Route("[action]")]
         public async Task<IActionResult> CreateWishList([FromBody] CreateWishListDto dto)
@@ -289,6 +459,21 @@ namespace DreemDay.Controllers
                 }
             }
         }
+        ///<remarks>
+        ///  Sample request:
+        ///    Get API/UpdateWishList
+        ///    {
+        ///        "Id":"Enter The WishList Id Here ",
+        ///        "UserId": "Enter Your new WishList UserId  Here",   
+        ///        "SerciceId": "Enter Your new WishList SerciceId Here",   
+        ///    }
+        /// </remarks>
+        /// <summary>
+        /// Update an existing WishList. 
+        /// </summary>
+        /// <returns>  WishList Has Been Updated  </returns>
+        /// <response code="201"> Returns  WishList Has Been Updated</response>
+        /// <response code="400">If the error was occured</response>
         [HttpPut]
         [Route("[action]")]
         public async Task<IActionResult> UpdateWishList([FromBody] UpdateWishListDto dto)
@@ -314,6 +499,19 @@ namespace DreemDay.Controllers
                 }
             }
         }
+        ///<remarks>
+        ///  Sample request:
+        ///    Get API/DeleteWishList
+        ///    {
+        ///       "Id":"Enter The WishList Id Here ",
+        ///    }
+        /// </remarks>
+        /// <summary>
+        ///  Delete a WishList
+        /// </summary>
+        /// <returns>A WishList Has Been Deleted</returns>
+        /// <response code="201">Returns  WishList Has Been Deleted</response>
+        /// <response code="400">If the error was occured</response>
         [HttpPut]
         [Route("[action]/{id}")]
         public async Task<IActionResult> DeleteWishList([FromRoute]int Id)
@@ -337,6 +535,19 @@ namespace DreemDay.Controllers
         }
         #endregion
         #region Category
+        ///<remarks>
+        ///  Sample request:
+        ///    Get API/GetCategoryById
+        ///    {
+        ///       "id":"Enter The Category Id Here ",
+        ///    }
+        /// </remarks>
+        /// <summary>
+        ///  Retrieve a specific Category by ID.
+        /// </summary>
+        /// <returns>GetCategoryById</returns>
+        /// <response code="201">Returns  GetCategoryById</response>
+        /// <response code="400">If the error was occured</response>
         [HttpGet]
         [Route("[action]/{id}")]
         public async Task<IActionResult> GetCategoryById([FromRoute]int Id)

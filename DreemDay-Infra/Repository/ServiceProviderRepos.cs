@@ -3,6 +3,7 @@ using DreemDay_Core.DTOs.ServiceProviderDTOs;
 using DreemDay_Core.IRepository;
 using DreemDay_Core.Models.Entity;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,34 +33,45 @@ namespace DreemDay_Infra.Repository
             };
             _dbContext.ServiceProviders.Add(serviceb);
             await _dbContext.SaveChangesAsync();
+            Log.Debug("Debugging CreateServiceProvider Has been Finised Successfully");
             return serviceb.Id;
         }
 
         public async Task DeleteServiceProvider(int id)
         {
             var serviceb = await _dbContext.ServiceProviders.FindAsync(id);
-            if (serviceb == null) return;
+            if (serviceb == null)
+                return;
+            Log.Information("ServiceProviders Is Exists");
+
             serviceb.IsDeleted = true;
             _dbContext.ServiceProviders.Update(serviceb);
             await _dbContext.SaveChangesAsync();
+            Log.Debug("Debugging DeleteServiceProvider Has been Finised Successfully");
+
         }
 
         public async Task<List<ServiceProviderCardDto>> GetAllServiceProviders()
         {
-            return await _dbContext.ServiceProviders
+            var SR =  await _dbContext.ServiceProviders
                 .Where(x =>!x.IsDeleted)
                 .Select(serviceb => new ServiceProviderCardDto
                 { Id = serviceb.Id,
                 Name = serviceb.Name,
                 ProfileImage= serviceb.ProfileImage,
                 }).ToListAsync();
+            Log.Debug("Debugging GetAllServiceProviders Has been Finised Successfully");
+            return SR;
         }
 
         public async Task<ServiceProviderByIdDto> GetServiceProvider(int id)
         {
             var serviceb = await _dbContext.ServiceProviders.Join(_dbContext.Users,sb=>sb.UserId,u=>u.Id,(sb,u)=>new {ServiceProvider=sb,User=u}).FirstOrDefaultAsync(sb => sb.ServiceProvider.Id == id);   
-            if (serviceb == null) return null;
-            return new ServiceProviderByIdDto
+            if (serviceb == null) 
+                return null;
+            Log.Information("ServiceProviders Is Exists");
+
+            var Sr =  new ServiceProviderByIdDto
             {
                 Id = serviceb.ServiceProvider.Id,
                 Name = serviceb.ServiceProvider.Name,
@@ -73,12 +85,16 @@ namespace DreemDay_Infra.Repository
                 IsDeleted = serviceb.ServiceProvider.IsDeleted,
 
             };
+            Log.Debug("Debugging GetServiceProvider Has been Finised Successfully");
+            return Sr;
         }
 
         public async Task UpdateServiceProvider(UpdateServiceProviderDto updateServiceProviderDto)
         {
             var serviceb = await _dbContext.ServiceProviders.FindAsync(updateServiceProviderDto.Id);
-            if (serviceb == null) return;
+            if (serviceb == null)
+                return;
+            Log.Information("ServiceProviders Is Exists");
             serviceb.Name = updateServiceProviderDto.Name;
             serviceb.Address = updateServiceProviderDto.Address;
             serviceb.Phone = updateServiceProviderDto.Phone;
@@ -89,6 +105,8 @@ namespace DreemDay_Infra.Repository
             serviceb.UserId = updateServiceProviderDto.UserId;
             _dbContext.ServiceProviders.Update(serviceb);
             await _dbContext.SaveChangesAsync();
+            Log.Debug("Debugging UpdateServiceProvider Has been Finised Successfully");
+
 
         }
     }

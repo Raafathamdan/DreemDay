@@ -20,6 +20,19 @@ namespace DreemDay.Controllers
             _serviceService = serviceService;
         }
         #region Service
+        ///<remarks>
+        ///  Sample request:
+        ///    Get API/GetServiceById
+        ///    {
+        ///       "id":"Enter The Service Id Here ",
+        ///    }
+        /// </remarks>
+        /// <summary>
+        ///  Retrieve a specific Service by ID.
+        /// </summary>
+        /// <returns>GetServiceById</returns>
+        /// <response code="201">Returns  GetServiceById</response>
+        /// <response code="400">If the error was occured</response>
         [HttpGet]
         [Route("[action]/{id}")]
         public async Task<IActionResult> GetServiceById ([FromRoute]int id)
@@ -41,6 +54,30 @@ namespace DreemDay.Controllers
                 }
             }
         }
+        /// <remarks>
+        /// Sample request:
+        /// 
+        ///     POST api/CreateService
+        ///     {          
+        ///       "ServiceProviderId": "Enter Your new Service ServiceProviderId  Here",   
+        ///       "Name": "Enter Your new Service Name Here",   
+        ///       "Description": "Enter Your new Service Description Here",   
+        ///       "Image": "Enter Your new Service Image Here",   
+        ///       "Price": "Enter Your new Service Price Here",   
+        ///       "Unit": "Enter Your new Service Unit Here",   
+        ///       "MinAmount": "Enter Your new Service MinAmount Here",   
+        ///       "MaxAmount": "Enter Your new Service MaxAmount Here",   
+        ///       "isHaveDiscount": "Enter Your new Service isHaveDiscount Here",   
+        ///       "DiscountAmount": "Enter Your new Service DiscountAmount Here",   
+        ///       "PriceAfterDiscount": "Enter Your new Service PriceAfterDiscount Here",   
+        ///     }
+        /// </remarks>
+        /// <summary>
+        /// Create New Service.
+        /// </summary>
+        /// <returns>A newly created Service</returns>
+        /// <response code="201">Returns the newly created Service</response>
+        /// <response code="400">If the error was occured</response>
         [HttpPost]
         [Route("[action]")]
         public async Task<IActionResult> CreateService ([FromBody]CreateServiceDto dto)
@@ -62,6 +99,30 @@ namespace DreemDay.Controllers
                 }
             }
         }
+        ///<remarks>
+        ///  Sample request:
+        ///    Get API/UpdateService
+        ///    {
+        ///       "Id":"Enter The Service Id Here ",
+        ///       "ServiceProviderId": "Enter Your new Service ServiceProviderId  Here",   
+        ///       "Name": "Enter Your new Service Name Here",   
+        ///       "Description": "Enter Your new Service Description Here",   
+        ///       "Image": "Enter Your new Service Image Here",   
+        ///       "Price": "Enter Your new Service Price Here",   
+        ///       "Unit": "Enter Your new Service Unit Here",   
+        ///       "MinAmount": "Enter Your new Service MinAmount Here",   
+        ///       "MaxAmount": "Enter Your new Service MaxAmount Here",   
+        ///       "isHaveDiscount": "Enter Your new Service isHaveDiscount Here",   
+        ///       "DiscountAmount": "Enter Your new Service DiscountAmount Here",   
+        ///       "PriceAfterDiscount": "Enter Your new Service PriceAfterDiscount Here",
+        ///    }
+        /// </remarks>
+        /// <summary>
+        /// Update an existing Service. 
+        /// </summary>
+        /// <returns>  Service Has Been Updated  </returns>
+        /// <response code="201"> Returns  Service Has Been Updated</response>
+        /// <response code="400">If the error was occured</response>
         [HttpPut]
         [Route("[action]")]
         public async Task<IActionResult> UpdateService ([FromBody]UpdateServiceDto dto)
@@ -87,6 +148,19 @@ namespace DreemDay.Controllers
                 }
             }
         }
+        ///<remarks>
+        ///  Sample request:
+        ///    Get API/DeleteService
+        ///    {
+        ///       "Id":"Enter The Service Id Here ",
+        ///    }
+        /// </remarks>
+        /// <summary>
+        ///  Delete a Service
+        /// </summary>
+        /// <returns>A Service Has Been Deleted</returns>
+        /// <response code="201">Returns  Service Has Been Deleted</response>
+        /// <response code="400">If the error was occured</response>
         [HttpPut]
         [Route("[action]")]
         public async Task<IActionResult> DeleteService([FromRoute] int id)
@@ -110,8 +184,22 @@ namespace DreemDay.Controllers
         }
         #endregion
         #region ServiceProvider
+        ///<remarks>
+        ///  Sample request:
+        ///    Get API/GetServiceProviderById
+        ///    {
+        ///       "id":"Enter The ServiceProvider Id Here ",
+        ///    }
+        /// </remarks>
+        /// <summary>
+        ///  Retrieve a specific ServiceProvider by ID.
+        /// </summary>
+        /// <returns>GetServiceProviderById</returns>
+        /// <response code="201">Returns  ServiceProvider</response>
+        /// <response code="400">If the error was occured</response>
         [HttpGet]
         [Route("[action]/{id}")]
+        
         public async Task<IActionResult> GetServiceProviderById([FromRoute] int id)
         {  
             if (id == 0) 
@@ -131,6 +219,66 @@ namespace DreemDay.Controllers
                 }
             }
         }
+        /// <remarks>
+        /// Sample request:
+        /// 
+        ///     POST api/CreateServiceProvider
+        ///     {          
+        ///       "Name": "Enter Your new ServiceProvider Name Here",   
+        ///       "UserId": "Enter Your new ServiceProvider UserId Here",   
+        ///       "Email": "Enter Your new ServiceProvider Email Here",   
+        ///       "Address": "Enter Your new ServiceProvider Address Here",   
+        ///       "ProfileImage": "Enter Your new ServiceProvider ProfileImage Here",   
+        ///       "Phone": "Enter Your new ServiceProvider Phone Here",      
+        ///     }
+        /// </remarks>
+        /// <summary>
+        /// Create New ServiceProvider.
+        /// </summary>
+        /// <returns>A newly created ServiceProvider</returns>
+        /// <response code="201">Returns the newly created ServiceProvider</response>
+        /// <response code="400">If the error was occured</response>
+        [HttpPost]
+        [Route("[action]")]
+        public async Task<IActionResult> CreateServiceProvider([FromBody] CreateServiceProviderDto dto)
+        {
+            if (dto == null)
+            {
+                return BadRequest("Please Fill All Data");
+            }
+            else
+            {
+                try
+                {
+                    await _serviceProviderService.CreateServiceProvider(dto);
+                    return Ok();
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
+            }
+
+        }
+        ///<remarks>
+        ///  Sample request:
+        ///    Get API/UpdateServiceProvider
+        ///    {
+        ///        "Id":"Enter The ServiceProvider Id Here ",
+        ///        "Name": "Enter Your new ServiceProvider Name Here",   
+        ///       "UserId": "Enter Your new ServiceProvider UserId Here",   
+        ///       "Email": "Enter Your new ServiceProvider Email Here",   
+        ///       "Address": "Enter Your new ServiceProvider Address Here",   
+        ///       "ProfileImage": "Enter Your new ServiceProvider ProfileImage Here",   
+        ///       "Phone": "Enter Your new ServiceProvider Phone Here",      
+        ///    }
+        /// </remarks>
+        /// <summary>
+        /// Update an existing ServiceProvider. 
+        /// </summary>
+        /// <returns>  ServiceProvider Has Been Updated  </returns>
+        /// <response code="201"> Returns  ServiceProvider Has Been Updated</response>
+        /// <response code="400">If the error was occured</response>
         [HttpPut]
         [Route("[action]")]
         public async Task<IActionResult> UpdateServiceProvider([FromBody]UpdateServiceProviderDto dto)
