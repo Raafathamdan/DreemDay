@@ -40,8 +40,8 @@ namespace DreemDay.Controllers
             {
                 try
                 {
-                    await _paymentService.GetPayments(id);
-                    return Ok();
+                   var payment = await _paymentService.GetPayments(id);
+                    return Ok(payment);
                 }
                 catch (Exception ex)
                 {
@@ -61,8 +61,8 @@ namespace DreemDay.Controllers
         {
             try
             {
-                await _paymentService.GetAllPayments();
-                return Ok();
+               var payments = await _paymentService.GetAllPayments();
+                return Ok(payments);
             }
             catch (Exception ex)
             {

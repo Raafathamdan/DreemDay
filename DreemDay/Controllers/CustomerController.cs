@@ -62,8 +62,8 @@ namespace DreemDay.Controllers
             {
                 try
                 {
-                    await _userService.GetUser(id);
-                    return Ok();
+                   var user = await _userService.GetUser(id);
+                    return Ok(user);
                 }
                 catch (Exception ex)
                 {
@@ -142,8 +142,8 @@ namespace DreemDay.Controllers
             {
                 try
                 {
-                    await _orderService.GetOrder(id);
-                    return Ok();
+                   var order = await _orderService.GetOrder(id);
+                    return Ok(order);
                 }
                 catch (Exception ex)
                 {
@@ -300,8 +300,8 @@ namespace DreemDay.Controllers
             {
                 try
                 {
-                    await _cartItemService.GetCartItem(id); 
-                    return Ok();
+                   var CI = await _cartItemService.GetCartItem(id); 
+                    return Ok(CI);
                 }
                 catch (Exception ex)
                 {
@@ -414,8 +414,8 @@ namespace DreemDay.Controllers
             {
                 try
                 {
-                    await _wishListService.GetWishList(id);
-                    return Ok();
+                   var WL = await _wishListService.GetWishList(id);
+                    return Ok(WL);
                 }
                 catch(Exception ex)
                 {
@@ -560,12 +560,12 @@ namespace DreemDay.Controllers
             {
                 try
                 {
-                    await _categoryService.GetById(Id);
-                    return Ok();
+                   var category = await _categoryService.GetById(Id);
+                    return Ok(category);
                 }
                 catch (Exception ex)
                 {
-                    return BadRequest(ex.Message);
+                    return  BadRequest(ex.Message);
                 }
             }
         

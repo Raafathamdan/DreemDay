@@ -20,15 +20,9 @@ namespace DreemDay_Infra.Repository
         {
             _dbContext = dbContext;
         }
-        public async Task<int> CreateWishList(CreateWishListDto createWishListDto)
+        public async Task<int> CreateWishList(WishList wishList)
         {
-            var wishList = new WishList
-            {
-                ServiceId = createWishListDto.SerciceId,
-                UserId = createWishListDto.UserId,
-                CreationDate= DateTime.Now,
-                IsDeleted= false,
-            };
+           
             _dbContext.Add(wishList);
             await _dbContext.SaveChangesAsync();
             Log.Debug("Debugging CreateWishList Has been Finised Successfully");
@@ -103,7 +97,6 @@ namespace DreemDay_Infra.Repository
                 return;
             Log.Information("WishList Is Exists");
             wishlist.ServiceId = updateWishListDto.ServiceId;
-            wishlist.UserId = updateWishListDto.UserId;
             wishlist.CreationDate=updateWishListDto.CreationDate;
             wishlist.ModifiedDate=DateTime.Now;
             wishlist.IsDeleted = updateWishListDto.IsDeleted;

@@ -11,7 +11,7 @@ namespace DreemDay_Core.Iservice
     {
         Task<List<UserCardDto>> GetAllUsers();
         Task<UserByIdDto> GetUser(int id);
-        Task<int> CreateUser (CreateUserDto createUserDto);
+        Task CreateUser (CreateUserDto createUserDto);
         Task UpdateUser(UpdateUserDto updateUserDto);
         Task DeleteUser(int id);
     }

@@ -2,7 +2,9 @@
 using DreemDay_Core.DTOs.AuthDTOs;
 using DreemDay_Core.DTOs.LoginDTOs;
 using DreemDay_Core.DTOs.UserDTOs;
+using DreemDay_Core.Helper;
 using DreemDay_Core.IRepository;
+using DreemDay_Core.Models.Entity;
 using DreemDay_Infra.Service;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -24,32 +26,19 @@ namespace DreemDay_Infra.Repository
             _loginRepos = loginRepos;
         }
 
-        public async Task Login(LoginDto loginDto)
+        public async Task<Login> GetLoginByCredentialsAsync(string username, string password)
         {
-            if (string.IsNullOrEmpty(loginDto.UserName))
-                throw new Exception("User Name Is Required");
-            if (string.IsNullOrEmpty(loginDto.Password))
-                throw new Exception("Password Is Required");
-
-            var login = _dbContext.Logins.FirstOrDefault(x => x.UserName.Equals(loginDto.UserName) && x.Password.Equals(loginDto.Password));
-            if (login != null)
-            {
-                if (!login.IsLoggedIn)
-                {
-                    login.IsLoggedIn = true;
-                    _dbContext.Logins.Update(login);
-                    await _dbContext.SaveChangesAsync();
-                }
-                else
-                {
-                    throw new Exception("You're Already Logged In");
-                }
-            }
-            else
-            {
-                throw new Exception("Either Email or Password is Incorrect");
-            }
+            return await _dbContext.Logins.FirstOrDefaultAsync(x => x.UserName == username && x.Password == password);
         }
+
+        public async Task UpdateLoginStatusAsync(Login login)
+        {
+            login.IsLoggedIn = true;
+            _dbContext.Logins.Update(login);
+            await _dbContext.SaveChangesAsync();
+        }
+
+
 
         public async Task Logout(int id)
         {
@@ -86,7 +75,7 @@ namespace DreemDay_Infra.Repository
 
         public async Task SignUp(SignUpDto signUpDto)
         {
-            var createUserDto = new CreateUserDto
+            var user = new User
             {
                 FirstName = signUpDto.FirstName,
                 LastName = signUpDto.LastName,
@@ -95,17 +84,40 @@ namespace DreemDay_Infra.Repository
                 BirthDate = signUpDto.BirthDate
             };
 
-            int userId = await _userRepos.CreateUser(createUserDto);
+            int userId = await _userRepos.CreateUser(user);
 
-            var createLoginDto = new CreateLoginDto
+            var login = new Login
             {
                 UserId = userId,
                 UserName = signUpDto.UserName,
-                Password = signUpDto.Password,
+                Password = HashingHelper.GenerateSHA384String(signUpDto.Password),
                 IsLoggedIn = false
             };
 
-            await _loginRepos.CreateLogin(createLoginDto);
+            await _loginRepos.CreateLogin(login);
         }
+
+        public async Task<User> GetUserByUserName(string userName)
+        {
+            var login = await _dbContext.Logins.FirstOrDefaultAsync(x => x.UserName == userName);
+          var user =   await _dbContext.Users.FirstOrDefaultAsync(x => x.Id==login.UserId);
+            return user;
+        }
+
+        public async Task<IEnumerable<Login>> GetAllLoginsAsync()
+        {
+            return await _dbContext.Logins.ToListAsync();
+        }
+
+        public void UpdateLogin(Login login)
+        {
+            _dbContext.Logins.Update(login);
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _dbContext.SaveChangesAsync();
+        }
+
     }
 }

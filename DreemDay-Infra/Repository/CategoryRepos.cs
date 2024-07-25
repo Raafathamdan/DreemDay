@@ -19,15 +19,8 @@ namespace DreemDay_Infra.Repository
         {
             _dbContext = dbContext;
         }
-        public async Task<int> CreateCategory(CreateCategoryDto createCategoryDto)
+        public async Task<int> CreateCategory(Category category)
         {
-            var category = new Category
-            {
-                Title = createCategoryDto.Title,
-                Description = createCategoryDto.Description,
-                CreationDate = DateTime.Now,
-
-            };
             _dbContext.Categories.Add(category);
             await _dbContext.SaveChangesAsync();
             Log.Debug("Debugging CreateCategory Has been Finised Successfully");

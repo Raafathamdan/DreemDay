@@ -9,7 +9,6 @@ namespace DreemDay_Core.DTOs.CartDTOs
     public class UpdateCartDto
     {
         public int Id { get; set; }
-        public int UserId { get; set; }
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }
     }

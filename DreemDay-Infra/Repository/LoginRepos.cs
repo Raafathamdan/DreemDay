@@ -20,18 +20,18 @@ namespace DreemDay_Infra.Repository
             _dbContext = dbContext;
         }
 
-        public async Task<int> CreateLogin(CreateLoginDto loginDto)
+        public async Task<int> CreateLogin(Login login)
         {
-            var login = new Login
+            var log = new Login
             {
-                UserId = loginDto.UserId,
-                UserName = loginDto.UserName,
-                Password = loginDto.Password,
-                IsLoggedIn = loginDto.IsLoggedIn,
+                UserId = login.UserId,
+                UserName = login.UserName,
+                Password = login.Password,
+                IsLoggedIn = login.IsLoggedIn,
                 CreationDate = DateTime.Now,
 
             };
-            _dbContext.Add(login);  
+            _dbContext.Add(log);  
             await _dbContext.SaveChangesAsync();
             Log.Debug("Debugging CreateLogin Has been Finised Successfully");
             return login.Id;

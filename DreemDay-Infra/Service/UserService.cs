@@ -1,6 +1,7 @@
 ﻿using DreemDay_Core.DTOs.UserDTOs;
 using DreemDay_Core.IRepository;
 using DreemDay_Core.Iservice;
+using DreemDay_Core.Models.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +17,23 @@ namespace DreemDay_Infra.Service
         {
             _repos = repos;
         }
-        public async Task<int> CreateUser(CreateUserDto createUserDto)
+        public async Task CreateUser(CreateUserDto createUserDto)
         {
-            return await _repos.CreateUser(createUserDto);
+            var user = new User();
+
+            user.FirstName = createUserDto.FirstName;
+            user.LastName = createUserDto.LastName;
+            user.Email = createUserDto.Email;
+            user.Phone = createUserDto.Phone;
+            user.BirthDate = createUserDto.BirthDate;
+            user.CreationDate = DateTime.Now;
+            user.IsDeleted = false;
+            
+            await _repos.CreateUser(user);
+            var id = await _repos.CreateUser(user);
+            if (id == 0)
+                throw new Exception("Failed To Create User");
+
         }
 
         public async Task DeleteUser(int id)

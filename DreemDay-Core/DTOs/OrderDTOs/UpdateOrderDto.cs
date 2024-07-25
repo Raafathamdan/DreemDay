@@ -10,7 +10,6 @@ namespace DreemDay_Core.DTOs.OrderDTOs
     public class UpdateOrderDto
     {
         public int Id { get; set; }
-        public int UserId { get; set; }
         public int CartId { get; set; }
         public string Title { get; set; }
         public string Note { get; set; }

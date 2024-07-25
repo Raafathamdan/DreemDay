@@ -19,15 +19,9 @@ namespace DreemDay_Infra.Repository
         {
             _dbContext = dbContext;
         }
-        public async Task<int> CreateCart(CreateCartDto createCartDto)
+        public async Task<int> CreateCart(Cart cart)
         {
-            var cart = new Cart
-            {
-                UserId = createCartDto.UserId,
-                CreationDate = DateTime.Now,
-                IsActive = true
-
-            };
+           
             _dbContext.Carts.Add(cart);
             await _dbContext.SaveChangesAsync();
             Log.Debug("Debugging CreateCart Has been Finised Successfully");
@@ -100,7 +94,6 @@ namespace DreemDay_Infra.Repository
             cart.IsActive = updateCartDto.IsActive;
             cart.IsDeleted = updateCartDto.IsDeleted;
             cart.ModifiedDate = DateTime.Now;
-            cart.UserId = updateCartDto.UserId;
             _dbContext.Carts.Update(cart);
             await _dbContext.SaveChangesAsync();
             Log.Debug("Debugging UpdateCart Has been Finised Successfully");

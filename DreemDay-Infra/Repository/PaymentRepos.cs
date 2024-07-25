@@ -1,6 +1,8 @@
 ﻿using DreemDay_Core.Context;
 using DreemDay_Core.DTOs.PaymentDTOs;
 using DreemDay_Core.IRepository;
+using DreemDay_Core.Models.Entity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,9 +33,19 @@ namespace DreemDay_Infra.Repository
             throw new NotImplementedException();
         }
 
-        public Task<PaymentByIdDto> GetPayments(int id)
+        public async Task<Payment> GetPayment(int id)
         {
-            throw new NotImplementedException();
+           return await _dbContext.Payments.FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task<Payment> IsValidPayment(string code, string cardNumber, string cardHolder, float price)
+        {
+            var payment = await _dbContext.Payments.FirstOrDefaultAsync(
+                x=>x.Balance>=price&&
+                x.CardHolder.Equals(cardHolder)&&
+                x.CardNumber.Equals(cardNumber)&&
+                x.Code.Equals(code));
+            return payment;
         }
 
         public Task UpdatePayment(UpdatePaymentDto updatePaymentDto)

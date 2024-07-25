@@ -1,4 +1,5 @@
 ﻿using DreemDay_Core.DTOs.OrderDTOs;
+using DreemDay_Core.Models.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,8 @@ namespace DreemDay_Core.IRepository
     {
         Task<List<OrderCardDto>> GetAllOrder();
         Task<OrderByIdDto> GetOrder(int id);
-        Task<int> CreateOrder(CreateOrderDto createOrderDto);
-        Task UpdateOrder(UpdateOrderDto updateOrderDto);
+        Task<int> CreateOrder(Order order);
+        Task UpdateOrder(UpdateOrderDto updateOrderDto );
         Task DeleteOrder(int id);
     }
 }

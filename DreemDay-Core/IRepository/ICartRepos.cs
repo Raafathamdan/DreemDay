@@ -1,4 +1,5 @@
 ﻿using DreemDay_Core.DTOs.CartDTOs;
+using DreemDay_Core.Models.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace DreemDay_Core.IRepository
     {
         Task<List<CartCardDto>> GetAllCart();
         Task<CartByIdDto> GetCart(int id);
-        Task<int> CreateCart(CreateCartDto createCartDto);
+        Task<int> CreateCart(Cart cart);
         Task UpdateCart(UpdateCartDto updateCartDto);
         Task DeleteCart(int id);
     }

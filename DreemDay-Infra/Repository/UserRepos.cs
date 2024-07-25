@@ -19,19 +19,9 @@ namespace DreemDay_Infra.Repository
         {
             _dbContext = dbContext;
         }
-        public async Task<int> CreateUser(CreateUserDto createUserDto)
+        public async Task<int> CreateUser(User user)
         {
-            var user = new User
-            {
-                FirstName = createUserDto.FirstName,
-                LastName = createUserDto.LastName,
-                Email = createUserDto.Email,
-                Phone = createUserDto.Phone,
-                BirthDate = createUserDto.BirthDate,
-                CreationDate = DateTime.Now,
-                IsDeleted = false
-            };
-
+           
             _dbContext.Users.Add(user);
             await _dbContext.SaveChangesAsync();
             Log.Debug("Debugging CreateUser Has been Finised Successfully");

@@ -11,7 +11,7 @@ namespace DreemDay_Core.Iservice
     {
         Task<List<CartItemCardDto>> GetAllCartItem();
         Task<CartItemById> GetCartItem(int id);
-        Task<int> CreateCartItem (CreateCartItemDto createCartItemDto);
+        Task CreateCartItem (CreateCartItemDto createCartItemDto);
         Task UpdateCartItem (UpdateCartItemDto updateCartItemDto);
         Task DeleteCartItem (int id);
 

@@ -7,7 +7,7 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace DreemDay.Migrations
 {
     /// <inheritdoc />
-    public partial class updateRealtion2 : Migration
+    public partial class UpdateRelations2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,12 +16,20 @@ namespace DreemDay.Migrations
                 name: "FK_Carts_Orders_Id",
                 table: "Carts");
 
+            migrationBuilder.AlterColumn<bool>(
+                name: "IsDeleted",
+                table: "WishLists",
+                type: "tinyint(1)",
+                nullable: false,
+                defaultValue: false,
+                oldClrType: typeof(bool),
+                oldType: "tinyint(1)");
+
             migrationBuilder.AlterColumn<DateTime>(
                 name: "CreationDate",
                 table: "Users",
                 type: "datetime(6)",
                 nullable: false,
-                defaultValue: new DateTime(2024, 6, 11, 1, 36, 34, 128, DateTimeKind.Local).AddTicks(9118),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime(6)",
                 oldDefaultValue: new DateTime(2024, 6, 11, 1, 3, 43, 590, DateTimeKind.Local).AddTicks(7797));
@@ -31,7 +39,6 @@ namespace DreemDay.Migrations
                 table: "Services",
                 type: "datetime(6)",
                 nullable: false,
-                defaultValue: new DateTime(2024, 6, 11, 1, 36, 34, 130, DateTimeKind.Local).AddTicks(4524),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime(6)",
                 oldDefaultValue: new DateTime(2024, 6, 11, 1, 3, 43, 592, DateTimeKind.Local).AddTicks(1567));
@@ -41,7 +48,6 @@ namespace DreemDay.Migrations
                 table: "ServiceProviders",
                 type: "datetime(6)",
                 nullable: false,
-                defaultValue: new DateTime(2024, 6, 11, 1, 36, 34, 130, DateTimeKind.Local).AddTicks(5699),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime(6)",
                 oldDefaultValue: new DateTime(2024, 6, 11, 1, 3, 43, 592, DateTimeKind.Local).AddTicks(2588));
@@ -51,7 +57,6 @@ namespace DreemDay.Migrations
                 table: "Orders",
                 type: "datetime(6)",
                 nullable: false,
-                defaultValue: new DateTime(2024, 6, 11, 1, 36, 34, 128, DateTimeKind.Local).AddTicks(4905),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime(6)",
                 oldDefaultValue: new DateTime(2024, 6, 11, 1, 3, 43, 590, DateTimeKind.Local).AddTicks(1551));
@@ -61,7 +66,6 @@ namespace DreemDay.Migrations
                 table: "Logins",
                 type: "datetime(6)",
                 nullable: false,
-                defaultValue: new DateTime(2024, 6, 11, 1, 36, 34, 130, DateTimeKind.Local).AddTicks(2639),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime(6)",
                 oldDefaultValue: new DateTime(2024, 6, 11, 1, 3, 43, 591, DateTimeKind.Local).AddTicks(9963));
@@ -71,7 +75,6 @@ namespace DreemDay.Migrations
                 table: "Categories",
                 type: "datetime(6)",
                 nullable: false,
-                defaultValue: new DateTime(2024, 6, 11, 1, 36, 34, 130, DateTimeKind.Local).AddTicks(1716),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime(6)",
                 oldDefaultValue: new DateTime(2024, 6, 11, 1, 3, 43, 591, DateTimeKind.Local).AddTicks(9187));
@@ -92,10 +95,10 @@ namespace DreemDay.Migrations
                 unique: true);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Orders_Orders_CartId",
+                name: "FK_Orders_Carts_CartId",
                 table: "Orders",
                 column: "CartId",
-                principalTable: "Orders",
+                principalTable: "Carts",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
         }
@@ -104,12 +107,21 @@ namespace DreemDay.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Orders_Orders_CartId",
+                name: "FK_Orders_Carts_CartId",
                 table: "Orders");
 
             migrationBuilder.DropIndex(
                 name: "IX_Orders_CartId",
                 table: "Orders");
+
+            migrationBuilder.AlterColumn<bool>(
+                name: "IsDeleted",
+                table: "WishLists",
+                type: "tinyint(1)",
+                nullable: false,
+                oldClrType: typeof(bool),
+                oldType: "tinyint(1)",
+                oldDefaultValue: false);
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "CreationDate",
@@ -118,8 +130,7 @@ namespace DreemDay.Migrations
                 nullable: false,
                 defaultValue: new DateTime(2024, 6, 11, 1, 3, 43, 590, DateTimeKind.Local).AddTicks(7797),
                 oldClrType: typeof(DateTime),
-                oldType: "datetime(6)",
-                oldDefaultValue: new DateTime(2024, 6, 11, 1, 36, 34, 128, DateTimeKind.Local).AddTicks(9118));
+                oldType: "datetime(6)");
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "CreationDate",
@@ -128,8 +139,7 @@ namespace DreemDay.Migrations
                 nullable: false,
                 defaultValue: new DateTime(2024, 6, 11, 1, 3, 43, 592, DateTimeKind.Local).AddTicks(1567),
                 oldClrType: typeof(DateTime),
-                oldType: "datetime(6)",
-                oldDefaultValue: new DateTime(2024, 6, 11, 1, 36, 34, 130, DateTimeKind.Local).AddTicks(4524));
+                oldType: "datetime(6)");
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "CreationDate",
@@ -138,8 +148,7 @@ namespace DreemDay.Migrations
                 nullable: false,
                 defaultValue: new DateTime(2024, 6, 11, 1, 3, 43, 592, DateTimeKind.Local).AddTicks(2588),
                 oldClrType: typeof(DateTime),
-                oldType: "datetime(6)",
-                oldDefaultValue: new DateTime(2024, 6, 11, 1, 36, 34, 130, DateTimeKind.Local).AddTicks(5699));
+                oldType: "datetime(6)");
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "CreationDate",
@@ -148,8 +157,7 @@ namespace DreemDay.Migrations
                 nullable: false,
                 defaultValue: new DateTime(2024, 6, 11, 1, 3, 43, 590, DateTimeKind.Local).AddTicks(1551),
                 oldClrType: typeof(DateTime),
-                oldType: "datetime(6)",
-                oldDefaultValue: new DateTime(2024, 6, 11, 1, 36, 34, 128, DateTimeKind.Local).AddTicks(4905));
+                oldType: "datetime(6)");
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "CreationDate",
@@ -158,8 +166,7 @@ namespace DreemDay.Migrations
                 nullable: false,
                 defaultValue: new DateTime(2024, 6, 11, 1, 3, 43, 591, DateTimeKind.Local).AddTicks(9963),
                 oldClrType: typeof(DateTime),
-                oldType: "datetime(6)",
-                oldDefaultValue: new DateTime(2024, 6, 11, 1, 36, 34, 130, DateTimeKind.Local).AddTicks(2639));
+                oldType: "datetime(6)");
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "CreationDate",
@@ -168,8 +175,7 @@ namespace DreemDay.Migrations
                 nullable: false,
                 defaultValue: new DateTime(2024, 6, 11, 1, 3, 43, 591, DateTimeKind.Local).AddTicks(9187),
                 oldClrType: typeof(DateTime),
-                oldType: "datetime(6)",
-                oldDefaultValue: new DateTime(2024, 6, 11, 1, 36, 34, 130, DateTimeKind.Local).AddTicks(1716));
+                oldType: "datetime(6)");
 
             migrationBuilder.AlterColumn<int>(
                 name: "Id",

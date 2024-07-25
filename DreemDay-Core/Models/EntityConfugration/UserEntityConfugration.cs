@@ -15,7 +15,6 @@ namespace DreemDay_Core.Models.EntityConfugration
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
-            builder.Property(x => x.CreationDate).HasDefaultValue(DateTime.Now);
             builder.Property(x => x.CreationDate).IsRequired();
             builder.Property(x => x.IsDeleted).IsRequired();
             builder.Property(x => x.IsDeleted).HasDefaultValue(false);
@@ -30,6 +29,8 @@ namespace DreemDay_Core.Models.EntityConfugration
             builder.HasOne<ServiceProvider>().WithOne().HasForeignKey<ServiceProvider>(x => x.UserId);
             builder.HasMany<Order>().WithOne().HasForeignKey(x => x.UserId);
             builder.HasMany<Cart>().WithOne().HasForeignKey(x => x.UserId);
+            builder.HasMany<WishList>().WithOne().HasForeignKey(x => x.UserId);
+
 
 
 

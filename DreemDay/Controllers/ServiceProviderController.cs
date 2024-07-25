@@ -4,6 +4,7 @@ using DreemDay_Core.Iservice;
 using DreemDay_Infra.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Org.BouncyCastle.Crypto.Prng;
 
 namespace DreemDay.Controllers
 {
@@ -45,8 +46,8 @@ namespace DreemDay.Controllers
             {
                 try
                 {
-                    await _serviceService.GetService(id);
-                    return Ok();
+                   var service = await _serviceService.GetService(id);
+                    return Ok(service);
                 }
                 catch (Exception ex)
                 {
@@ -210,8 +211,8 @@ namespace DreemDay.Controllers
             {
                 try
                 {
-                    await _serviceProviderService.GetServiceProvider(id);
-                    return Ok();
+                   var SP =  await _serviceProviderService.GetServiceProvider(id);
+                    return Ok(SP);
                 }
                 catch(Exception ex)
                 {

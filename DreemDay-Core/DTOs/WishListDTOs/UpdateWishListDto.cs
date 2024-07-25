@@ -10,9 +10,8 @@ namespace DreemDay_Core.DTOs.WishListDTOs
     {
         public int Id { get; set; }
         public int ServiceId { get; set; }
-        public int UserId { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime CreationDate { get; set; }
-        public DateTime? ModifiedDate { get; set; }
+        public DateTime ModifiedDate { get; set; }
     }
 }

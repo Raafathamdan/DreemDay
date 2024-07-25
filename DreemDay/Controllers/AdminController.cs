@@ -54,8 +54,8 @@ namespace DreemDay.Controllers
         {
             try
             {
-                await _iuserService.GetAllUsers();
-                return Ok();
+                var result = await _iuserService.GetAllUsers();
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -110,8 +110,8 @@ namespace DreemDay.Controllers
         {
             try
             {
-                await _iserviceProviderService.GetAllServiceProviders();
-                return Ok();
+              var SP =  await _iserviceProviderService.GetAllServiceProviders();
+                return Ok(SP);
             }
             catch (Exception ex)
             {
@@ -167,8 +167,8 @@ namespace DreemDay.Controllers
         {
             try
             {
-                await _iserviceService.GetAllService();
-                return Ok();
+               var service =  await _iserviceService.GetAllService();
+                return Ok(service);
             }
             catch (Exception ex)
             {
@@ -181,7 +181,7 @@ namespace DreemDay.Controllers
         ///  Retrieve a list of Order.
         /// </summary>
         /// <returns>A List Of All Order</returns>
-        /// <response code="200">Returns  GetAllCustomer</response>
+        /// <response code="200">Returns  GetAllOrder</response>
         /// <response code="400">If the error was occured</response>
         [HttpGet]
         [Route("[action]")]
@@ -189,8 +189,9 @@ namespace DreemDay.Controllers
         {
             try
             {
-                await _iorderService.GetAllOrder();
-                return Ok();
+                var orders = await _iorderService.GetAllOrder();
+
+                return Ok(orders);
             }
             catch (Exception ex)
             {
@@ -211,8 +212,8 @@ namespace DreemDay.Controllers
         {
             try
             {
-                await _icartItemService.GetAllCartItem();
-                return Ok();
+               var CI = await _icartItemService.GetAllCartItem();
+                return Ok(CI);
             }
             catch (Exception ex)
             {
@@ -233,8 +234,8 @@ namespace DreemDay.Controllers
         {
             try
             {
-                await _icartService.GetAllCart();
-                return Ok();
+               var carts = await _icartService.GetAllCart();
+                return Ok(carts);
             }
             catch (Exception ex)
             {
@@ -255,8 +256,8 @@ namespace DreemDay.Controllers
         {
             try
             {
-                await _iwishListService.GetAllWishList();
-                return Ok();
+                var WL = await _iwishListService.GetAllWishList();
+                return Ok(WL);
             }
             catch (Exception ex)
             {
@@ -277,8 +278,8 @@ namespace DreemDay.Controllers
         {
             try
             {
-                await _icategoryService.GetAllCategories();
-                return Ok();
+               var categories =  await _icategoryService.GetAllCategories();
+                return Ok(categories);
             }
             catch (Exception ex)
             {

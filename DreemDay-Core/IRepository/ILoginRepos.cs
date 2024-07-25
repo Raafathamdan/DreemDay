@@ -1,4 +1,5 @@
 ﻿using DreemDay_Core.DTOs.LoginDTOs;
+using DreemDay_Core.Models.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace DreemDay_Core.IRepository
 {
     public interface ILoginRepos
     {
-        Task<int> CreateLogin(CreateLoginDto loginDto);
+        Task<int> CreateLogin(Login login);
     }
 }

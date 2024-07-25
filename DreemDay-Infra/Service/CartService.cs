@@ -1,6 +1,7 @@
 ﻿using DreemDay_Core.DTOs.CartDTOs;
 using DreemDay_Core.IRepository;
 using DreemDay_Core.Iservice;
+using DreemDay_Core.Models.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,13 +13,31 @@ namespace DreemDay_Infra.Service
     public class CartService : ICartService
     {
         private readonly ICartRepos _repos;
-        public CartService(ICartRepos repos)
+        private readonly IUserRepos _userRepos;
+        public CartService(ICartRepos repos, IUserRepos userRepos)
         {
             _repos = repos;
+            _userRepos = userRepos;
         }
-        public async Task<int> CreateCart(CreateCartDto createCartDto)
+        public async Task CreateCart(CreateCartDto createCartDto)
         {
-            return await _repos.CreateCart(createCartDto);
+            var user = await _userRepos.GetUser(createCartDto.UserId);
+            if (user != null) 
+            {
+                var cart = new Cart();
+
+                cart.UserId = createCartDto.UserId;
+                cart.CreationDate = DateTime.Now;
+                cart.IsActive = true;
+                await _repos.CreateCart(cart);
+                var id = await _repos.CreateCart(cart);
+                if (id == 0)
+                    throw new Exception("Failed To Create Cart");
+            }
+            throw new Exception("User Dose not Exisit");
+
+
+
         }
 
         public async Task DeleteCart(int id)
@@ -38,6 +57,7 @@ namespace DreemDay_Infra.Service
 
         public async Task UpdateCart(UpdateCartDto updateCartDto)
         {
+
             await _repos.UpdateCart(updateCartDto);
         }
     }

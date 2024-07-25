@@ -1,16 +1,10 @@
 ﻿using DreemDay_Core.Context;
 using DreemDay_Core.DTOs.ServiceDTOs;
 using DreemDay_Core.IRepository;
-using DreemDay_Core.Models.Entity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ZstdSharp.Unsafe;
+using DreemDay_Core.Models.Entity;
+
 
 namespace DreemDay_Infra.Repository
 {
@@ -21,24 +15,9 @@ namespace DreemDay_Infra.Repository
         {
             _dbContext = dbContext;
         }
-        public async Task<int> CreateService(CreateServiceDto createServiceDto)
+        public async Task<int> CreateService(DreemDay_Core.Models.Entity.Service service)
         {
-            var service = new DreemDay_Core.Models.Entity.Service
-            {
-                ServiceProviderId = createServiceDto.ServiceProviderId,
-                Name = createServiceDto.Name,
-                Description = createServiceDto.Description,
-                Image = createServiceDto.Image,
-                Price = createServiceDto.Price,
-                Unit= createServiceDto.Unit,
-                MinAmount= createServiceDto.MinAmount,
-                MaxAmount= createServiceDto.MaxAmount,
-                isHaveDiscount= createServiceDto.isHaveDiscount,
-                DiscountAmount = createServiceDto.DiscountAmount,
-                PriceAfterDiscount = createServiceDto.PriceAfterDiscount,
-                CreationDate= DateTime.Now
-                
-            };
+           
             _dbContext.Services.Add(service);
             await _dbContext.SaveChangesAsync();
             Log.Debug("Debugging CreateService Has been Finised Successfully");
@@ -64,16 +43,19 @@ namespace DreemDay_Infra.Repository
         public async Task<List<ServiceCardDto>> GetAllService()
         {
             var S = await _dbContext.Services
-                .Where(x => x.IsDeleted)
+                .Where(x => !x.IsDeleted)
                 .Join(_dbContext.ServiceProviders, s => s.ServiceProviderId,
                 sb => sb.Id, (s, sb) => new {Service=s,ServiceProvider=sb})
+                .Join(_dbContext.Categories,ssb=>ssb.Service.CategoryId,
+                c => c.Id, (ssb,c)=>new {ServiceServiceProvider=ssb,Category=c})
                 .Select(service => new ServiceCardDto
                 {
-                    Id = service.Service.Id,
-                    ServiceProviderId= service.ServiceProvider.Id,
-                    Image = service.Service.Image,
-                    Price = service.Service.Price,
-                    Name = service.Service.Name,
+                    Id = service.ServiceServiceProvider.Service.Id,
+                    ServiceProviderId= service.ServiceServiceProvider.ServiceProvider.Id,
+                    CategoryId = service.Category.Id,
+                    Image = service.ServiceServiceProvider.Service.Image,
+                    Price = service.ServiceServiceProvider.Service.Price,
+                    Name = service.ServiceServiceProvider.Service.Name,
 
                 }).ToListAsync();
             Log.Debug("Debugging GetAllService Has been Finised Successfully");
@@ -86,28 +68,31 @@ namespace DreemDay_Infra.Repository
                 .Join(_dbContext.ServiceProviders,
                 s => s.ServiceProviderId,
                 sb => sb.Id, (s, sb) => new {Service=s,ServiceProvider=sb})
-                .FirstOrDefaultAsync(s=>s.Service.Id == id);
+                .Join(_dbContext.Categories, ssb => ssb.Service.CategoryId,
+                c => c.Id, (ssb, c) => new { ServiceServiceProvider = ssb, Category = c })
+                .FirstOrDefaultAsync(s=>s.ServiceServiceProvider.Service.Id == id);
             if (service == null)
                 return null;
             Log.Information("Service Is Exists");
 
             var S =  new ServiceByIdDto
             {
-                Id = service.Service.Id,
-                ServiceProviderId = service.ServiceProvider.Id,
-                Image = service.Service.Image,
-                Price = service.Service.Price,
-                Name = service.Service.Name,
-                Unit = service.Service.Unit,
-                Description = service.Service.Description,
-                MaxAmount = service.Service.MaxAmount,
-                MinAmount = service.Service.MinAmount,
-                DiscountAmount = service.Service.DiscountAmount,
-                isHaveDiscount = service.Service.isHaveDiscount,
-                PriceAfterDiscount = service.Service.PriceAfterDiscount,
-                CreationDate = service.Service.CreationDate.ToString(),
-                ModifiedDate = service.Service.ModifiedDate.ToString(),
-                IsDeleted = service.Service.IsDeleted,
+                Id = service.ServiceServiceProvider.Service.Id,
+                ServiceProviderId = service.ServiceServiceProvider.ServiceProvider.Id,
+                CategoryId = service.Category.Id,
+                Image = service.ServiceServiceProvider.Service.Image,
+                Price = service.ServiceServiceProvider.Service.Price,
+                Name = service.ServiceServiceProvider.Service.Name,
+                Unit = service.ServiceServiceProvider.Service.Unit,
+                Description = service.ServiceServiceProvider.Service.Description,
+                MaxAmount = service.ServiceServiceProvider.Service.MaxAmount,
+                MinAmount = service.ServiceServiceProvider.Service.MinAmount,
+                DiscountAmount = service.ServiceServiceProvider.Service.DiscountAmount,
+                isHaveDiscount = service.ServiceServiceProvider.Service.isHaveDiscount,
+                PriceAfterDiscount = service.ServiceServiceProvider.Service.PriceAfterDiscount,
+                CreationDate = service.ServiceServiceProvider.Service.CreationDate.ToString(),
+                ModifiedDate = service.ServiceServiceProvider.Service.ModifiedDate.ToString(),
+                IsDeleted = service.ServiceServiceProvider.Service.IsDeleted,
 
             };
             Log.Debug("Debugging GetService Has been Finised Successfully");

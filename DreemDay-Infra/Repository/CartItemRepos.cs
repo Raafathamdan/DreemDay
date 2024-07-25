@@ -27,22 +27,13 @@ namespace DreemDay_Infra.Repository
             _serviceRepos = serviceRepos;
         }
 
-        public async Task<int> CreateCartItem(CreateCartItemDto createCartItemDto)
+        public async Task<int> CreateCartItem(CartItem item)
         {
-
-          
-            var cartitem = new CartItem
-            {
-                CreationDate = DateTime.Now,
-                CartId = createCartItemDto.CartId,
-                Quantity = createCartItemDto.Quantity,
-                ServiceId = createCartItemDto.ServiceId,
-            };
-            _dbContext.CartItems.Add(cartitem);
+            _dbContext.CartItems.Add(item);
             await _dbContext.SaveChangesAsync();
             Log.Debug("Debugging CreateCartItem Has been Finised Successfully");
 
-            return cartitem.Id;
+            return item.Id;
 
         }
 
@@ -93,13 +84,11 @@ namespace DreemDay_Infra.Repository
             cartitem.Quantity = updateCartItemDto.Quantity;
             cartitem.ServiceId = updateCartItemDto.ServiceId;
             cartitem.CartId = updateCartItemDto.CartId;
-            cartitem.ModifiedDate=DateTime.Now;
+            cartitem.ModifiedDate = DateTime.Now;
             cartitem.IsDeleted = updateCartItemDto.IsDeleted;
             _dbContext.CartItems.Update(cartitem);
             await _dbContext.SaveChangesAsync();
             Log.Debug("Debugging UpdateCartItem Has been Finised Successfully");
-
-
 
         }
 
@@ -119,5 +108,6 @@ namespace DreemDay_Infra.Repository
 
         }
 
+        
     }
 }

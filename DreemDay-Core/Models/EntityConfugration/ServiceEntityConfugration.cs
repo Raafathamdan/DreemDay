@@ -15,7 +15,6 @@ namespace DreemDay_Core.Models.EntityConfugration
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
-            builder.Property(x => x.CreationDate).HasDefaultValue(DateTime.Now);
             builder.Property(x => x.IsDeleted).IsRequired();
             builder.Property(x => x.IsDeleted).HasDefaultValue(false);
             builder.Property(x => x.Name).IsRequired();
@@ -24,6 +23,7 @@ namespace DreemDay_Core.Models.EntityConfugration
             builder.Property(x => x.isHaveDiscount).HasDefaultValue(false);
             builder.Property(x => x.Description).IsRequired();
             builder.Property(x => x.Image).IsRequired(false);
+            builder.HasMany<WishList>().WithOne().HasForeignKey(x => x.ServiceId);
 
         }
     }

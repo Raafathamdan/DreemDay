@@ -1,6 +1,7 @@
 ﻿using DreemDay_Core.DTOs.CategoryDTOs;
 using DreemDay_Core.IRepository;
 using DreemDay_Core.Iservice;
+using DreemDay_Core.Models.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +17,17 @@ namespace DreemDay_Infra.Service
         {
             _repos = repos;
         }
-        public async Task<int> CreateCategory(CreateCategoryDto createCategoryDto)
+        public async Task CreateCategory(CreateCategoryDto createCategoryDto)
         {
-            return await _repos.CreateCategory(createCategoryDto);
+            var category = new Category();
+
+            category.Title = createCategoryDto.Title;
+            category.Description = createCategoryDto.Description;
+            category.CreationDate = DateTime.Now;
+             await _repos.CreateCategory(category);
+            var id = await _repos.CreateCategory(category);
+            if (id == 0)
+                throw new Exception("Failed To Create Category");
         }
 
         public async Task DeleteCategory(int id)

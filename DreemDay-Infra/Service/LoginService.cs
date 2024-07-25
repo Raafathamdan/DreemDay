@@ -2,6 +2,7 @@
 using DreemDay_Core.DTOs.LoginDTOs;
 using DreemDay_Core.IRepository;
 using DreemDay_Core.Iservice;
+using DreemDay_Core.Models.Entity;
 using DreemDay_Infra.Repository;
 using System;
 using System.Collections.Generic;
@@ -20,9 +21,9 @@ namespace DreemDay_Infra.Service
             _repos = repos;
         }
 
-        public async Task<int> CreateLogin(CreateLoginDto loginDto)
+        public async Task<int> CreateLogin(Login login)
         {
-            return await _repos.CreateLogin(loginDto);
+            return await _repos.CreateLogin(login);
         }
     }
 }

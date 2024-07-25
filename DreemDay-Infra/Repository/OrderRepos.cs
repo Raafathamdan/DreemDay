@@ -20,20 +20,9 @@ namespace DreemDay_Infra.Repository
         {
             _dbContext = dbContext;
         }
-        public async Task<int> CreateOrder(CreateOrderDto createOrderDto)
+        public async Task<int> CreateOrder(Order order)
         {
-            var order = new Order
-            {
-                CartId = createOrderDto.CartId,
-                UserId = createOrderDto.UserId,
-                CreationDate= DateTime.Now,
-                Title = createOrderDto.Title,
-                Note = createOrderDto.Note,
-                PaymentMethod = createOrderDto.PaymentMethod,
-                Date= DateTime.Now,
-                Status = createOrderDto.Status,
-                
-            };
+           
             _dbContext.Add(order);
             await _dbContext.SaveChangesAsync();
             Log.Debug("Debugging CreateOrder Has been Finised Successfully");
@@ -127,7 +116,6 @@ namespace DreemDay_Infra.Repository
             order.ModifiedDate= DateTime.Now;
             order.IsDeleted = updateOrderDto.IsDeleted;
             order.PaymentMethod = updateOrderDto.PaymentMethod;
-            order.UserId = updateOrderDto.UserId;
             order.CartId = updateOrderDto.CartId;
             _dbContext.Orders.Update(order);
             await _dbContext.SaveChangesAsync();

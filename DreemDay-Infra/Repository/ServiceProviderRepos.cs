@@ -19,22 +19,13 @@ namespace DreemDay_Infra.Repository
         {
             _dbContext = dbContext;
         }
-        public async Task<int> CreateServiceProvider(CreateServiceProviderDto createServiceProviderDto)
+        public async Task<int> CreateServiceProvider(ServiceProvider serviceProvider)
         {
-            var serviceb = new ServiceProvider
-            {
-                Name = createServiceProviderDto.Name,
-                Email = createServiceProviderDto.Email,
-                Address = createServiceProviderDto.Address,
-                Phone = createServiceProviderDto.Phone,
-                ProfileImage = createServiceProviderDto.ProfileImage,
-                UserId = createServiceProviderDto.UserId,
-                CreationDate = DateTime.Now,
-            };
-            _dbContext.ServiceProviders.Add(serviceb);
+            
+            _dbContext.ServiceProviders.Add(serviceProvider);
             await _dbContext.SaveChangesAsync();
             Log.Debug("Debugging CreateServiceProvider Has been Finised Successfully");
-            return serviceb.Id;
+            return serviceProvider.Id;
         }
 
         public async Task DeleteServiceProvider(int id)

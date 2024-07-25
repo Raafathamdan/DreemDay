@@ -5,6 +5,7 @@ using DreemDay_Infra.Repository;
 using DreemDay_Infra.Service;
 using Google.Protobuf.WellKnownTypes;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using System.Reflection;
@@ -58,6 +59,16 @@ builder.Services.AddScoped<IServiceService, ServiceService>();
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IWishListService, WishListService>();
+builder.Services.AddCors(opt=>
+{
+    opt.AddPolicy(name: "default", builder =>
+    {
+        builder
+        .AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyOrigin();
+    });
+});
 // Serilog
 var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
 Serilog.Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(configuration).
@@ -76,8 +87,15 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+var imageDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Images");
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(imageDirectory),
+    RequestPath = "/Images"
+}) ;
 app.UseRouting();
 app.UseAuthorization();
+app.UseCors("default");
 app.MapControllers();
 app.Run();
 

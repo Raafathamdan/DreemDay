@@ -11,7 +11,7 @@ namespace DreemDay_Core.Iservice
     {
         Task<List<ServiceCardDto>> GetAllService();
         Task<ServiceByIdDto> GetService(int id);
-        Task<int> CreateService(CreateServiceDto createServiceDto);
+        Task CreateService(CreateServiceDto createServiceDto);
         Task UpdateService(UpdateServiceDto updateServiceDto);
         Task DeleteService(int id);
     }

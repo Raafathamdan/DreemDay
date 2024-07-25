@@ -50,8 +50,8 @@ namespace DreemDay.Controllers
             {
                 try
                 {
-                    await _authService.Login(dto);
-                    return Ok();
+                    var token = await _authService.Login(dto);
+                    return Ok(new { Token = token });
                 }
                 catch (Exception ex)
                 {
@@ -98,6 +98,14 @@ namespace DreemDay.Controllers
             }
             
         }
+        [HttpPut]
+        [Route("[action]")]
+        public async Task<IActionResult> Hashing()
+        {
+            await _authService.HashAllPasswordsAsync();
+            return Ok();
+        }
+
 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DreemDay_Core.DTOs.ServiceProviderDTOs;
+using DreemDay_Core.Models.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace DreemDay_Core.IRepository
     {
         Task<List<ServiceProviderCardDto>> GetAllServiceProviders();
         Task<ServiceProviderByIdDto> GetServiceProvider(int id);
-        Task<int> CreateServiceProvider(CreateServiceProviderDto createServiceProviderDto);
+        Task<int> CreateServiceProvider(ServiceProvider serviceProvider);
         Task UpdateServiceProvider(UpdateServiceProviderDto updateServiceProviderDto);
         Task DeleteServiceProvider(int id);
     }
