@@ -8,5 +8,10 @@ namespace DreemDay_Core.DTOs.PaymentDTOs
 {
     public class CreatePaymentDto
     {
+        public string CardNumber { get; set; }
+        public string Code { get; set; }
+        public string CardHolder { get; set; }
+        public DateTime ExpiryDate { get; set; }
+        public float? Balance { get; set; }
     }
 }

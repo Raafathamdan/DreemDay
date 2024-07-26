@@ -3,10 +3,7 @@ using DreemDay_Core.DTOs.PaymentDTOs;
 using DreemDay_Core.IRepository;
 using DreemDay_Core.Models.Entity;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DreemDay_Infra.Repository
@@ -14,43 +11,79 @@ namespace DreemDay_Infra.Repository
     public class PaymentRepos : IPaymentRepos
     {
         private readonly DreemDayDbContext _dbContext;
+
         public PaymentRepos(DreemDayDbContext dbContext)
         {
             _dbContext = dbContext;
         }
-        public Task<int> CreatePayment(CreatePaymentDto createPaymentDto)
+
+        public async Task<int> CreatePayment(CreatePaymentDto createPaymentDto)
         {
-            throw new NotImplementedException();
+            var payment = new Payment
+            {
+                CardNumber = createPaymentDto.CardNumber,
+                CardHolder = createPaymentDto.CardHolder,
+                Balance = createPaymentDto.Balance,
+                Code = createPaymentDto.Code,
+                ExpiryDate = createPaymentDto.ExpiryDate
+            };
+
+            _dbContext.Payments.Add(payment);
+            await _dbContext.SaveChangesAsync();
+
+            return payment.Id;
         }
 
-        public Task DeletePayment(int id)
+        public async Task DeletePayment(int id)
         {
-            throw new NotImplementedException();
+            var payment = await _dbContext.Payments.FindAsync(id);
+            if (payment != null)
+            {
+                _dbContext.Payments.Remove(payment);
+                await _dbContext.SaveChangesAsync();
+            }
         }
 
-        public Task<List<PaymentCardDto>> GetAllPayments()
+        public async Task<List<PaymentCardDto>> GetAllPayments()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Payments
+                .Select(payment => new PaymentCardDto
+                {
+                    Id = payment.Id,
+                    CardNumber = payment.CardNumber,
+                    Balance = payment.Balance,
+                    ExpiryDate = payment.ExpiryDate
+                }).ToListAsync();
         }
 
         public async Task<Payment> GetPayment(int id)
         {
-           return await _dbContext.Payments.FirstOrDefaultAsync(x => x.Id == id);
+            return await _dbContext.Payments.FindAsync(id);
         }
 
         public async Task<Payment> IsValidPayment(string code, string cardNumber, string cardHolder, float price)
         {
-            var payment = await _dbContext.Payments.FirstOrDefaultAsync(
-                x=>x.Balance>=price&&
-                x.CardHolder.Equals(cardHolder)&&
-                x.CardNumber.Equals(cardNumber)&&
-                x.Code.Equals(code));
-            return payment;
+            return await _dbContext.Payments.FirstOrDefaultAsync(
+                x => x.Balance >= price &&
+                     x.CardHolder == cardHolder &&
+                     x.CardNumber == cardNumber &&
+                     x.Code == code);
         }
 
-        public Task UpdatePayment(UpdatePaymentDto updatePaymentDto)
+        public async Task UpdatePayment(UpdatePaymentDto updatePaymentDto)
         {
-            throw new NotImplementedException();
+            var payment = await _dbContext.Payments.FindAsync(updatePaymentDto.Id);
+            if (payment != null)
+            {
+                payment.CardNumber = updatePaymentDto.CardNumber;
+                payment.CardHolder = updatePaymentDto.CardHolder;
+                payment.Balance = updatePaymentDto.Balance;
+                payment.Code = updatePaymentDto.Code;
+                payment.ExpiryDate = updatePaymentDto.ExpiryDate;
+
+                _dbContext.Payments.Update(payment);
+                await _dbContext.SaveChangesAsync();
+            }
         }
     }
 }

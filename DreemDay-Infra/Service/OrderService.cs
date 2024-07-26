@@ -4,11 +4,8 @@ using DreemDay_Core.Iservice;
 using DreemDay_Core.Models.Entity;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using static DreemDay_Core.Helper.Enums.SystemEnum;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DreemDay_Infra.Service
 {
@@ -17,6 +14,7 @@ namespace DreemDay_Infra.Service
         private readonly IOrderRepos _repos;
         private readonly IUserRepos _userRepos;
         private readonly IPaymentRepos _paymentRepos;
+
         public OrderService(IOrderRepos repos, IUserRepos userRepos, IPaymentRepos paymentRepos)
         {
             _repos = repos;
@@ -27,26 +25,31 @@ namespace DreemDay_Infra.Service
         public async Task CreateOrder(CreateOrderDto createOrderDto)
         {
             var user = await _userRepos.GetUser(createOrderDto.UserId);
-            if (user != null) 
+            if (user == null)
+                throw new Exception("User Does Not Exist");
+
+            if (createOrderDto.PaymentMethod == PaymentMethod.Visa)
             {
-                var order = new Order();
-
-                order.CartId = createOrderDto.CartId;
-                order.UserId = user.Id;
-                order.CreationDate = DateTime.Now;
-                order.Title = createOrderDto.Title;
-                order.Note = createOrderDto.Note;
-                order.PaymentMethod = createOrderDto.PaymentMethod;
-                order.Date = DateTime.Now;
-                order.Status = createOrderDto.Status;
-                var id = await _repos.CreateOrder(order);
-                if (id == 0)
-                    throw new Exception("Failed To Create Order");
-
+                var payment = await _paymentRepos.IsValidPayment(createOrderDto.Code, createOrderDto.CardNumber, createOrderDto.CardHolder, createOrderDto.Price);
+                if (payment == null)
+                    throw new Exception("Invalid Payment Details");
             }
 
-            throw new Exception("User Dose Not Exisit");
-            
+            var order = new Order
+            {
+                CartId = createOrderDto.CartId,
+                UserId = user.Id,
+                CreationDate = DateTime.Now,
+                Title = createOrderDto.Title,
+                Note = createOrderDto.Note,
+                PaymentMethod = createOrderDto.PaymentMethod,
+                Date = DateTime.Now,
+                Status = OrderStatus.New
+            };
+
+            var id = await _repos.CreateOrder(order);
+            if (id == 0)
+                throw new Exception("Failed To Create Order");
         }
 
         public async Task DeleteOrder(int id)

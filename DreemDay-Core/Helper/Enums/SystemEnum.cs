@@ -24,7 +24,7 @@ namespace DreemDay_Core.Helper.Enums
         public enum PaymentMethod
         {
             Cliacq = 100,
-            Wallet = 101,
+            Visa = 101,
             Cash = 102
         }
        

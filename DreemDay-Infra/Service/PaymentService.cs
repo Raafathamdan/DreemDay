@@ -2,10 +2,7 @@
 using DreemDay_Core.IRepository;
 using DreemDay_Core.Iservice;
 using DreemDay_Core.Models.Entity;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DreemDay_Infra.Service
@@ -13,7 +10,8 @@ namespace DreemDay_Infra.Service
     public class PaymentService : IPaymentService
     {
         private readonly IPaymentRepos _repos;
-        public PaymentService (IPaymentRepos repos)
+
+        public PaymentService(IPaymentRepos repos)
         {
             _repos = repos;
         }
@@ -21,7 +19,6 @@ namespace DreemDay_Infra.Service
         public Task CreatePayment(CreatePaymentDto createPaymentDto)
         {
             return _repos.CreatePayment(createPaymentDto);
-
         }
 
         public async Task DeletePayment(int id)
