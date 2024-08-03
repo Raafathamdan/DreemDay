@@ -45,7 +45,6 @@ namespace DreemDay_Infra.Repository
         public async Task<List<UserCardDto>> GetAllUsers()
         {
             var users = await _dbContext.Users
-                .Where(x => !x.IsDeleted)
                 .Select(user => new UserCardDto
                 {
                     Id = user.Id,

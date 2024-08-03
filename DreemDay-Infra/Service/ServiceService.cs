@@ -53,6 +53,19 @@ namespace DreemDay_Infra.Service
             await _repos.DeleteService(id);
         }
 
+        public async Task<List<ServiceCardDto>> GetAllCarService()
+        {
+           var Services = await _repos.GetAllCarService();
+            return Services;
+
+        }
+
+        public async Task<List<ServiceCardDto>> GetAllHallService()
+        {
+            var Services = await _repos.GetAllHallService();
+            return Services;
+        }
+
         public async Task<List<ServiceCardDto>> GetAllService()
         {
             return await _repos.GetAllService();
@@ -61,6 +74,21 @@ namespace DreemDay_Infra.Service
         public async Task<ServiceByIdDto> GetService(int id)
         {
             return await _repos.GetService(id);
+        }
+
+        public async Task<List<ServiceCardDto>> SearchService(string? name, string? categorytitle, double? price)
+        {
+            if(name == null & categorytitle == null & price == null)
+            {
+                var service = await _repos.GetAllService();
+                return service;
+            }
+            else
+            {
+                var service = await _repos.SearchService( name, categorytitle, price);
+                return service;
+            }
+            
         }
 
         public async Task UpdateService(UpdateServiceDto updateServiceDto)

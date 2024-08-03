@@ -25,7 +25,7 @@ namespace DreemDay_Infra.Repository
                 CardHolder = createPaymentDto.CardHolder,
                 Balance = createPaymentDto.Balance,
                 Code = createPaymentDto.Code,
-                ExpiryDate = createPaymentDto.ExpiryDate
+                ExpireDate = createPaymentDto.ExpireDate
             };
 
             _dbContext.Payments.Add(payment);
@@ -52,7 +52,7 @@ namespace DreemDay_Infra.Repository
                     Id = payment.Id,
                     CardNumber = payment.CardNumber,
                     Balance = payment.Balance,
-                    ExpiryDate = payment.ExpiryDate
+                    ExpireDate = payment.ExpireDate
                 }).ToListAsync();
         }
 
@@ -79,7 +79,7 @@ namespace DreemDay_Infra.Repository
                 payment.CardHolder = updatePaymentDto.CardHolder;
                 payment.Balance = updatePaymentDto.Balance;
                 payment.Code = updatePaymentDto.Code;
-                payment.ExpiryDate = updatePaymentDto.ExpiryDate;
+                payment.ExpireDate = updatePaymentDto.ExpireDate;
 
                 _dbContext.Payments.Update(payment);
                 await _dbContext.SaveChangesAsync();

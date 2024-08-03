@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
 
@@ -6,6 +7,8 @@ namespace DreemDay.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = ("Admin,Customer,ServiceProvider"))]
+
     public class FilesController : ControllerBase
     {
         [HttpPost]

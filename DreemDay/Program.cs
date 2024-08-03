@@ -4,11 +4,14 @@ using DreemDay_Core.Iservice;
 using DreemDay_Infra.Repository;
 using DreemDay_Infra.Service;
 using Google.Protobuf.WellKnownTypes;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using System.Reflection;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,7 +36,29 @@ builder.Services.AddSwaggerGen(c =>
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     c.IncludeXmlComments(xmlPath);
-}); builder.Services.AddDbContext<DreemDayDbContext>(x => x.UseMySQL(builder.Configuration.GetConnectionString("MySqlConnection"), b => b.MigrationsAssembly("DreemDay")));
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Please insert JWT token into field",
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        BearerFormat = "JWT",
+        Scheme = "Bearer"
+    });
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement {
+    {
+        new OpenApiSecurityScheme
+        {
+            Reference = new OpenApiReference
+            {
+                Type = ReferenceType.SecurityScheme,
+                Id = "Bearer"
+            }
+        },
+        new string[] { }
+    }});
+}); 
+builder.Services.AddDbContext<DreemDayDbContext>(x => x.UseMySQL(builder.Configuration.GetConnectionString("MySqlConnection"), b => b.MigrationsAssembly("DreemDay")));
 
 // Register Repositories
 builder.Services.AddScoped<IAuthRepos, AuthRepos>();
@@ -66,8 +91,26 @@ builder.Services.AddCors(opt=>
         builder
         .AllowAnyOrigin()
         .AllowAnyMethod()
-        .AllowAnyOrigin();
+        .AllowAnyHeader();
     });
+});
+var key = Encoding.ASCII.GetBytes("x3Fv8tB7p9r4q3N7Q1Z2W3M5P6L8K0J3H2G5F6D7S9A8V7C6X5Z1Y2E4R1T3Y4U7");
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(key),
+        ClockSkew = TimeSpan.Zero
+    };
 });
 // Serilog
 var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
@@ -94,6 +137,7 @@ app.UseStaticFiles(new StaticFileOptions
     RequestPath = "/Images"
 }) ;
 app.UseRouting();
+app.UseAuthentication();
 app.UseAuthorization();
 app.UseCors("default");
 app.MapControllers();

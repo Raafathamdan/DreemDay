@@ -20,9 +20,9 @@ namespace DreemDay_Core.Helper
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim ("Email",input.Email),
+                    new Claim (ClaimTypes.Email,input.Email),
                     new Claim ("Id", input.Id.ToString()),
-                    new Claim ("Role",input.Role.ToString())
+                    new Claim (ClaimTypes.Role,input.Role.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddHours(10),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature),

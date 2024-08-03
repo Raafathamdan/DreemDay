@@ -4,6 +4,7 @@ using DreemDay_Core.DTOs.UserDTOs;
 using DreemDay_Core.DTOs.WishListDTOs;
 using DreemDay_Core.Iservice;
 using DreemDay_Infra.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +15,7 @@ namespace DreemDay.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = ("Admin,Customer,ServiceProvider"))]
     public class CustomerController : ControllerBase
     {
         private readonly ICartItemService _cartItemService;
@@ -21,13 +23,15 @@ namespace DreemDay.Controllers
         private readonly IUserService _userService;
         private readonly IWishListService _wishListService;
         private readonly ICategoryService _categoryService;
+        private readonly IServiceService _serviceService ;
         public CustomerController
             (
             ICartItemService cartItemService,
             IOrderService orderService,
             IUserService userService,
             IWishListService wishListService,
-            ICategoryService categoryService
+            ICategoryService categoryService,
+            IServiceService serviceService
             )
         {
             _cartItemService = cartItemService;
@@ -35,6 +39,7 @@ namespace DreemDay.Controllers
             _userService = userService;
             _wishListService = wishListService;
             _categoryService = categoryService;
+            _serviceService = serviceService;
         }
         #region User
         ///<remarks>
@@ -570,6 +575,55 @@ namespace DreemDay.Controllers
             }
         
             
+        }
+        /// <summary>
+        ///  Retrieve a list of User.
+        /// </summary>
+        /// <returns>A List Of All User</returns>
+        /// <response code="200">Returns  GetAllCustomer</response>
+        /// <response code="400">If the error was occured</response>
+
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<IActionResult> GetAllCarService()
+        {
+            try
+            {
+                var result = await _serviceService.GetAllCarService();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<IActionResult> GetAllHallService()
+        {
+            try
+            {
+                var result = await _serviceService.GetAllHallService();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<IActionResult> SearchService(string? name,string? categorytitle,double? price)
+        {
+            try
+            {
+                var result = await _serviceService.SearchService( name,categorytitle,price);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
         #endregion
     }

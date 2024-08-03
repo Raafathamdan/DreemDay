@@ -46,7 +46,7 @@ namespace DreemDay.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Carts");
+                    b.ToTable("Carts", (string)null);
                 });
 
             modelBuilder.Entity("DreemDay_Core.Models.Entity.CartItem", b =>
@@ -79,7 +79,7 @@ namespace DreemDay.Migrations
 
                     b.HasIndex("ServiceId");
 
-                    b.ToTable("CartItems");
+                    b.ToTable("CartItems", (string)null);
                 });
 
             modelBuilder.Entity("DreemDay_Core.Models.Entity.Category", b =>
@@ -109,7 +109,7 @@ namespace DreemDay.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("DreemDay_Core.Models.Entity.Login", b =>
@@ -153,7 +153,7 @@ namespace DreemDay.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Logins", t =>
+                    b.ToTable("Logins", null, t =>
                         {
                             t.HasCheckConstraint("CK_Password_Length", "LENGTH(Password) >= 8");
                         });
@@ -205,7 +205,7 @@ namespace DreemDay.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("DreemDay_Core.Models.Entity.Payment", b =>
@@ -246,7 +246,7 @@ namespace DreemDay.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Payments");
+                    b.ToTable("Payments", (string)null);
                 });
 
             modelBuilder.Entity("DreemDay_Core.Models.Entity.Service", b =>
@@ -313,7 +313,7 @@ namespace DreemDay.Migrations
 
                     b.HasIndex("ServiceProviderId");
 
-                    b.ToTable("Services");
+                    b.ToTable("Services", (string)null);
                 });
 
             modelBuilder.Entity("DreemDay_Core.Models.Entity.ServiceProvider", b =>
@@ -360,7 +360,7 @@ namespace DreemDay.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("ServiceProviders");
+                    b.ToTable("ServiceProviders", (string)null);
                 });
 
             modelBuilder.Entity("DreemDay_Core.Models.Entity.User", b =>
@@ -406,7 +406,7 @@ namespace DreemDay.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("DreemDay_Core.Models.Entity.WishList", b =>
@@ -438,7 +438,7 @@ namespace DreemDay.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("WishLists");
+                    b.ToTable("WishLists", (string)null);
                 });
 
             modelBuilder.Entity("DreemDay_Core.Models.Entity.Cart", b =>

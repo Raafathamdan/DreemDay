@@ -2,6 +2,7 @@
 using DreemDay_Core.DTOs.UserDTOs;
 using DreemDay_Core.Iservice;
 using DreemDay_Infra.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +10,7 @@ namespace DreemDay.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = ("Admin"))]
     public class AdminController : ControllerBase
     {
         private readonly IUserService _iuserService;
@@ -48,6 +50,7 @@ namespace DreemDay.Controllers
         /// <returns>A List Of All User</returns>
         /// <response code="200">Returns  GetAllCustomer</response>
         /// <response code="400">If the error was occured</response>
+        
         [HttpGet]
         [Route("[action]")]
         public async Task<IActionResult> GetAllUsers()

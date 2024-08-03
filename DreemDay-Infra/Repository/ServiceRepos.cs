@@ -39,6 +39,53 @@ namespace DreemDay_Infra.Repository
 
         }
 
+        public async Task<List<ServiceCardDto>> GetAllCarService()
+        {
+           var S = await _dbContext.Services
+                 .Where(x => !x.IsDeleted)
+                 .Join(_dbContext.ServiceProviders, s => s.ServiceProviderId,
+                 sb => sb.Id, (s, sb) => new { Service = s, ServiceProvider = sb })
+                 .Join(_dbContext.Categories, ssb => ssb.Service.CategoryId,
+                 c => c.Id, (ssb, c) => new { ServiceServiceProvider = ssb, Category = c })
+                 .Where(c=>c.Category.Id.Equals(2))
+                 .Select(service => new ServiceCardDto
+                 {
+                     Id = service.ServiceServiceProvider.Service.Id,
+                     ServiceProviderId = service.ServiceServiceProvider.ServiceProvider.Id,
+                     CategoryId = service.Category.Id,
+                     CategoryTitle = service.Category.Title,
+                     Image = service.ServiceServiceProvider.Service.Image,
+                     Price = service.ServiceServiceProvider.Service.Price,
+                     Name = service.ServiceServiceProvider.Service.Name,
+
+                 }).ToListAsync();
+            Log.Debug("Debugging GetAllService Has been Finised Successfully");
+            return S;
+        }
+
+        public async Task<List<ServiceCardDto>> GetAllHallService()
+        {
+            var S = await _dbContext.Services
+                .Where(x => !x.IsDeleted)
+                .Join(_dbContext.ServiceProviders, s => s.ServiceProviderId,
+                sb => sb.Id, (s, sb) => new { Service = s, ServiceProvider = sb })
+                .Join(_dbContext.Categories, ssb => ssb.Service.CategoryId,
+                c => c.Id, (ssb, c) => new { ServiceServiceProvider = ssb, Category = c })
+                .Where(c => c.Category.Id.Equals(1))
+                .Select(service => new ServiceCardDto
+                {
+                    Id = service.ServiceServiceProvider.Service.Id,
+                    ServiceProviderId = service.ServiceServiceProvider.ServiceProvider.Id,
+                    CategoryId = service.Category.Id,
+                    CategoryTitle = service.Category.Title,
+                    Image = service.ServiceServiceProvider.Service.Image,
+                    Price = service.ServiceServiceProvider.Service.Price,
+                    Name = service.ServiceServiceProvider.Service.Name,
+
+                }).ToListAsync();
+            Log.Debug("Debugging GetAllService Has been Finised Successfully");
+            return S;
+        }
 
         public async Task<List<ServiceCardDto>> GetAllService()
         {
@@ -53,6 +100,7 @@ namespace DreemDay_Infra.Repository
                     Id = service.ServiceServiceProvider.Service.Id,
                     ServiceProviderId= service.ServiceServiceProvider.ServiceProvider.Id,
                     CategoryId = service.Category.Id,
+                    CategoryTitle = service.Category.Title,
                     Image = service.ServiceServiceProvider.Service.Image,
                     Price = service.ServiceServiceProvider.Service.Price,
                     Name = service.ServiceServiceProvider.Service.Name,
@@ -93,10 +141,30 @@ namespace DreemDay_Infra.Repository
                 CreationDate = service.ServiceServiceProvider.Service.CreationDate.ToString(),
                 ModifiedDate = service.ServiceServiceProvider.Service.ModifiedDate.ToString(),
                 IsDeleted = service.ServiceServiceProvider.Service.IsDeleted,
-
+                 
             };
             Log.Debug("Debugging GetService Has been Finised Successfully");
             return S;
+        }
+
+        public async Task<List<ServiceCardDto>> SearchService(string? name, string? categorytitle, double? price)
+        {
+            var service = await _dbContext.Services.Join(_dbContext.Categories, s => s.CategoryId, c => c.Id, (s, c) => new { Service = s, Category = c }).Join(_dbContext.ServiceProviders,sc => sc.Service.ServiceProviderId,sb => sb.Id, (sc, sb) => new {ServiceCategory=sc,ServiceProvider=sb}).ToListAsync();
+            if (name != null) service = await _dbContext.Services.Join(_dbContext.Categories, s => s.CategoryId, c => c.Id, (s, c) => new { Service = s, Category = c }).Join(_dbContext.ServiceProviders, sc => sc.Service.ServiceProviderId, sb => sb.Id, (sc, sb) => new { ServiceCategory = sc, ServiceProvider = sb }).Where(x=>x.ServiceCategory.Service.Name.Contains(name)).ToListAsync();
+            if (categorytitle != null) service = await _dbContext.Services.Join(_dbContext.Categories, s => s.CategoryId, c => c.Id, (s, c) => new { Service = s, Category = c }).Join(_dbContext.ServiceProviders, sc => sc.Service.ServiceProviderId, sb => sb.Id, (sc, sb) => new { ServiceCategory = sc, ServiceProvider = sb }).Where(x => x.ServiceCategory.Category.Title.Contains(categorytitle)).ToListAsync();
+            if (price != null) service = await _dbContext.Services.Join(_dbContext.Categories, s => s.CategoryId, c => c.Id, (s, c) => new { Service = s, Category = c }).Join(_dbContext.ServiceProviders, sc => sc.Service.ServiceProviderId, sb => sb.Id, (sc, sb) => new { ServiceCategory = sc, ServiceProvider = sb }).Where(x=>x.ServiceCategory.Service.Price.Equals(price)).ToListAsync();
+            var result = from s in service
+                         select new ServiceCardDto
+                         {
+                             Id = s.ServiceCategory.Service.Id,
+                             ServiceProviderId = s.ServiceProvider.Id,
+                             CategoryId = s.ServiceCategory.Category.Id,
+                             CategoryTitle = s.ServiceCategory.Category.Title,
+                             Name = s.ServiceCategory.Service.Name,
+                             Price = s.ServiceCategory.Service.Price,
+                             Image = s.ServiceCategory.Service.Image
+                         };
+            return result.ToList();
         }
 
         public async Task UpdateService(UpdateServiceDto updateServiceDto)

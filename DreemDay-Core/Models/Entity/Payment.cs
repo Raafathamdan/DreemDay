@@ -12,7 +12,7 @@ namespace DreemDay_Core.Models.Entity
         public string CardNumber { get; set; }
         public string Code { get; set; }
         public string CardHolder { get; set; }
-        public DateTime ExpiryDate { get; set; }
+        public DateTime ExpireDate { get; set; }
         public float? Balance { get; set; }
 
     }

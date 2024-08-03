@@ -2,6 +2,7 @@
 using DreemDay_Core.DTOs.ServiceProviderDTOs;
 using DreemDay_Core.Iservice;
 using DreemDay_Infra.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Org.BouncyCastle.Crypto.Prng;
@@ -10,6 +11,8 @@ namespace DreemDay.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = ("Admin,ServiceProvider"))]
+
     public class ServiceProviderController : ControllerBase
     {
         private readonly IServiceProviderService _serviceProviderService;
