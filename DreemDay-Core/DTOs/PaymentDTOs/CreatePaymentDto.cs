@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +12,6 @@ namespace DreemDay_Core.DTOs.PaymentDTOs
         public string Code { get; set; }
         public string CardHolder { get; set; }
         public DateTime ExpireDate { get; set; }
-        public float? Balance { get; set; }
+        public decimal? Balance { get; set; }
     }
 }

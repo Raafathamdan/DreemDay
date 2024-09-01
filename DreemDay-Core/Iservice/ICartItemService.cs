@@ -1,4 +1,4 @@
-﻿using DreemDay_Core.DTOs.CartItemDTOs;
+using DreemDay_Core.DTOs.CartItemDTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +11,8 @@ namespace DreemDay_Core.Iservice
     {
         Task<List<CartItemCardDto>> GetAllCartItem();
         Task<CartItemById> GetCartItem(int id);
+        Task<List<CartItemById>> GetCartItemByUserId(int userId);
+
         Task CreateCartItem (CreateCartItemDto createCartItemDto);
         Task UpdateCartItem (UpdateCartItemDto updateCartItemDto);
         Task DeleteCartItem (int id);

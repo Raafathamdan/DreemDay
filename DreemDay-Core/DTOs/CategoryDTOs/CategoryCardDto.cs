@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +10,8 @@ namespace DreemDay_Core.DTOs.CategoryDTOs
     {
         public int Id { get; set; }
         public string Title { get; set; }
-       
-    }
+        public string Description { get; set; }
+
+
+  }
 }

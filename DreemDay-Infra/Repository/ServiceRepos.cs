@@ -1,4 +1,4 @@
-﻿using DreemDay_Core.Context;
+using DreemDay_Core.Context;
 using DreemDay_Core.DTOs.ServiceDTOs;
 using DreemDay_Core.IRepository;
 using Microsoft.EntityFrameworkCore;
@@ -42,7 +42,7 @@ namespace DreemDay_Infra.Repository
         public async Task<List<ServiceCardDto>> GetAllCarService()
         {
            var S = await _dbContext.Services
-                 .Where(x => !x.IsDeleted)
+                 .Where(x => x.IsDeleted == false)
                  .Join(_dbContext.ServiceProviders, s => s.ServiceProviderId,
                  sb => sb.Id, (s, sb) => new { Service = s, ServiceProvider = sb })
                  .Join(_dbContext.Categories, ssb => ssb.Service.CategoryId,
@@ -54,7 +54,7 @@ namespace DreemDay_Infra.Repository
                      ServiceProviderId = service.ServiceServiceProvider.ServiceProvider.Id,
                      CategoryId = service.Category.Id,
                      CategoryTitle = service.Category.Title,
-                     Image = service.ServiceServiceProvider.Service.Image,
+                     Image = $"https://localhost:44324/Images/{service.ServiceServiceProvider.Service.Image}",
                      Price = service.ServiceServiceProvider.Service.Price,
                      Name = service.ServiceServiceProvider.Service.Name,
 
@@ -66,7 +66,7 @@ namespace DreemDay_Infra.Repository
         public async Task<List<ServiceCardDto>> GetAllHallService()
         {
             var S = await _dbContext.Services
-                .Where(x => !x.IsDeleted)
+                .Where(x => x.IsDeleted == false)
                 .Join(_dbContext.ServiceProviders, s => s.ServiceProviderId,
                 sb => sb.Id, (s, sb) => new { Service = s, ServiceProvider = sb })
                 .Join(_dbContext.Categories, ssb => ssb.Service.CategoryId,
@@ -78,7 +78,7 @@ namespace DreemDay_Infra.Repository
                     ServiceProviderId = service.ServiceServiceProvider.ServiceProvider.Id,
                     CategoryId = service.Category.Id,
                     CategoryTitle = service.Category.Title,
-                    Image = service.ServiceServiceProvider.Service.Image,
+                    Image = $"https://localhost:44324/Images/{service.ServiceServiceProvider.Service.Image}",
                     Price = service.ServiceServiceProvider.Service.Price,
                     Name = service.ServiceServiceProvider.Service.Name,
 
@@ -90,7 +90,7 @@ namespace DreemDay_Infra.Repository
         public async Task<List<ServiceCardDto>> GetAllService()
         {
             var S = await _dbContext.Services
-                .Where(x => !x.IsDeleted)
+                .Where(x => x.IsDeleted == false)
                 .Join(_dbContext.ServiceProviders, s => s.ServiceProviderId,
                 sb => sb.Id, (s, sb) => new {Service=s,ServiceProvider=sb})
                 .Join(_dbContext.Categories,ssb=>ssb.Service.CategoryId,
@@ -101,7 +101,7 @@ namespace DreemDay_Infra.Repository
                     ServiceProviderId= service.ServiceServiceProvider.ServiceProvider.Id,
                     CategoryId = service.Category.Id,
                     CategoryTitle = service.Category.Title,
-                    Image = service.ServiceServiceProvider.Service.Image,
+                    Image = $"https://localhost:44324/Images/{service.ServiceServiceProvider.Service.Image}",
                     Price = service.ServiceServiceProvider.Service.Price,
                     Name = service.ServiceServiceProvider.Service.Name,
 
@@ -128,7 +128,7 @@ namespace DreemDay_Infra.Repository
                 Id = service.ServiceServiceProvider.Service.Id,
                 ServiceProviderId = service.ServiceServiceProvider.ServiceProvider.Id,
                 CategoryId = service.Category.Id,
-                Image = service.ServiceServiceProvider.Service.Image,
+                Image = $"https://localhost:44324/Images/{service.ServiceServiceProvider.Service.Image}",
                 Price = service.ServiceServiceProvider.Service.Price,
                 Name = service.ServiceServiceProvider.Service.Name,
                 Unit = service.ServiceServiceProvider.Service.Unit,
@@ -140,7 +140,7 @@ namespace DreemDay_Infra.Repository
                 PriceAfterDiscount = service.ServiceServiceProvider.Service.PriceAfterDiscount,
                 CreationDate = service.ServiceServiceProvider.Service.CreationDate.ToString(),
                 ModifiedDate = service.ServiceServiceProvider.Service.ModifiedDate.ToString(),
-                IsDeleted = service.ServiceServiceProvider.Service.IsDeleted,
+                IsDeleted = service.ServiceServiceProvider.Service.IsDeleted ?? false,
                  
             };
             Log.Debug("Debugging GetService Has been Finised Successfully");
@@ -162,7 +162,7 @@ namespace DreemDay_Infra.Repository
                              CategoryTitle = s.ServiceCategory.Category.Title,
                              Name = s.ServiceCategory.Service.Name,
                              Price = s.ServiceCategory.Service.Price,
-                             Image = s.ServiceCategory.Service.Image
+                             Image = $"https://localhost:44324/Images/{s.ServiceCategory.Service.Image}"
                          };
             return result.ToList();
         }

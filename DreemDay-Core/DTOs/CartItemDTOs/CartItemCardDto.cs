@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +11,7 @@ namespace DreemDay_Core.DTOs.CartItemDTOs
         public int Id { get; set; }
         public int ServiceId { get; set; }
         public int CartId { get; set; }
+        public bool CartActivate { get; set;}
        
     }
 }

@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -10,18 +10,9 @@ namespace DreemDay.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
-                name: "CategoryId",
-                table: "Services",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
+           
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Services_CategoryId",
-                table: "Services",
-                column: "CategoryId");
-
+            
             migrationBuilder.AddForeignKey(
                 name: "FK_Services_Categories_CategoryId",
                 table: "Services",

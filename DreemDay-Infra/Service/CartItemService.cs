@@ -1,4 +1,5 @@
-﻿using DreemDay_Core.DTOs.CartItemDTOs;
+using DreemDay_Core.DTOs.CartItemDTOs;
+using DreemDay_Core.DTOs.OrderDTOs;
 using DreemDay_Core.IRepository;
 using DreemDay_Core.Iservice;
 using DreemDay_Core.Models.Entity;
@@ -15,27 +16,72 @@ namespace DreemDay_Infra.Service
     {
         private readonly ICartItemRepos _repos;
         private readonly IUserRepos _userRepos;
+        private readonly ICartRepos _cart;
 
-        public CartItemService(ICartItemRepos repos,IUserRepos userRepos ) 
+        public CartItemService(ICartItemRepos repos,IUserRepos userRepos, ICartRepos cart ) 
         {
             _repos = repos;
             _userRepos = userRepos;
+            _cart = cart;
         }
-        public async Task CreateCartItem(CreateCartItemDto createCartItemDto)
+    public async Task CreateCartItem(CreateCartItemDto createCartItemDto)
+    {
+      // Get the CartByIdDto
+      var cartDto = await _cart.GetCart(createCartItemDto.CartId);
+
+      Cart cart = null;
+
+      // Map CartByIdDto to Cart if cartDto is not null
+      if (cartDto != null)
+      {
+        cart = new Cart
         {
+          Id = cartDto.Id,
+          UserId = cartDto.UserId,
+          IsActive = cartDto.IsActive,
+         
+        };
+      }
 
-            var cartItem = new CartItem();
-            cartItem.CreationDate = DateTime.Now;
-            cartItem.CartId = createCartItemDto.CartId;
-            cartItem.Quantity = createCartItemDto.Quantity;
-            cartItem.ServiceId = createCartItemDto.ServiceId;
-            await _repos.CreateCartItem(cartItem);
-            var id = await _repos.CreateCartItem(cartItem);
-            if (id == 0)
-                throw new Exception("Failed To Create CartItem");
+      // Check if the cart is inactive or doesn't exist
+      if (cart == null || !cart.IsActive)
+      {
+        // If the cart is inactive or doesn't exist, create a new cart
+        cart = new Cart
+        {
+          UserId = createCartItemDto.UserId,
+          IsActive = true,
+          CreationDate = DateTime.Now
+        };
+
+        var newCartId = await _cart.CreateCart(cart);
+        if (newCartId == 0)
+        {
+          throw new Exception("Failed To Create New Cart");
         }
 
-        public async Task DeleteCartItem(int id)
+        createCartItemDto.CartId = newCartId;
+      }
+
+      // Create the new cart item
+      var cartItem = new CartItem
+      {
+        CreationDate = DateTime.Now,
+        CartId = createCartItemDto.CartId,
+        Quantity = createCartItemDto.Quantity,
+        ServiceId = createCartItemDto.ServiceId
+      };
+
+      var id = await _repos.CreateCartItem(cartItem);
+      if (id == 0)
+      {
+        throw new Exception("Failed To Create CartItem");
+      }
+    }
+
+
+
+    public async Task DeleteCartItem(int id)
         {
             await _repos.DeleteCartItem(id);
         }
@@ -50,7 +96,23 @@ namespace DreemDay_Infra.Service
             return await _repos.GetCartItem(id);
         }
 
-        public async Task UpdateCartItem(UpdateCartItemDto updateCartItemDto)
+    public async Task<List<CartItemById>> GetCartItemByUserId(int userId)
+    {
+      // Check if the user exists
+      var user = await _userRepos.GetUser(userId);
+      if (user == null)
+        throw new Exception("User Does Not Exist");
+
+      // Fetch cart items where the cart is active
+      var cartItems = await _repos.GetAllCartItems();
+      var userCartItems = cartItems
+          .Where(c => c.userId == userId && c.CartActivate)
+          .ToList();
+
+      return userCartItems;
+    }
+
+    public async Task UpdateCartItem(UpdateCartItemDto updateCartItemDto)
         {
            await _repos.UpdateCartItem(updateCartItemDto);
         }

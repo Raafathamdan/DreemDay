@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +10,8 @@ namespace DreemDay_Core.DTOs.WishListDTOs
     {
         public int Id { get; set; }
         public int ServiceId { get; set; }
+        public string ServiceImage { get; set; }
+        public string ServiceName { get; set; }
         public int UserId { get; set; }
 
     }

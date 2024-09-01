@@ -1,4 +1,4 @@
-﻿using DreemDay_Core.DTOs.WishListDTOs;
+using DreemDay_Core.DTOs.WishListDTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +11,7 @@ namespace DreemDay_Core.Iservice
     {
         Task<List<WishListCardDto>> GetAllWishList();
         Task<WishListByIdDto> GetWishList(int id);
+        Task<List<WishListCardDto>> GetWishListByUserId(int userId);
         Task CreateWishList(CreateWishListDto createWishListDto);
         Task UpdateWishList(UpdateWishListDto updateWishListDto);
         Task DeleteWishList(int id);

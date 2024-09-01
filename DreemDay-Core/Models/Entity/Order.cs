@@ -1,4 +1,4 @@
-﻿using DreemDay_Core.Models.Shared;
+using DreemDay_Core.Models.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;

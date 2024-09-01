@@ -1,7 +1,9 @@
-﻿using DreemDay_Core.DTOs.WishListDTOs;
+using DreemDay_Core.DTOs.OrderDTOs;
+using DreemDay_Core.DTOs.WishListDTOs;
 using DreemDay_Core.IRepository;
 using DreemDay_Core.Iservice;
 using DreemDay_Core.Models.Entity;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +24,7 @@ namespace DreemDay_Infra.Service
 
         public async Task CreateWishList(CreateWishListDto createWishListDto)
         {
-            var user = await _userRepos.GetUser(createWishListDto.Id);
+            var user = await _userRepos.GetUser(createWishListDto.UserId);
             if (user != null)
             {
                 var wishList = new WishList();
@@ -32,15 +34,18 @@ namespace DreemDay_Infra.Service
                 wishList.CreationDate = DateTime.Now;
                 wishList.IsDeleted = false;
 
-                await _repos.CreateWishList(wishList);
                 var id = await _repos.CreateWishList(wishList);
                 if (id == 0)
                     throw new Exception("Failed To Create Wish List");
+                Log.Debug($"WishList created successfully with Id: {id}");
+              }
+              else
+              {
+                Log.Error($"User with UserId: {createWishListDto.UserId} does not exist.");
+                throw new Exception("User Does Not Exist");
+              }
 
-            }
-            throw new Exception("User Dose Not Exisit");
-
-        }
+    }
 
         public async Task DeleteWishList(int id)
         {
@@ -57,7 +62,19 @@ namespace DreemDay_Infra.Service
             return await _repos.GetWishList(id);
         }
 
-        public async Task UpdateWishList(UpdateWishListDto updateWishListDto)
+    public async Task<List<WishListCardDto>> GetWishListByUserId(int userId)
+    {
+      var user = await _userRepos.GetUser(userId);
+      if (user == null)
+        throw new Exception("User Does Not Exist");
+
+      var wishList = await _repos.GetAllWishList();
+      var userWishList = wishList.Where(w => w.UserId == userId).ToList();
+
+      return userWishList;
+    }
+
+    public async Task UpdateWishList(UpdateWishListDto updateWishListDto)
         {
             await _repos.UpdateWishList(updateWishListDto);
         }

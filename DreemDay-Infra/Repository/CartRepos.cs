@@ -1,4 +1,4 @@
-﻿using DreemDay_Core.Context;
+using DreemDay_Core.Context;
 using DreemDay_Core.DTOs.CartDTOs;
 using DreemDay_Core.IRepository;
 using DreemDay_Core.Models.Entity;
@@ -38,7 +38,6 @@ namespace DreemDay_Infra.Repository
             Log.Information("cart Is Exists");
 
             cart.IsDeleted = true;
-            cart.IsActive = false;
             _dbContext.Carts.Update(cart);
             await _dbContext.SaveChangesAsync();
             Log.Debug("Debugging DeleteCart Has been Finised Successfully");
@@ -48,7 +47,7 @@ namespace DreemDay_Infra.Repository
         public async Task<List<CartCardDto>> GetAllCart()
         {
             var carts =  await _dbContext.Carts
-                .Where(x => !x.IsDeleted)
+                .Where(x => x.IsDeleted==false)
                 .Join(_dbContext.Users, c => c.UserId, u => u.Id, (c, u) => new {Cart=c,User=u})
                 .Select( cart => new CartCardDto
                 {
@@ -75,11 +74,12 @@ namespace DreemDay_Infra.Repository
 
             var c =  new CartByIdDto
                     {
+                       Id=cart.Cart.Id,
                        UserId = cart.User.Id,
                        IsActive = cart.Cart.IsActive,
                        CreationDate = cart.Cart.CreationDate.ToString(),
                        ModifiedDate = cart.Cart.ModifiedDate.ToString(),
-                       IsDeleted = cart.Cart.IsDeleted
+                       IsDeleted = cart.Cart.IsDeleted??false
                 
                     };
             Log.Debug("Debugging GetCart Has been Finised Successfully");
@@ -99,5 +99,15 @@ namespace DreemDay_Infra.Repository
             Log.Debug("Debugging UpdateCart Has been Finised Successfully");
 
         }
+
+    public async Task UpdateCartActivation(CartByIdDto CartByIdDto)
+    {
+      var cart = await _dbContext.Carts.FindAsync(CartByIdDto.Id);
+      if (cart == null) return;
+      cart.IsActive = false;
+      await _dbContext.SaveChangesAsync();
+      Log.Debug("Debugging Cart has been deactivated Successfully");
+
     }
+  }
 }

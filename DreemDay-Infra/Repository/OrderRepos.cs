@@ -1,4 +1,4 @@
-﻿using DreemDay_Core.Context;
+using DreemDay_Core.Context;
 using DreemDay_Core.DTOs.OrderDTOs;
 using DreemDay_Core.IRepository;
 using DreemDay_Core.Models.Entity;
@@ -20,7 +20,10 @@ namespace DreemDay_Infra.Repository
         {
             _dbContext = dbContext;
         }
-        public async Task<int> CreateOrder(Order order)
+
+   
+
+    public async Task<int> CreateOrder(Order order)
         {
            
             _dbContext.Add(order);
@@ -47,7 +50,7 @@ namespace DreemDay_Infra.Repository
         public async Task<List<OrderCardDto>> GetAllOrder()
         {
             var ord = await _dbContext.Orders
-                .Where(x => !x.IsDeleted)
+                .Where(x => x.IsDeleted == false)
                 .Join(_dbContext.Users,
                     o => o.UserId,
                     u => u.Id,
@@ -61,14 +64,38 @@ namespace DreemDay_Infra.Repository
                     Id = order.OrderUser.Order.Id,
                     CartId = order.OrderUser.Order.CartId,
                     UserId = order.OrderUser.User.Id,
-                    Status = order.OrderUser.Order.Status,
+                    Status = order.OrderUser.Order.Status.ToString(),
                     Date = order.OrderUser.Order.Date.ToString(),
                     Title = order.OrderUser.Order.Title
                 }).ToListAsync();
             Log.Debug("Debugging GetAllOrder Has been Finised Successfully");
             return ord;
         }
-        public async Task<OrderByIdDto> GetOrder(int id)
+
+    public async Task<List<Order>> GetAllUserOrder()
+    {
+      var order= await _dbContext.Orders.ToListAsync();
+      if (order == null)
+      {
+        return null;
+      }
+      else
+      {
+        return order;
+      }
+    }
+    public async Task CancelOrder(int id)
+    {
+      var order = await _dbContext.Orders.FindAsync(id);
+      if (order == null)
+        return;
+
+      order.Status = OrderStatus.Cancelled;
+      _dbContext.Orders.Update(order);
+      await _dbContext.SaveChangesAsync();
+    }
+
+    public async Task<OrderByIdDto> GetOrder(int id)
         {
             var order = await _dbContext.Orders
                 .Join(_dbContext.Users,
@@ -94,7 +121,7 @@ namespace DreemDay_Infra.Repository
                 Title = order.Title,
                 CreationDate = order.CreationDate.ToString(),
                 ModifiedDate = order.ModifiedDate.ToString(),
-                IsDeleted = order.IsDeleted,
+                IsDeleted = order.IsDeleted ?? false,
                 Note = order.Note,
                 PaymentMethod = order.PaymentMethod,
             };
@@ -123,5 +150,39 @@ namespace DreemDay_Infra.Repository
 
 
         }
+
+    public async Task<OrderByIdDto> GetOrderByCartId(int cartId)
+    {
+      var order = await _dbContext.Orders
+                .Join(_dbContext.Users,
+                    o => o.UserId,
+                    u => u.Id,
+                    (o, u) => new { Order = o, User = u })
+                .Join(_dbContext.Carts,
+                    ou => ou.Order.CartId,
+                    c => c.Id,
+                    (ou, c) => new { OrderUser = ou, Cart = c })
+                .Select(o => o.OrderUser.Order)
+                .FirstOrDefaultAsync(o => o.CartId == cartId);
+
+      if (order == null) return null;
+      Log.Information("Order Is Exists");
+      var O = new OrderByIdDto
+      {
+        Id = order.Id,
+        CartId = order.CartId,
+        UserId = order.UserId,
+        Status = order.Status,
+        Date = order.Date.ToString(),
+        Title = order.Title,
+        CreationDate = order.CreationDate.ToString(),
+        ModifiedDate = order.ModifiedDate.ToString(),
+        IsDeleted = order.IsDeleted ?? false,
+        Note = order.Note,
+        PaymentMethod = order.PaymentMethod,
+      };
+      Log.Debug("Debugging GetOrder Has been Finised Successfully");
+      return O;
     }
+  }
 }

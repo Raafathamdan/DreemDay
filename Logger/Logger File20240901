@@ -1,0 +1,512 @@
+2024-09-01 00:04:23.132 +03:00 [INF] User Is Exists
+2024-09-01 00:04:23.135 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 00:04:33.328 +03:00 [INF] User Is Exists
+2024-09-01 00:04:33.328 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 00:10:07.701 +03:00 [INF] User Is Exists
+2024-09-01 00:10:07.748 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 00:10:46.945 +03:00 [INF] User Is Exists
+2024-09-01 00:10:46.945 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 00:12:48.396 +03:00 [INF] User Is Exists
+2024-09-01 00:12:48.397 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 00:14:44.892 +03:00 [INF] User Is Exists
+2024-09-01 00:14:44.892 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 00:18:50.105 +03:00 [INF] User Is Exists
+2024-09-01 00:18:50.105 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 00:35:39.915 +03:00 [INF] User Is Exists
+2024-09-01 00:35:39.937 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 00:35:47.749 +03:00 [ERR] Error creating order
+Microsoft.EntityFrameworkCore.DbUpdateException: Could not save changes. Please configure your entity type accordingly.
+ ---> MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1' for key 'orders.IX_Orders_CartId'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at MySql.EntityFrameworkCore.Update.MySQLModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at MySql.EntityFrameworkCore.Storage.Internal.MySQLExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at DreemDay_Infra.Repository.OrderRepos.CreateOrder(Order order) in C:\Raafat Projects\DreemDayProject\DreemDay-Infra\Repository\OrderRepos.cs:line 29
+   at DreemDay_Infra.Service.OrderService.CreateOrder(CreateOrderDto createOrderDto) in C:\Raafat Projects\DreemDayProject\DreemDay-Infra\Service\OrderService.cs:line 59
+2024-09-01 00:43:30.058 +03:00 [INF] User Is Exists
+2024-09-01 00:43:30.078 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 00:43:32.787 +03:00 [ERR] Error creating order
+Microsoft.EntityFrameworkCore.DbUpdateException: Could not save changes. Please configure your entity type accordingly.
+ ---> MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1' for key 'orders.IX_Orders_CartId'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at MySql.EntityFrameworkCore.Update.MySQLModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at MySql.EntityFrameworkCore.Storage.Internal.MySQLExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at DreemDay_Infra.Repository.OrderRepos.CreateOrder(Order order) in C:\Raafat Projects\DreemDayProject\DreemDay-Infra\Repository\OrderRepos.cs:line 29
+   at DreemDay_Infra.Service.OrderService.CreateOrder(CreateOrderDto createOrderDto) in C:\Raafat Projects\DreemDayProject\DreemDay-Infra\Service\OrderService.cs:line 59
+2024-09-01 00:50:12.512 +03:00 [INF] User Is Exists
+2024-09-01 00:50:12.530 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 00:50:14.742 +03:00 [ERR] Error creating order
+Microsoft.EntityFrameworkCore.DbUpdateException: Could not save changes. Please configure your entity type accordingly.
+ ---> MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1' for key 'orders.IX_Orders_CartId'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at MySql.EntityFrameworkCore.Update.MySQLModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at MySql.EntityFrameworkCore.Storage.Internal.MySQLExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at DreemDay_Infra.Repository.OrderRepos.CreateOrder(Order order) in C:\Raafat Projects\DreemDayProject\DreemDay-Infra\Repository\OrderRepos.cs:line 29
+   at DreemDay_Infra.Service.OrderService.CreateOrder(CreateOrderDto createOrderDto) in C:\Raafat Projects\DreemDayProject\DreemDay-Infra\Service\OrderService.cs:line 59
+2024-09-01 00:51:54.101 +03:00 [ERR] Error creating order
+Microsoft.EntityFrameworkCore.DbUpdateException: Could not save changes. Please configure your entity type accordingly.
+ ---> MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1' for key 'orders.IX_Orders_CartId'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at MySql.EntityFrameworkCore.Update.MySQLModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at MySql.EntityFrameworkCore.Storage.Internal.MySQLExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at DreemDay_Infra.Repository.OrderRepos.CreateOrder(Order order) in C:\Raafat Projects\DreemDayProject\DreemDay-Infra\Repository\OrderRepos.cs:line 29
+   at DreemDay_Infra.Service.OrderService.CreateOrder(CreateOrderDto createOrderDto) in C:\Raafat Projects\DreemDayProject\DreemDay-Infra\Service\OrderService.cs:line 50
+2024-09-01 00:54:15.840 +03:00 [ERR] Error creating order
+Microsoft.EntityFrameworkCore.DbUpdateException: Could not save changes. Please configure your entity type accordingly.
+ ---> MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1' for key 'orders.IX_Orders_CartId'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at MySql.EntityFrameworkCore.Update.MySQLModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at MySql.EntityFrameworkCore.Storage.Internal.MySQLExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at DreemDay_Infra.Repository.OrderRepos.CreateOrder(Order order) in C:\Raafat Projects\DreemDayProject\DreemDay-Infra\Repository\OrderRepos.cs:line 29
+   at DreemDay_Infra.Service.OrderService.CreateOrder(CreateOrderDto createOrderDto) in C:\Raafat Projects\DreemDayProject\DreemDay-Infra\Service\OrderService.cs:line 52
+2024-09-01 00:58:25.758 +03:00 [INF] User Is Exists
+2024-09-01 00:58:25.779 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 00:58:26.032 +03:00 [ERR] Error creating order
+Microsoft.EntityFrameworkCore.DbUpdateException: Could not save changes. Please configure your entity type accordingly.
+ ---> MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1' for key 'orders.IX_Orders_CartId'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at MySql.EntityFrameworkCore.Update.MySQLModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at MySql.EntityFrameworkCore.Storage.Internal.MySQLExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at DreemDay_Infra.Repository.OrderRepos.CreateOrder(Order order) in C:\Raafat Projects\DreemDayProject\DreemDay-Infra\Repository\OrderRepos.cs:line 30
+   at DreemDay_Infra.Service.OrderService.CreateOrder(CreateOrderDto createOrderDto) in C:\Raafat Projects\DreemDayProject\DreemDay-Infra\Service\OrderService.cs:line 59
+2024-09-01 00:58:48.121 +03:00 [INF] WishList Is Exists
+2024-09-01 00:58:48.140 +03:00 [DBG] Debugging GetWishList Has been Finised Successfully
+2024-09-01 00:58:58.373 +03:00 [INF] WishList Is Exists
+2024-09-01 00:58:58.373 +03:00 [DBG] Debugging GetWishList Has been Finised Successfully
+2024-09-01 01:00:32.418 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 01:00:32.462 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 01:00:32.462 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 01:00:40.376 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 01:00:40.381 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 01:00:40.388 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 01:00:41.914 +03:00 [INF] WishList Is Exists
+2024-09-01 01:00:41.914 +03:00 [DBG] Debugging GetWishList Has been Finised Successfully
+2024-09-01 01:05:05.392 +03:00 [INF] WishList Is Exists
+2024-09-01 01:05:05.392 +03:00 [DBG] Debugging GetWishList Has been Finised Successfully
+2024-09-01 01:05:08.276 +03:00 [INF] WishList Is Exists
+2024-09-01 01:05:08.276 +03:00 [DBG] Debugging GetWishList Has been Finised Successfully
+2024-09-01 01:06:17.156 +03:00 [INF] WishList Is Exists
+2024-09-01 01:06:17.156 +03:00 [DBG] Debugging GetWishList Has been Finised Successfully
+2024-09-01 01:06:25.345 +03:00 [INF] WishList Is Exists
+2024-09-01 01:06:25.346 +03:00 [DBG] Debugging GetWishList Has been Finised Successfully
+2024-09-01 01:08:40.171 +03:00 [INF] WishList Is Exists
+2024-09-01 01:08:40.171 +03:00 [DBG] Debugging GetWishList Has been Finised Successfully
+2024-09-01 01:09:03.350 +03:00 [INF] WishList Is Exists
+2024-09-01 01:09:03.350 +03:00 [DBG] Debugging GetWishList Has been Finised Successfully
+2024-09-01 01:09:41.266 +03:00 [INF] WishList Is Exists
+2024-09-01 01:09:41.266 +03:00 [DBG] Debugging GetWishList Has been Finised Successfully
+2024-09-01 01:09:51.121 +03:00 [INF] WishList Is Exists
+2024-09-01 01:09:51.121 +03:00 [DBG] Debugging GetWishList Has been Finised Successfully
+2024-09-01 01:10:21.555 +03:00 [INF] WishList Is Exists
+2024-09-01 01:10:21.555 +03:00 [DBG] Debugging GetWishList Has been Finised Successfully
+2024-09-01 19:55:47.939 +03:00 [INF] User Is Exists
+2024-09-01 19:55:47.998 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 19:57:06.967 +03:00 [ERR] Error creating order
+Microsoft.EntityFrameworkCore.DbUpdateException: Could not save changes. Please configure your entity type accordingly.
+ ---> MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1' for key 'orders.IX_Orders_CartId'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at MySql.EntityFrameworkCore.Update.MySQLModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at MySql.EntityFrameworkCore.Storage.Internal.MySQLExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at DreemDay_Infra.Repository.OrderRepos.CreateOrder(Order order) in C:\Raafat Projects\DreemDayProject\DreemDay-Infra\Repository\OrderRepos.cs:line 30
+   at DreemDay_Infra.Service.OrderService.CreateOrder(CreateOrderDto createOrderDto) in C:\Raafat Projects\DreemDayProject\DreemDay-Infra\Service\OrderService.cs:line 59
+2024-09-01 20:12:49.976 +03:00 [INF] User Is Exists
+2024-09-01 20:12:50.018 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 20:12:50.218 +03:00 [INF] Order Is Exists
+2024-09-01 20:12:50.220 +03:00 [DBG] Debugging GetOrder Has been Finised Successfully
+2024-09-01 20:12:50.338 +03:00 [ERR] Error creating order
+System.Exception: An order with this CartId already exists.
+   at DreemDay_Infra.Service.OrderService.CreateOrder(CreateOrderDto createOrderDto) in C:\Raafat Projects\DreemDayProject\DreemDay-Infra\Service\OrderService.cs:line 61
+2024-09-01 21:29:35.132 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 21:29:35.132 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 21:29:35.132 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 21:30:11.947 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 21:30:11.988 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 21:30:11.988 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 21:31:05.595 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 21:31:05.595 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 21:31:05.597 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 21:31:23.767 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 21:31:23.773 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 21:31:23.778 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 21:34:23.926 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 21:34:23.937 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 21:34:23.945 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 21:35:33.717 +03:00 [INF] WishList Is Exists
+2024-09-01 21:35:33.740 +03:00 [DBG] Debugging GetWishList Has been Finised Successfully
+2024-09-01 21:35:46.690 +03:00 [INF] Service Is Exists
+2024-09-01 21:35:46.692 +03:00 [DBG] Debugging GetService Has been Finised Successfully
+2024-09-01 21:38:58.391 +03:00 [INF] Service Is Exists
+2024-09-01 21:38:58.391 +03:00 [DBG] Debugging GetService Has been Finised Successfully
+2024-09-01 21:39:19.300 +03:00 [INF] Service Is Exists
+2024-09-01 21:39:19.301 +03:00 [DBG] Debugging GetService Has been Finised Successfully
+2024-09-01 21:40:21.069 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 21:40:21.275 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 21:40:21.323 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 21:40:27.689 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 21:40:27.694 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 21:40:27.712 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 21:40:29.371 +03:00 [INF] WishList Is Exists
+2024-09-01 21:40:29.371 +03:00 [DBG] Debugging GetWishList Has been Finised Successfully
+2024-09-01 21:41:04.460 +03:00 [INF] WishList Is Exists
+2024-09-01 21:41:04.460 +03:00 [DBG] Debugging GetWishList Has been Finised Successfully
+2024-09-01 21:45:11.432 +03:00 [INF] WishList Is Exists
+2024-09-01 21:45:11.432 +03:00 [DBG] Debugging GetWishList Has been Finised Successfully
+2024-09-01 21:45:55.039 +03:00 [INF] WishList Is Exists
+2024-09-01 21:45:55.039 +03:00 [DBG] Debugging GetWishList Has been Finised Successfully
+2024-09-01 21:45:59.580 +03:00 [INF] WishList Is Exists
+2024-09-01 21:45:59.580 +03:00 [DBG] Debugging GetWishList Has been Finised Successfully
+2024-09-01 21:47:36.578 +03:00 [INF] WishList Is Exists
+2024-09-01 21:47:36.615 +03:00 [DBG] Debugging GetWishList Has been Finised Successfully
+2024-09-01 21:48:08.193 +03:00 [INF] WishList Is Exists
+2024-09-01 21:48:08.194 +03:00 [DBG] Debugging GetWishList Has been Finised Successfully
+2024-09-01 21:52:06.564 +03:00 [INF] WishList Is Exists
+2024-09-01 21:52:06.599 +03:00 [DBG] Debugging GetWishList Has been Finised Successfully
+2024-09-01 22:04:33.377 +03:00 [DBG] Debugging GetAllWishList Has been Finised Successfully
+2024-09-01 22:06:00.719 +03:00 [INF] WishList Is Exists
+2024-09-01 22:06:00.719 +03:00 [DBG] Debugging GetWishList Has been Finised Successfully
+2024-09-01 22:07:03.852 +03:00 [INF] WishList Is Exists
+2024-09-01 22:07:03.853 +03:00 [DBG] Debugging GetWishList Has been Finised Successfully
+2024-09-01 22:11:01.885 +03:00 [INF] User Is Exists
+2024-09-01 22:11:01.915 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 22:11:01.972 +03:00 [DBG] Debugging GetAllWishList Has been Finised Successfully
+2024-09-01 22:11:16.152 +03:00 [INF] User Is Exists
+2024-09-01 22:11:16.152 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 22:11:16.161 +03:00 [DBG] Debugging GetAllWishList Has been Finised Successfully
+2024-09-01 22:12:10.097 +03:00 [INF] User Is Exists
+2024-09-01 22:12:10.097 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 22:12:10.112 +03:00 [DBG] Debugging GetAllWishList Has been Finised Successfully
+2024-09-01 22:13:43.755 +03:00 [INF] User Is Exists
+2024-09-01 22:13:43.755 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 22:13:43.767 +03:00 [DBG] Debugging GetAllWishList Has been Finised Successfully
+2024-09-01 22:19:46.014 +03:00 [INF] User Is Exists
+2024-09-01 22:19:46.015 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 22:19:46.027 +03:00 [DBG] Debugging GetAllWishList Has been Finised Successfully
+2024-09-01 22:19:50.502 +03:00 [INF] User Is Exists
+2024-09-01 22:19:50.502 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 22:19:50.654 +03:00 [DBG] Debugging GetAllWishList Has been Finised Successfully
+2024-09-01 22:20:07.149 +03:00 [INF] WishList Is Exists
+2024-09-01 22:20:07.224 +03:00 [DBG] Debugging UpdateWishList Has been Finised Successfully
+2024-09-01 22:21:05.928 +03:00 [INF] Service Is Exists
+2024-09-01 22:21:08.470 +03:00 [DBG] Debugging GetService Has been Finised Successfully
+2024-09-01 22:21:47.988 +03:00 [INF] Service Is Exists
+2024-09-01 22:21:47.988 +03:00 [DBG] Debugging GetService Has been Finised Successfully
+2024-09-01 22:22:03.188 +03:00 [INF] Service Is Exists
+2024-09-01 22:22:03.188 +03:00 [DBG] Debugging GetService Has been Finised Successfully
+2024-09-01 22:22:06.415 +03:00 [INF] Service Is Exists
+2024-09-01 22:22:06.416 +03:00 [DBG] Debugging GetService Has been Finised Successfully
+2024-09-01 22:30:24.748 +03:00 [INF] Service Is Exists
+2024-09-01 22:30:24.749 +03:00 [DBG] Debugging GetService Has been Finised Successfully
+2024-09-01 22:30:24.752 +03:00 [INF] Service Is Exists
+2024-09-01 22:30:24.752 +03:00 [DBG] Debugging GetService Has been Finised Successfully
+2024-09-01 22:30:24.795 +03:00 [INF] Service Is Exists
+2024-09-01 22:30:24.795 +03:00 [DBG] Debugging GetService Has been Finised Successfully
+2024-09-01 22:30:24.799 +03:00 [INF] Service Is Exists
+2024-09-01 22:30:24.799 +03:00 [INF] Service Is Exists
+2024-09-01 22:30:24.799 +03:00 [DBG] Debugging GetService Has been Finised Successfully
+2024-09-01 22:30:24.799 +03:00 [DBG] Debugging GetService Has been Finised Successfully
+2024-09-01 22:30:24.807 +03:00 [INF] Service Is Exists
+2024-09-01 22:30:24.808 +03:00 [DBG] Debugging GetService Has been Finised Successfully
+2024-09-01 22:30:24.809 +03:00 [INF] Service Is Exists
+2024-09-01 22:30:24.809 +03:00 [DBG] Debugging GetService Has been Finised Successfully
+2024-09-01 22:30:24.811 +03:00 [INF] Service Is Exists
+2024-09-01 22:30:24.811 +03:00 [DBG] Debugging GetService Has been Finised Successfully
+2024-09-01 22:30:24.825 +03:00 [INF] cart Is Exists
+2024-09-01 22:30:24.826 +03:00 [DBG] Debugging GetCart Has been Finised Successfully
+2024-09-01 22:30:24.897 +03:00 [DBG] Debugging CreateCartItem Has been Finised Successfully
+2024-09-01 22:30:32.080 +03:00 [INF] Service Is Exists
+2024-09-01 22:30:32.080 +03:00 [DBG] Debugging GetService Has been Finised Successfully
+2024-09-01 22:30:32.118 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:30:32.118 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:30:32.118 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:31:49.503 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:31:49.514 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:31:49.517 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:31:57.789 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:31:57.795 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:31:57.800 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:32:00.534 +03:00 [INF] Service Is Exists
+2024-09-01 22:32:00.534 +03:00 [DBG] Debugging GetService Has been Finised Successfully
+2024-09-01 22:32:03.217 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:32:03.219 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:32:03.221 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:32:07.061 +03:00 [INF] Service Is Exists
+2024-09-01 22:32:07.061 +03:00 [DBG] Debugging GetService Has been Finised Successfully
+2024-09-01 22:32:08.989 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:32:08.998 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:32:09.001 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:33:58.512 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:33:58.529 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:33:58.537 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:34:01.252 +03:00 [INF] Service Is Exists
+2024-09-01 22:34:01.252 +03:00 [DBG] Debugging GetService Has been Finised Successfully
+2024-09-01 22:36:16.264 +03:00 [INF] Service Is Exists
+2024-09-01 22:36:16.264 +03:00 [DBG] Debugging GetService Has been Finised Successfully
+2024-09-01 22:36:18.799 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:36:18.804 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:36:18.806 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:37:32.172 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:37:32.185 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:37:32.192 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:42:28.239 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:42:28.243 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:42:28.255 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:43:04.875 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:43:04.903 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:43:04.919 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:44:29.980 +03:00 [INF] User Is Exists
+2024-09-01 22:44:29.980 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 22:44:29.990 +03:00 [DBG] Debugging GetAllWishList Has been Finised Successfully
+2024-09-01 22:44:36.348 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:44:36.350 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:44:36.355 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:45:50.570 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:45:50.583 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:45:50.588 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:45:57.998 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:45:57.999 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:45:58.001 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:46:13.596 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:46:13.597 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:46:13.598 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:47:54.886 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:47:54.892 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:47:54.897 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:48:14.527 +03:00 [INF] Service Is Exists
+2024-09-01 22:48:14.528 +03:00 [DBG] Debugging GetService Has been Finised Successfully
+2024-09-01 22:48:35.200 +03:00 [INF] cart Is Exists
+2024-09-01 22:48:35.200 +03:00 [DBG] Debugging GetCart Has been Finised Successfully
+2024-09-01 22:48:35.215 +03:00 [DBG] Debugging CreateCartItem Has been Finised Successfully
+2024-09-01 22:58:16.906 +03:00 [INF] Service Is Exists
+2024-09-01 22:58:16.928 +03:00 [DBG] Debugging GetService Has been Finised Successfully
+2024-09-01 22:59:47.884 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:59:47.916 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:59:47.916 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 22:59:54.172 +03:00 [INF] Service Is Exists
+2024-09-01 22:59:54.173 +03:00 [DBG] Debugging GetService Has been Finised Successfully
+2024-09-01 23:00:29.669 +03:00 [INF] User Is Exists
+2024-09-01 23:00:29.669 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 23:00:40.703 +03:00 [DBG] Debugging CreateWishList Has been Finised Successfully
+2024-09-01 23:05:05.972 +03:00 [INF] Service Is Exists
+2024-09-01 23:05:05.973 +03:00 [DBG] Debugging GetService Has been Finised Successfully
+2024-09-01 23:05:06.708 +03:00 [INF] Service Is Exists
+2024-09-01 23:05:06.708 +03:00 [DBG] Debugging GetService Has been Finised Successfully
+2024-09-01 23:05:24.334 +03:00 [INF] User Is Exists
+2024-09-01 23:05:24.334 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 23:05:25.718 +03:00 [DBG] Debugging CreateWishList Has been Finised Successfully
+2024-09-01 23:09:58.199 +03:00 [INF] User Is Exists
+2024-09-01 23:09:58.199 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 23:09:58.218 +03:00 [DBG] Debugging CreateWishList Has been Finised Successfully
+2024-09-01 23:13:47.477 +03:00 [INF] User Is Exists
+2024-09-01 23:13:47.477 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 23:13:47.489 +03:00 [DBG] Debugging CreateWishList Has been Finised Successfully
+2024-09-01 23:14:16.640 +03:00 [INF] User Is Exists
+2024-09-01 23:14:16.640 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 23:14:16.656 +03:00 [DBG] Debugging CreateWishList Has been Finised Successfully
+2024-09-01 23:14:31.726 +03:00 [INF] User Is Exists
+2024-09-01 23:14:31.726 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 23:14:31.771 +03:00 [DBG] Debugging CreateWishList Has been Finised Successfully
+2024-09-01 23:15:26.277 +03:00 [INF] User Is Exists
+2024-09-01 23:15:26.277 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 23:15:34.630 +03:00 [DBG] Debugging CreateWishList Has been Finised Successfully
+2024-09-01 23:19:30.124 +03:00 [INF] User Is Exists
+2024-09-01 23:19:30.124 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 23:19:30.142 +03:00 [DBG] Debugging CreateWishList Has been Finised Successfully
+2024-09-01 23:19:30.142 +03:00 [DBG] WishList created successfully with Id: 29
+2024-09-01 23:23:03.290 +03:00 [INF] User Is Exists
+2024-09-01 23:23:03.290 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 23:23:03.316 +03:00 [DBG] Debugging CreateWishList Has been Finised Successfully
+2024-09-01 23:23:03.316 +03:00 [DBG] WishList created successfully with Id: 30
+2024-09-01 23:23:49.862 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 23:23:50.184 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 23:23:50.233 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 23:23:54.252 +03:00 [INF] Service Is Exists
+2024-09-01 23:23:54.252 +03:00 [DBG] Debugging GetService Has been Finised Successfully
+2024-09-01 23:23:59.143 +03:00 [INF] User Is Exists
+2024-09-01 23:23:59.144 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 23:23:59.176 +03:00 [DBG] Debugging CreateWishList Has been Finised Successfully
+2024-09-01 23:23:59.176 +03:00 [DBG] WishList created successfully with Id: 31
+2024-09-01 23:24:27.571 +03:00 [INF] User Is Exists
+2024-09-01 23:24:27.571 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 23:24:27.630 +03:00 [INF] Cart items exist
+2024-09-01 23:26:34.809 +03:00 [INF] User Is Exists
+2024-09-01 23:26:34.809 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 23:26:34.834 +03:00 [INF] Cart items exist
+2024-09-01 23:26:37.604 +03:00 [INF] User Is Exists
+2024-09-01 23:26:37.604 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 23:26:37.633 +03:00 [INF] Cart items exist
+2024-09-01 23:26:41.575 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 23:26:41.602 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 23:26:41.620 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 23:26:44.293 +03:00 [INF] Service Is Exists
+2024-09-01 23:26:44.293 +03:00 [DBG] Debugging GetService Has been Finised Successfully
+2024-09-01 23:26:46.174 +03:00 [INF] cart Is Exists
+2024-09-01 23:26:46.175 +03:00 [DBG] Debugging GetCart Has been Finised Successfully
+2024-09-01 23:26:46.232 +03:00 [DBG] Debugging CreateCart Has been Finised Successfully
+2024-09-01 23:26:46.259 +03:00 [DBG] Debugging CreateCartItem Has been Finised Successfully
+2024-09-01 23:26:49.544 +03:00 [INF] User Is Exists
+2024-09-01 23:26:49.544 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 23:26:49.573 +03:00 [INF] Cart items exist
+2024-09-01 23:41:05.365 +03:00 [INF] User Is Exists
+2024-09-01 23:41:05.431 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 23:42:07.862 +03:00 [DBG] Debugging CreateOrder Has been Finised Successfully
+2024-09-01 23:42:27.715 +03:00 [INF] cart Is Exists
+2024-09-01 23:42:27.716 +03:00 [DBG] Debugging GetCart Has been Finised Successfully
+2024-09-01 23:42:58.163 +03:00 [DBG] Debugging Cart has been deactivated Successfully
+2024-09-01 23:43:01.364 +03:00 [DBG] Order created with ID: 50, and CartId: 22 has been deactivated.
+2024-09-01 23:44:31.335 +03:00 [INF] User Is Exists
+2024-09-01 23:44:31.335 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 23:44:31.500 +03:00 [INF] Cart items exist
+2024-09-01 23:44:34.808 +03:00 [INF] User Is Exists
+2024-09-01 23:44:34.808 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 23:44:34.826 +03:00 [INF] Cart items exist
+2024-09-01 23:44:58.208 +03:00 [INF] User Is Exists
+2024-09-01 23:44:58.208 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 23:44:58.247 +03:00 [INF] Cart items exist
+2024-09-01 23:45:06.006 +03:00 [INF] User Is Exists
+2024-09-01 23:45:06.006 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 23:45:08.447 +03:00 [INF] User Is Exists
+2024-09-01 23:45:08.447 +03:00 [DBG] Debugging GetUser Has been Finised Successfully
+2024-09-01 23:45:23.839 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 23:45:23.915 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 23:45:23.932 +03:00 [DBG] Debugging GetAllService Has been Finised Successfully
+2024-09-01 23:45:28.491 +03:00 [INF] Service Is Exists
+2024-09-01 23:45:28.493 +03:00 [DBG] Debugging GetService Has been Finised Successfully

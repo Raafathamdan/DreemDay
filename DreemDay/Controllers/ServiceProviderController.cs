@@ -1,4 +1,4 @@
-﻿using DreemDay_Core.DTOs.ServiceDTOs;
+using DreemDay_Core.DTOs.ServiceDTOs;
 using DreemDay_Core.DTOs.ServiceProviderDTOs;
 using DreemDay_Core.Iservice;
 using DreemDay_Infra.Service;
@@ -11,7 +11,7 @@ namespace DreemDay.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = ("Admin,ServiceProvider"))]
+    //[Authorize(Roles = ("Admin,ServiceProvider"))]
 
     public class ServiceProviderController : ControllerBase
     {
@@ -166,7 +166,7 @@ namespace DreemDay.Controllers
         /// <response code="201">Returns  Service Has Been Deleted</response>
         /// <response code="400">If the error was occured</response>
         [HttpPut]
-        [Route("[action]")]
+        [Route("[action]/{id}")]
         public async Task<IActionResult> DeleteService([FromRoute] int id)
         {
             if (id == 0)

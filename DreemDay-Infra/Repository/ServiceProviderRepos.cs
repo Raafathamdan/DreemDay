@@ -1,4 +1,4 @@
-﻿using DreemDay_Core.Context;
+using DreemDay_Core.Context;
 using DreemDay_Core.DTOs.ServiceProviderDTOs;
 using DreemDay_Core.IRepository;
 using DreemDay_Core.Models.Entity;
@@ -45,11 +45,11 @@ namespace DreemDay_Infra.Repository
         public async Task<List<ServiceProviderCardDto>> GetAllServiceProviders()
         {
             var SR =  await _dbContext.ServiceProviders
-                .Where(x =>!x.IsDeleted)
+                .Where(x =>x.IsDeleted == false)
                 .Select(serviceb => new ServiceProviderCardDto
                 { Id = serviceb.Id,
                 Name = serviceb.Name,
-                ProfileImage= serviceb.ProfileImage,
+                ProfileImage= $"https://localhost:44324/Images/{serviceb.ProfileImage}",
                 }).ToListAsync();
             Log.Debug("Debugging GetAllServiceProviders Has been Finised Successfully");
             return SR;
@@ -66,14 +66,14 @@ namespace DreemDay_Infra.Repository
             {
                 Id = serviceb.ServiceProvider.Id,
                 Name = serviceb.ServiceProvider.Name,
-                ProfileImage = serviceb.ServiceProvider.ProfileImage,
+                ProfileImage = $"https://localhost:44324/Images/{serviceb.ServiceProvider.ProfileImage}",
                 Email = serviceb.ServiceProvider.Email,
                 Address = serviceb.ServiceProvider.Address,
                 Phone = serviceb.ServiceProvider.Phone,
                 UserId = serviceb.User.Id,
                 CreationDate = serviceb.ServiceProvider.CreationDate.ToString(),
                 ModifiedDate = serviceb.ServiceProvider.ModifiedDate.ToString(),
-                IsDeleted = serviceb.ServiceProvider.IsDeleted,
+                IsDeleted = serviceb.ServiceProvider.IsDeleted ?? false,
 
             };
             Log.Debug("Debugging GetServiceProvider Has been Finised Successfully");

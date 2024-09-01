@@ -1,4 +1,4 @@
-﻿using DreemDay_Core.Context;
+using DreemDay_Core.Context;
 using DreemDay_Core.DTOs.CategoryDTOs;
 using DreemDay_Core.IRepository;
 using DreemDay_Core.Models.Entity;
@@ -44,11 +44,12 @@ namespace DreemDay_Infra.Repository
         public async Task<List<CategoryCardDto>> GetAllCategories()
         {
           var categores =    await _dbContext.Categories
-                .Where(x => !x.IsDeleted)
+                .Where(x => x.IsDeleted==false)
                 .Select( category => new CategoryCardDto
                 {
                     Id = category.Id,
                     Title = category.Title,
+                    Description = category.Description,
 
                 }).ToListAsync();
             Log.Debug("Debugging GetAllCategories Has been Finised Successfully");
@@ -69,7 +70,7 @@ namespace DreemDay_Infra.Repository
                 Description = category.Description,
                 CreationDate = category.CreationDate.ToString(),
                 ModifiedDate = category.ModifiedDate.ToString(),
-                IsDeleted = category.IsDeleted,
+                IsDeleted = category.IsDeleted ?? false,
 
             };
             Log.Debug("Debugging GetById Has been Finised Successfully");

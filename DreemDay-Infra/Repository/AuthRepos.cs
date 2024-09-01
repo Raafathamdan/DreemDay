@@ -1,4 +1,4 @@
-﻿using DreemDay_Core.Context;
+using DreemDay_Core.Context;
 using DreemDay_Core.DTOs.AuthDTOs;
 using DreemDay_Core.DTOs.LoginDTOs;
 using DreemDay_Core.DTOs.UserDTOs;
@@ -59,6 +59,7 @@ namespace DreemDay_Infra.Repository
                 throw new Exception("UserName Is Required");
             if (string.IsNullOrEmpty(resetDto.NewPassword))
                 throw new Exception("NewPassword Is Required");
+            var hashPass = HashingHelper.GenerateSHA384String(resetDto.NewPassword);
 
             var userLogin = _dbContext.Users
                            .Join(_dbContext.Logins, u => u.Id, l => l.UserId, (user, login) => new { User = user, Login = login })
@@ -66,7 +67,7 @@ namespace DreemDay_Infra.Repository
 
             if (userLogin != null)
             {
-                userLogin.Login.Password = resetDto.NewPassword;
+                userLogin.Login.Password = hashPass;
                 _dbContext.Logins.Update(userLogin.Login);
                 await _dbContext.SaveChangesAsync();
             }
@@ -81,7 +82,8 @@ namespace DreemDay_Infra.Repository
                 LastName = signUpDto.LastName,
                 Email = signUpDto.Email,
                 Phone = signUpDto.Phone,
-                BirthDate = signUpDto.BirthDate
+                BirthDate = signUpDto.BirthDate,
+                Role = DreemDay_Core.Helper.Enums.SystemEnum.Role.Customer
             };
 
             int userId = await _userRepos.CreateUser(user);

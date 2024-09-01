@@ -72,6 +72,7 @@ builder.Services.AddScoped<IServiceRepos, ServiceRepos>();
 builder.Services.AddScoped<ICartRepos, CartRepos>();
 builder.Services.AddScoped<ICategoryRepos, CategoryRepos>();
 builder.Services.AddScoped<IWishListRepos, WishListRepos>();
+builder.Services.AddScoped<IContactRepos, ContactRepos>();
 
 // Register Services
 builder.Services.AddScoped<IAuthService, AuthService>();
@@ -84,6 +85,7 @@ builder.Services.AddScoped<IServiceService, ServiceService>();
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IWishListService, WishListService>();
+builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddCors(opt=>
 {
     opt.AddPolicy(name: "default", builder =>

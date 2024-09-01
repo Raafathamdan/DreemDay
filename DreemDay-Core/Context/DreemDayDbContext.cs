@@ -1,4 +1,4 @@
-﻿using DreemDay_Core.Models.Entity;
+using DreemDay_Core.Models.Entity;
 using DreemDay_Core.Models.EntityConfugration;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -27,7 +27,11 @@ namespace DreemDay_Core.Context
             modelBuilder.ApplyConfiguration(new CartItemEntityConfugration());
             modelBuilder.ApplyConfiguration(new WishListEntityConfugration());
             modelBuilder.ApplyConfiguration(new PaymentEntityConfugration());
-        }
+            modelBuilder.ApplyConfiguration(new ContactEntityConfugration());
+            modelBuilder.Entity<Order>()
+            .Property(o => o.PaymentMethod)
+             .HasConversion<int>();
+    }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Service> Services  { get; set; }
@@ -38,6 +42,7 @@ namespace DreemDay_Core.Context
         public virtual DbSet<CartItem> CartItems   { get; set; }
         public virtual DbSet<WishList> WishLists   { get; set; }
         public virtual DbSet<Payment> Payments { get; set; }
+        public virtual DbSet<Contact> Contacts{ get; set; }
 
     }
 }

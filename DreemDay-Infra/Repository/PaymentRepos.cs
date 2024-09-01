@@ -1,4 +1,4 @@
-﻿using DreemDay_Core.Context;
+using DreemDay_Core.Context;
 using DreemDay_Core.DTOs.PaymentDTOs;
 using DreemDay_Core.IRepository;
 using DreemDay_Core.Models.Entity;
@@ -61,7 +61,7 @@ namespace DreemDay_Infra.Repository
             return await _dbContext.Payments.FindAsync(id);
         }
 
-        public async Task<Payment> IsValidPayment(string code, string cardNumber, string cardHolder, float price)
+        public async Task<Payment> IsValidPayment(string code, string cardNumber, string cardHolder, decimal price)
         {
             return await _dbContext.Payments.FirstOrDefaultAsync(
                 x => x.Balance >= price &&

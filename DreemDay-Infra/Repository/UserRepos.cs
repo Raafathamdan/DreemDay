@@ -1,4 +1,4 @@
-﻿using DreemDay_Core.Context;
+using DreemDay_Core.Context;
 using DreemDay_Core.DTOs.UserDTOs;
 using DreemDay_Core.IRepository;
 using DreemDay_Core.Models.Entity;
@@ -73,7 +73,7 @@ namespace DreemDay_Infra.Repository
                 BirthDate = user.BirthDate.ToString(),
                 CreationDate = user.CreationDate.ToString(),
                 ModifiedDate = user.ModifiedDate?.ToString(),
-                IsDeleted = user.IsDeleted
+                IsDeleted = user.IsDeleted??false
             };
             Log.Debug("Debugging GetUser Has been Finised Successfully");
             return U;

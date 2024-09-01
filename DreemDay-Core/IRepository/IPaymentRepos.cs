@@ -1,4 +1,4 @@
-﻿using DreemDay_Core.DTOs.PaymentDTOs;
+using DreemDay_Core.DTOs.PaymentDTOs;
 using DreemDay_Core.Models.Entity;
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ namespace DreemDay_Core.IRepository
     {
         Task<List<PaymentCardDto>> GetAllPayments();
         Task<Payment> GetPayment(int id);
-        Task<Payment> IsValidPayment(string code,string cardNumber , string cardHolder, float price);
+        Task<Payment> IsValidPayment(string code,string cardNumber , string cardHolder, decimal price);
 
         Task<int> CreatePayment(CreatePaymentDto createPaymentDto);
         Task UpdatePayment(UpdatePaymentDto updatePaymentDto);

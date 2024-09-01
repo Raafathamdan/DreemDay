@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
@@ -7,26 +7,31 @@ namespace DreemDay.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = ("Admin,Customer,ServiceProvider"))]
+    //[Authorize(Roles = ("Admin,Customer,ServiceProvider"))]
 
     public class FilesController : ControllerBase
     {
         [HttpPost]
         [Route("[action]")]
-        public async Task<String> UploadImagesAndGetURL(IFormFile file)
+        public async Task<string> UploadImagesAndGetURL(IFormFile file)
         {
-            string uploadFolder = Path.Combine(Directory.GetCurrentDirectory(), "Images");
-            if (file == null || file.Length == 0) 
-            {
-                throw new Exception("Please Enter Valid File");
-            }
-            string newFileURL = Guid.NewGuid().ToString() + "" + file.FileName;
-            using (var inputFile = new FileStream(Path.Combine(uploadFolder, newFileURL), FileMode.Create))
-            {
-                await file.CopyToAsync(inputFile);
-            }
-            return newFileURL;
+          string uploadFolder = Path.Combine(Directory.GetCurrentDirectory(), "Images");
+          if (file == null || file.Length == 0)
+          {
+            throw new Exception("Please Enter Valid File");
+          }
+       
+          string newFileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+          string filePath = Path.Combine(uploadFolder, newFileName);
+       
+          using (var inputFile = new FileStream(filePath, FileMode.Create))
+          {
+            await file.CopyToAsync(inputFile);
+          }
+       
+          // Construct the full URL to return
 
+            return newFileName;
         }
         [HttpGet("{fileName}")]
         public IActionResult GetFile( string fileName) 

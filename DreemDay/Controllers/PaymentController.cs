@@ -1,4 +1,4 @@
-﻿using DreemDay_Core.DTOs.PaymentDTOs;
+using DreemDay_Core.DTOs.PaymentDTOs;
 using DreemDay_Core.Iservice;
 using DreemDay_Infra.Service;
 using Microsoft.AspNetCore.Authorization;
@@ -9,7 +9,7 @@ namespace DreemDay.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = ("Admin,Customer"))]
+    //[Authorize(Roles = ("Admin,Customer"))]
 
     public class PaymentController : ControllerBase
     {

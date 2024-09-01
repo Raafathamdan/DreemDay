@@ -1,4 +1,5 @@
-﻿using DreemDay_Core.DTOs.CategoryDTOs;
+using DreemDay_Core.DTOs.CategoryDTOs;
+using DreemDay_Core.DTOs.ContactDTOs;
 using DreemDay_Core.DTOs.UserDTOs;
 using DreemDay_Core.Iservice;
 using DreemDay_Infra.Service;
@@ -10,7 +11,7 @@ namespace DreemDay.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = ("Admin"))]
+    //[Authorize(Roles = ("Admin"))]
     public class AdminController : ControllerBase
     {
         private readonly IUserService _iuserService;
@@ -21,6 +22,7 @@ namespace DreemDay.Controllers
         private readonly ICartService _icartService;
         private readonly IWishListService _iwishListService;
         private readonly ICategoryService _icategoryService;
+        private readonly IContactService _contactService;
 
         public AdminController
             (IUserService iuserService,
@@ -30,7 +32,9 @@ namespace DreemDay.Controllers
             ICartItemService icartItemService,
             ICartService icartService,
             IWishListService iwishListService,
-            ICategoryService icategoryService)
+            ICategoryService icategoryService,
+            IContactService contactService
+          )
         {
             _iuserService = iuserService;
             _iorderService = iorderService;
@@ -40,6 +44,7 @@ namespace DreemDay.Controllers
             _icartService = icartService;
             _iwishListService = iwishListService;
             _icategoryService = icategoryService;
+            _contactService = contactService;
         }
 
 
@@ -401,6 +406,72 @@ namespace DreemDay.Controllers
                 }
             }
         }
-        #endregion
+    #endregion
+        #region Contact
+
+    [HttpGet]
+    [Route("[action]")]
+    public async Task<IActionResult> GetAllContact()
+    {
+      try
+      {
+        var result = await _contactService.GelAllContact();
+        return Ok(result);
+      }
+      catch (Exception ex)
+      {
+        return BadRequest(ex.Message);
+      }
     }
+
+    [HttpPost]
+    [Route("[action]")]
+    [AllowAnonymous]
+    public async Task<IActionResult> CreateContact([FromBody] CreateContactDTO contactDTO)
+    {
+      try
+      {
+        await _contactService.CreateContact(contactDTO);
+        return Ok("Contact created successfully.");
+      }
+      catch (Exception ex)
+      {
+        return BadRequest(ex.Message);
+      }
+    }
+
+    [HttpPut]
+    [Route("[action]/{id}")]
+    public async Task<IActionResult> DeleteContact([FromRoute]int id)
+    {
+      try
+      {
+        await _contactService.DeleteContact(id);
+        return Ok("Contact deleted successfully.");
+      }
+      catch (Exception ex)
+      {
+        return BadRequest(ex.Message);
+      }
+    }
+
+    [HttpPut]
+    [Route("[action]")]
+    public async Task<IActionResult> UpdateContactStatus([FromBody] UpdateContactStatusDTO updateDTO)
+    {
+      try
+      {
+        await _contactService.UpdateContactStatus(updateDTO);
+        return Ok("Contact status updated successfully.");
+      }
+      catch (Exception ex)
+      {
+        return BadRequest(ex.Message);
+      }
+    }
+
+    #endregion
+
+
+  }
 }

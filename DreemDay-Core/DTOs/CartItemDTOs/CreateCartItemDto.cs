@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +8,8 @@ namespace DreemDay_Core.DTOs.CartItemDTOs
 {
     public class CreateCartItemDto
     {
+
+        public int UserId { get; set; }
         public int ServiceId { get; set; }
         public int CartId { get; set; }
         public int Quantity { get; set; }

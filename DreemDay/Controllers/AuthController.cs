@@ -1,4 +1,4 @@
-﻿using DreemDay_Core.DTOs.AuthDTOs;
+using DreemDay_Core.DTOs.AuthDTOs;
 using DreemDay_Core.Iservice;
 using DreemDay_Infra.Service;
 using Microsoft.AspNetCore.Http;
@@ -51,7 +51,7 @@ namespace DreemDay.Controllers
                 try
                 {
                     var token = await _authService.Login(dto);
-                    return Ok(new { Token = token });
+                    return Ok(token);
                 }
                 catch (Exception ex)
                 {
@@ -67,7 +67,7 @@ namespace DreemDay.Controllers
             try
             {
                 await _authService.Logout(id);
-                return Ok();
+                return Ok("Logout successfuly");
             }
             catch (Exception ex)
             {

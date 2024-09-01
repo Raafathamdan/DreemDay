@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +12,9 @@ namespace DreemDay_Core.DTOs.WishListDTOs
         public int ServiceId { get; set; }
         public int UserId { get; set; }
         public bool IsDeleted { get; set; }
-        public string CreationDate { get; set; }
+    public string ServiceImage { get; set; }
+
+    public string CreationDate { get; set; }
         public string? ModifiedDate { get; set; }
     }
 }
