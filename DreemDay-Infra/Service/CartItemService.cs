@@ -26,6 +26,8 @@ namespace DreemDay_Infra.Service
         }
     public async Task CreateCartItem(CreateCartItemDto createCartItemDto)
     {
+      var cartId = await _cart.GetCartIdByUser( createCartItemDto.UserId );
+      createCartItemDto.CartId = cartId;
       // Get the CartByIdDto
       var cartDto = await _cart.GetCart(createCartItemDto.CartId);
 

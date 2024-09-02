@@ -13,6 +13,7 @@ namespace DreemDay_Core.IRepository
         Task<List<CartCardDto>> GetAllCart();
         Task<CartByIdDto> GetCart(int id);
         Task<int> CreateCart(Cart cart);
+        Task<int> GetCartIdByUser(int userId);
         Task UpdateCart(UpdateCartDto updateCartDto);
         Task UpdateCartActivation(CartByIdDto CartByIdDto);
         Task DeleteCart(int id);

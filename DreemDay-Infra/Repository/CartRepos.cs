@@ -86,7 +86,20 @@ namespace DreemDay_Infra.Repository
                 return c;
         }
 
-        public async Task UpdateCart(UpdateCartDto updateCartDto)
+    public async Task<int> GetCartIdByUser(int userId)
+    {
+      var user = await _dbContext.Users.FindAsync(userId);
+      if(user == null)
+      {
+        throw new Exception("User Dose Not Exists");
+      }
+      var cart = await _dbContext.Carts.ToListAsync();
+      var UserCart = cart.Where(c=>c.UserId == userId&& c.IsActive==true).FirstOrDefault();
+      return UserCart.Id;
+      
+    }
+
+    public async Task UpdateCart(UpdateCartDto updateCartDto)
         {
             var cart = await _dbContext.Carts.FindAsync(updateCartDto.Id);
             if (cart == null) return;
